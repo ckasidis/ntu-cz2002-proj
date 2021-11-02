@@ -5,7 +5,7 @@ public class Customer {
 	private String name;
 	private ArrayList<Discount> discount = new ArrayList<Discount>();
 	Customer(String name){
-		name = this.name;
+		this.name = name;
 	}
 	public void setDiscount(Discount disct) {
 		discount.add(disct);
@@ -23,6 +23,6 @@ public class Customer {
 		return name;
 	}
 	public void setName(String name) {
-		name = this.name;
+		this.name = name;
 	}
 }
