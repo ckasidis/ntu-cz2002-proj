@@ -7,8 +7,8 @@ public class Customer {
 	Customer(String name){
 		name = this.name;
 	}
-	public void setDiscount(Discount discount) {
-		discount.add(discount);
+	public void setDiscount(Discount disct) {
+		discount.add(disct);
 	}
 	public double getDiscount(double price) {
 		if(discount.size()==0) return 0;
