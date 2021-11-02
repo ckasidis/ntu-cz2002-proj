@@ -3,19 +3,19 @@ import java.util.ArrayList;
 
 public class Customer {
 	private String name;
-	private ArrayList<Discount> discounts = new ArrayList<Discount>();
+	private ArrayList<Discount> discount = new ArrayList<Discount>();
 	Customer(String name){
 		name = this.name;
 	}
 	public void setDiscount(Discount d) {
-		discounts.add(d);
+		discount.add(d);
 	}
-	public double getDiscounts(double price) {
-		if(discounts.size()==0) return 0;
+	public double getDiscount(double price) {
+		if(discount.size()==0) return 0;
 		double highest_discount=0;
-		for(int i=0;i<discounts.size();i++) {
-			if(discounts.get(i).getDiscount()>highest_discount)
-				highest_discount = discounts.get(i).getDiscount();
+		for(int i=0;i<discount.size();i++) {
+			if(discount.get(i).getDiscount()>highest_discount)
+				highest_discount = discount.get(i).getDiscount();
 		}
 		return highest_discount;
 	}
