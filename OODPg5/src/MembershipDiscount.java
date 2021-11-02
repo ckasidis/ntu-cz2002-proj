@@ -5,13 +5,13 @@ public class MembershipDiscount {
 	public MembershipDiscount() {
 		discount = 0.01;
 	}
-	public MembershipDiscount(double d) {
-		discount = d;
+	public MembershipDiscount(double discount) {
+		discount = this.discount;
 	}
 	public Double getDiscount() {
 		return discount;
 	}
-	public void setDiscount(Double dis) {
-		discount = dis;
+	public void setDiscount(Double discount) {
+		discount = this.discount;
 	}
 }
