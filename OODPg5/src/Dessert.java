@@ -1,4 +1,4 @@
-import menu.MenuItem.TypeOfItem;
+
 
 public class Dessert implements MenuItem {
 	
