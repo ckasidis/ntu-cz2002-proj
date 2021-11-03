@@ -1,6 +1,5 @@
 
 public class MainCourse implements MenuItem {
-	
 	private String name;
 	private double price;
 	private String description;

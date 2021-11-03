@@ -1,6 +1,4 @@
 
-import menu.MenuItem.TypeOfItem;
-
 public class Set implements MenuItem {
 	
 	private String name;

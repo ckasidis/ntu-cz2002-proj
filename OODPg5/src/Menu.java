@@ -11,6 +11,7 @@ public class Menu {
 	}
 	
 	public void createMenuItem() { 
+		
 		String name;
 		String description;
 		double price;

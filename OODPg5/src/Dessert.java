@@ -39,6 +39,5 @@ public class Dessert implements MenuItem {
 	public TypeOfItem getItemType() {
 		return item;
 	}
-
 }
 
