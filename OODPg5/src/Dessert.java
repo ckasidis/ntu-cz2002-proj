@@ -1,5 +1,4 @@
 
-
 public class Dessert implements MenuItem {
 	
 	private TypeOfItem item;
