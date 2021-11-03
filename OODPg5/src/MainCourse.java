@@ -33,7 +33,6 @@ public class MainCourse implements MenuItem {
 	public void printDescription() {
 		System.out.println(this.description);
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}

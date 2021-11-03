@@ -1,6 +1,5 @@
 
 public class Drinks implements MenuItem{
-	
 	private TypeOfItem item;
 	private String name;
 	private double price;

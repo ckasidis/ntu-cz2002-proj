@@ -1,6 +1,5 @@
 
 public class Dessert implements MenuItem {
-	
 	private TypeOfItem item;
 	private String name;
 	private double price;
