@@ -11,7 +11,7 @@ public class MainCourse implements MenuItem {
 			this.description = description;
 			item = TypeOfItem.MAINCOURSE;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
