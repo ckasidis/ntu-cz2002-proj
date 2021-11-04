@@ -1,40 +1,22 @@
 package OODPg5;
 
+import java.time.LocalTime;
+
 public class Reservation {
-	private String date;
-	private String time;
+	private Customer customer;
+	private LocalTime startTime;
 	private int numOfPax;
-	private String name;
-	private int contactNo;
 	
-	//Constructors
-	public Reservation(String date, String time, int numOfPax, String name, int contactNo) {
-		this.date = date;
-		this.time = time;
+	//constructor
+	public Reservation(Customer customer, LocalTime startTime, int numOfPax) {
+		this.customer = customer;
+		this.startTime = startTime;
 		this.numOfPax = numOfPax;
-		this.name = name;
-		this.contactNo = contactNo;
 	}
 
-	//Getters and Setters
-	public String getDate() {
-		return date;
-	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public int getNumOfPax() {
-		return numOfPax;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public int getContactNo() {
-		return contactNo;
-	}
+	//getters
+	public Customer getCustomer() {return customer;}
+	public LocalTime getStartTime() {return startTime;}
+	public int getNumOfPax() {return numOfPax;}
 
 }

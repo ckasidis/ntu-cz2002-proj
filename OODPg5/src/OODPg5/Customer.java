@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Customer {
 	private String name;
 	private ArrayList<Discount> discount = new ArrayList<Discount>();
-	Customer(String name){
-		this.name = name;
-	}
-	public void setDiscount(Discount disct) {
-		discount.add(disct);
-	}
+	
+	//constructor
+	Customer(String name) {this.name = name;}
+	
+	//getters
+	public String getName() {return name;}
 	public double getDiscount(double price) {
 		if(discount.size()==0) return 0;
 		double highest_discount=0;
@@ -20,10 +20,8 @@ public class Customer {
 		}
 		return highest_discount;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+	
+	//setters
+	public void setName(String name) {this.name = name;}
+	public void setDiscount(Discount disct) {discount.add(disct);}
 }

@@ -1,27 +1,29 @@
 package OODPg5;
 
+import java.time.LocalTime;
+
 public class TimeSlot {
-	private int startTime;
-	private int endTime;
-	private boolean occupied;
+	private LocalTime startTime;
+	private LocalTime endTime;
+	private boolean isReserved;
+	private Customer customer;
 	
 	//constructor
-	public TimeSlot() {}
-	public TimeSlot(int startTime, int endTime) {
+	public TimeSlot(LocalTime startTime, LocalTime endTime) {
 		this.startTime = startTime;
 		this.endTime = endTime;
-		occupied = false;
+		isReserved = false;
+		customer = null;
 	}
 	
-	//setters
-	public void setStartTime(int startTime) {this.startTime = startTime;}
-	public void setEndTime (int endTime) {this.endTime = endTime;}
-	public void setOccupied (boolean occupied) {this.occupied = occupied;}
-	
 	//getters
-	public int getStartTime () {return startTime;}
-	public int getEndTime () {return endTime;}
-	public boolean getOccupied() {return occupied;}
+	public LocalTime getStartTime() {return startTime;}
+	public LocalTime getEndTime() {return endTime;}
+	public boolean getIsReserved() {return isReserved;}
+	public Customer getCustomer() {return customer;}
 	
-	
+	//setters
+	public void setIsReserved(boolean isReserved) {this.isReserved = isReserved;}
+	public void setCustomer(Customer customer) {this.customer = customer;}
+
 }
