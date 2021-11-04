@@ -1,3 +1,4 @@
+package OODPg5;
 
 public class Staff {
 	private String name;

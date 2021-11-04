@@ -1,4 +1,4 @@
-package rrps;
+package OODPg5;
 
 public interface Discount{
 	public double getDiscount();

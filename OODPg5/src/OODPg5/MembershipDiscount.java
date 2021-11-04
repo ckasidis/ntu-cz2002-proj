@@ -1,4 +1,4 @@
-package rrps;
+package OODPg5;
 
 public class MembershipDiscount {
 	private Double discount;

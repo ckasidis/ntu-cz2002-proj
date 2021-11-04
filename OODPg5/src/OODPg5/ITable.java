@@ -1,4 +1,4 @@
-package RRPSS;
+package OODPg5;
 
 public interface ITable {
 	public int getNumOfSeats();

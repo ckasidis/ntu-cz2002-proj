@@ -1,3 +1,4 @@
+package OODPg5;
 
 public class Reservation {
 	private String date;
