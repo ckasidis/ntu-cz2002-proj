@@ -1,15 +1,16 @@
+package OODPg5;
 
-public class Drinks implements MenuItem{
-	private TypeOfItem item;
+public class Set implements MenuItem {
 	private String name;
 	private double price;
 	private String description;
+	private TypeOfItem item;
 	
-	public Drinks (String name, double price, String description ) {
+	public Set (String name, double price, String description) {
 			this.name = name;
 			this.price = price;
 			this.description = description;
-			item = TypeOfItem.DRINK;
+			item = TypeOfItem.SET;
 	}
 
 	public String getName() {
@@ -27,14 +28,16 @@ public class Drinks implements MenuItem{
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	public void printDescription() {
+		System.out.printf(description);
+	}
 	public TypeOfItem getItemType() {
 		return item;
 	}
-	public void printDescription() {
-		System.out.println(this.description);
-	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 }
+
