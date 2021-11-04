@@ -32,6 +32,8 @@ public class RRPSS {
 			System.out.println("2: check table status");
 			System.out.println("3: book reservation");
 			System.out.println("4: remove reservation");
+			System.out.println("5: assign table");
+			System.out.println("6: unAssign table");
 			c = sc.nextInt();
 			switch(c) {
 				case 1: //check all table status
@@ -54,16 +56,12 @@ public class RRPSS {
 						}
 					}
 					break;
-				case 3: //book reservation
-					Customer tmp3Cus;
-					int tmp3Pax;
-					LocalTime tmp3StartTime;
-					
+				case 3: //book reservation			
 					System.out.println("Enter customer name");
 					String tmp3CusName = sc.next();
-					System.out.println("Enter contact naumber");
+					System.out.println("Enter contact number");
 					int tmp3CusContactNo = sc.nextInt();
-					tmp3Cus = new Customer(tmp3CusName, tmp3CusContactNo);
+					Customer tmp3Cus = new Customer(tmp3CusName, tmp3CusContactNo);
 					
 					System.out.println("Select a booking time (enter 11-21)");
 					int tmp3Int = sc.nextInt();
@@ -71,36 +69,31 @@ public class RRPSS {
 						System.out.println("Please enter an integer between 11-21");
 						break;
 					}
-					tmp3StartTime = LocalTime.of(tmp3Int, 0);
+					LocalTime tmp3StartTime = LocalTime.of(tmp3Int, 0);
 					
 					System.out.println("Enter number of person per table");
-					tmp3Pax = sc.nextInt();
+					int tmp3Pax = sc.nextInt();
 					if (tmp3Pax > 10 || tmp3Pax < 1) {
 						System.out.println("Please enter 1-10 people");
 						break;
 					}
 					else {
-						//find a table with enough seats and is not reserved
+						//find a table with enough seats
 						Reservation tmp3reservation = new Reservation(tmp3Cus, tmp3StartTime, tmp3Pax);
 						boolean booked = false;
 						for (Table table: tableList) {
 							if (tmp3Pax <= table.getNumOfSeats()) {
 								//booked return false if reservation failed
 								booked = table.bookSlot(tmp3reservation);
-								if (booked) {
-									break;
-								}
+								if (booked) break;
 							}
 						}
-						if (!booked) System.out.println("reservation failed, please try another time slot");
+						if (!booked) System.out.println("Reservation failed, please try another time slot");
 					}
 					break;
 				case 4: //remove reservation
-					int tmp4TableNo;
-					LocalTime tmp4StartTime;
-					
 					System.out.println("Enter table number (1-10)");
-					tmp4TableNo = sc.nextInt();
+					int tmp4TableNo = sc.nextInt();
 					if (tmp4TableNo < 1 || tmp4TableNo > 10) {
 						System.out.println("Please enter an integer between 11-21");
 						break;
@@ -112,12 +105,54 @@ public class RRPSS {
 						System.out.println("Please enter an integer between 11-21");
 						break;
 					}		
-					tmp4StartTime = LocalTime.of(tmp4Int, 0);
+					LocalTime tmp4StartTime = LocalTime.of(tmp4Int, 0);
 					
 					//find the table and free slot
 					for (Table table: tableList) {
 						if (table.getTableNo() == tmp4TableNo) {
 							table.freeSlot(tmp4StartTime);
+							break;
+						}
+					}
+					break;
+				case 5: //assign table
+					System.out.println("Enter customer name");
+					String tmp5CusName = sc.next();
+					System.out.println("Enter contact number");
+					int tmp5CusContactNo = sc.nextInt();
+					Customer tmp5Cus = new Customer(tmp5CusName, tmp5CusContactNo);
+					
+					System.out.println("Enter number of person per table");
+					int tmp5Pax = sc.nextInt();
+					if (tmp5Pax > 10 || tmp5Pax < 1) {
+						System.out.println("Please enter 1-10 people");
+						break;
+					}
+					else {
+						//find a table with enough seats
+						boolean assigned = false;
+						for (Table table: tableList) {
+							if (tmp5Pax <= table.getNumOfSeats()) {
+								//assigned return false if assigning failed
+								assigned = table.assign(tmp5Cus);
+								if (assigned) break;
+							}
+						}
+						if (!assigned) System.out.println("Assigning failed");
+					}
+					break;
+				case 6: //unAssign table
+					System.out.println("Enter table number (1-10)");
+					int tmp6TableNo = sc.nextInt();
+					if (tmp6TableNo < 1 || tmp6TableNo > 10) {
+						System.out.println("Please enter an integer between 11-21");
+						break;
+					}
+					
+					//find the table and unAssign
+					for (Table table: tableList) {
+						if (table.getTableNo() == tmp6TableNo) {
+							table.unAssign();
 							break;
 						}
 					}
