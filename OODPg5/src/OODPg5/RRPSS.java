@@ -10,7 +10,6 @@ public class RRPSS {
 		
 		//assign tables
 		ArrayList<Table> tableList = new ArrayList<Table>();
-		ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
 		
 		int tableNo = 1;
 		int tableSize = 2;
@@ -29,51 +28,66 @@ public class RRPSS {
 		
 		while(true) {
 			System.out.println("Choose your method");
-			System.out.println("1: check time slots");
-			System.out.println("2: book reservation");
-			System.out.println("3: remove reservation");
-			System.out.println("4: print reservation");
+			System.out.println("1: check all table status");
+			System.out.println("2: check table status");
+			System.out.println("3: book reservation");
+			System.out.println("4: remove reservation");
 			c = sc.nextInt();
 			switch(c) {
-				case 1: //check time slots
+				case 1: //check all table status
 					for (Table table: tableList)
-						table.printTimeSlots();
+						table.printTableStatus();
 					break;
-				case 2: //book reservation
-					Customer tmp2Cus;
-					int tmp2Pax;
-					LocalTime tmp2StartTime;
-					
-					System.out.println("Enter customer name");
-					String tmp2CusName = sc.next();
-					System.out.println("Enter contact naumber");
-					int tmp2CusContactNo = sc.nextInt();
-					tmp2Cus = new Customer(tmp2CusName, tmp2CusContactNo);
-					
-					System.out.println("Select a booking time (enter 11-21)");
-					int tmpInt2 = sc.nextInt();
-					if (tmpInt2 < 11 || tmpInt2 > 21) {
+				case 2: //check table status
+					System.out.println("Enter table number (1-10)");
+					int tmp2TableNo = sc.nextInt();
+					if (tmp2TableNo < 1 || tmp2TableNo > 10) {
 						System.out.println("Please enter an integer between 11-21");
 						break;
 					}
-					tmp2StartTime = LocalTime.of(tmpInt2, 0);
+					
+					//find table and print status
+					for (Table table: tableList) {
+						if (table.getTableNo() == tmp2TableNo) {
+							table.printTableStatus();
+							break;
+						}
+					}
+					break;
+				case 3: //book reservation
+					Customer tmp3Cus;
+					int tmp3Pax;
+					LocalTime tmp3StartTime;
+					
+					System.out.println("Enter customer name");
+					String tmp3CusName = sc.next();
+					System.out.println("Enter contact naumber");
+					int tmp3CusContactNo = sc.nextInt();
+					tmp3Cus = new Customer(tmp3CusName, tmp3CusContactNo);
+					
+					System.out.println("Select a booking time (enter 11-21)");
+					int tmp3Int = sc.nextInt();
+					if (tmp3Int < 11 || tmp3Int > 21) {
+						System.out.println("Please enter an integer between 11-21");
+						break;
+					}
+					tmp3StartTime = LocalTime.of(tmp3Int, 0);
 					
 					System.out.println("Enter number of person per table");
-					tmp2Pax = sc.nextInt();
-					if (tmp2Pax > 10 || tmp2Pax < 1) {
+					tmp3Pax = sc.nextInt();
+					if (tmp3Pax > 10 || tmp3Pax < 1) {
 						System.out.println("Please enter 1-10 people");
 						break;
 					}
 					else {
 						//find a table with enough seats and is not reserved
-						Reservation tmp2reservation = new Reservation(tmp2Cus, tmp2StartTime, tmp2Pax);
+						Reservation tmp3reservation = new Reservation(tmp3Cus, tmp3StartTime, tmp3Pax);
 						boolean booked = false;
 						for (Table table: tableList) {
-							if (tmp2Pax <= table.getNumOfSeats()) {
+							if (tmp3Pax <= table.getNumOfSeats()) {
 								//booked return false if reservation failed
-								booked = table.bookSlot(tmp2reservation);
+								booked = table.bookSlot(tmp3reservation);
 								if (booked) {
-									reservationList.add(tmp2reservation);
 									break;
 								}
 							}
@@ -81,29 +95,29 @@ public class RRPSS {
 						if (!booked) System.out.println("reservation failed, please try another time slot");
 					}
 					break;
-				case 3: //remove reservation
-					int tmp3TableNo;
-					LocalTime tmp3StartTime;
+				case 4: //remove reservation
+					int tmp4TableNo;
+					LocalTime tmp4StartTime;
 					
 					System.out.println("Enter table number (1-10)");
-					tmp3TableNo = sc.nextInt();
-					if (tmp3TableNo < 1 || tmp3TableNo > 10) {
+					tmp4TableNo = sc.nextInt();
+					if (tmp4TableNo < 1 || tmp4TableNo > 10) {
 						System.out.println("Please enter an integer between 11-21");
 						break;
 					}
 
 					System.out.println("Select a booking time (11-21)");
-					int tmpInt3 = sc.nextInt();
-					if (tmpInt3 < 11 || tmpInt3 > 21) {
+					int tmp4Int = sc.nextInt();
+					if (tmp4Int < 11 || tmp4Int > 21) {
 						System.out.println("Please enter an integer between 11-21");
 						break;
 					}		
-					tmp3StartTime = LocalTime.of(tmpInt3, 0);
+					tmp4StartTime = LocalTime.of(tmp4Int, 0);
 					
 					//find the table and free slot
 					for (Table table: tableList) {
-						if (table.getTableNo() == tmp3TableNo) {
-							table.freeSlot(tmp3StartTime);
+						if (table.getTableNo() == tmp4TableNo) {
+							table.freeSlot(tmp4StartTime);
 							break;
 						}
 					}
