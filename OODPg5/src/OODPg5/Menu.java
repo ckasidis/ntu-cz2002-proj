@@ -12,7 +12,7 @@ public class Menu {
 	public Menu() {
 		menuItem = new ArrayList<MenuItem>();
 	}
-	public void sort() {
+	private void sort() {
 		int i, prev=0;
 		if(menuItem.size()<=1) return;
 		for (TypeOfItem item : TypeOfItem.values()) {
