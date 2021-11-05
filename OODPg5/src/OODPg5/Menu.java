@@ -2,6 +2,7 @@ package OODPg5;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collections;
 public class Menu {
 	
 	ArrayList<MenuItem> menuItem;
@@ -11,7 +12,40 @@ public class Menu {
 	public Menu() {
 		menuItem = new ArrayList<MenuItem>();
 	}
-	
+	private void sort() {
+		int i, prev=0;
+		if(menuItem.size()<=1) return;
+		for (TypeOfItem item : TypeOfItem.values()) {
+			  for(i=0;i<menuItem.size();i++) {
+				  if(menuItem.get(i).getItemType() == item) {
+					  Collections.swap(menuItem, i, prev);
+					  prev++;
+				  }
+			  }
+			}
+	}
+	public void editMenu() {
+		System.out.println("Enter item number");
+		int num = in.nextInt();
+		System.out.println("Enter 1 to remove item");
+		System.out.println("Enter 2 to update details");
+		int choice = in.nextInt();
+		switch(choice) {
+				case 1:
+						removeMenuItem(num);
+						break;
+				case 2:
+					if(menuItem.get(num).getItemType() != TypeOfItem.SET) {
+						updateMenuItem(num);
+					}
+					else {
+						updatePromotionSet(num);
+					}
+					break;
+				default: System.out.println("Invalid entry!");
+					
+		}
+	}
 	public void createMenuItem() { 
 		String name;
 		String description;
@@ -31,7 +65,7 @@ public class Menu {
 				description = in.nextLine();
 				menuItem.add(new Drinks(name, price, description));
 				System.out.println("Succesfully created!");
-				return;
+				break;
 			case 2:
 				System.out.println("MainCourse name: ");
 				name = in.nextLine();
@@ -42,7 +76,7 @@ public class Menu {
 				description = in.nextLine();
 				menuItem.add(new MainCourse(name, price, description));
 				System.out.println("Succesfully created!");
-				return;
+				break;
 			case 3:
 				System.out.println("Dessert name: ");
 				name = in.nextLine();
@@ -53,9 +87,16 @@ public class Menu {
 				description = in.nextLine();
 				menuItem.add(new Dessert(name, price, description));
 				System.out.println("Succesfully created!");
-				return;
+				break;
 			default:
 				System.out.println("Please enter appropraite choice.");
+				break;
+			}
+			if(choice>0 && choice<4) {
+				sort();
+				System.out.println("New Menu:");
+				showMenuItems();
+				return;
 			}
 		}
 			
@@ -69,6 +110,8 @@ public class Menu {
 		else {
 			menuItem.remove(itemIndex);
 			System.out.println("Item is removed.");
+			System.out.println("New Menu:");
+			showMenuItems();
 		}
 	}
 	public void updateMenuItem (int itemIndex) {
@@ -121,19 +164,9 @@ public class Menu {
 		String dessert = in.nextLine();
 		String description = "Promotional set consists of " + drinks + ", " + mains + ", " + dessert;
 		menuItem.add(new Set(name, price, description));
-	}
-	
-	public void removePromotionSet(int itemIndex) {
-		
-		--itemIndex;
-		if(itemIndex < 0 || itemIndex > menuItem.size() - 1) {
-			System.out.println("Promotional set not in menu.");
-			return;
-		}
-		else {
-			menuItem.remove(itemIndex);
-			System.out.println("Item is removed.");
-		}
+		sort();
+		System.out.println("New Menu:");
+		showMenuItems();
 	}
 	
 	public void updatePromotionSet(int itemIndex) {
@@ -182,37 +215,25 @@ public class Menu {
 		int i;
 		System.out.println("\n\t======= RESTAURANT MENU =======\n");
 		System.out.print("DRINKS: \n");
-		for(i = 0; i < menuItem.size(); i++) {
-			if(menuItem.get(i).getItemType() == MenuItem.TypeOfItem.DRINK) {
-				System.out.print("Item " + (i+1) + ": " + menuItem.get(i).getName() + ", $" + menuItem.get(i).getPrice() + ": ");
-				menuItem.get(i).printDescription();
-				System.out.println();
+		TypeOfItem item = TypeOfItem.values()[j];
+		for(i=0;i<menuItem.size();i++) {
+			
+			while(menuItem.get(i).getItemType() != item) {
+				item = TypeOfItem.values()[++j];
+				System.out.printf("\n%sS: \n",item);
 			}
+			
+			System.out.printf("Item %d: %s, $%.2f: ",i+1,menuItem.get(i).getName(),menuItem.get(i).getPrice());
+			menuItem.get(i).printDescription();
+			System.out.println();
 		}
-		System.out.print("\nMAINCOURSES: \n");
-		for(i = 0; i < menuItem.size(); i++) {
-			if(menuItem.get(i).getItemType() == MenuItem.TypeOfItem.MAINCOURSE) {
-				System.out.print("Item " + (i+1) + ": " + menuItem.get(i).getName() + ", $" + menuItem.get(i).getPrice() + ": ");
-				menuItem.get(i).printDescription();
-				System.out.println();
-			}
+		for (TypeOfItem item1 : TypeOfItem.values()) {
+			item= item1;
 		}
-		System.out.print("\nDESSERTS: \n");
-		for(i = 0; i < menuItem.size(); i++) {
-			if(menuItem.get(i).getItemType() == MenuItem.TypeOfItem.DESSERT) {
-				System.out.print("Item " + (i+1) + ": " + menuItem.get(i).getName() + ", $" + menuItem.get(i).getPrice() + ": ");
-				menuItem.get(i).printDescription();
-				System.out.println();
-			}
+		while(item != TypeOfItem.values()[j]) {
+			System.out.printf("\n%sS: \n",TypeOfItem.values()[++j]);
 		}
-		System.out.printf("\nPROMOTIONAL SETS: \n");
-		for(i = 0; i < menuItem.size(); i++) {
-			if(menuItem.get(i).getItemType() == MenuItem.TypeOfItem.SET) {
-				System.out.print("Item " + (i+1) + ": " + menuItem.get(i).getName() + ", $" + menuItem.get(i).getPrice() + ": ");
-				menuItem.get(i).printDescription();
-				System.out.println();
-			}
-		}
+		
 	}	
-}
+
 
