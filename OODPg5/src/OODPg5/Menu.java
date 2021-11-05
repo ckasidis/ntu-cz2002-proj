@@ -1,8 +1,8 @@
 package OODPg5;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
+
 public class Menu {
 	
 	ArrayList<MenuItem> menuItem;
@@ -25,26 +25,26 @@ public class Menu {
 			}
 	}// sort menuItem according to enum TypeOfItem
 	public void editMenu() {
-		System.out.println("Enter item number");
+		System.out.println("Enter item number:");
 		int num = in.nextInt();
-		System.out.println("Enter 1 to remove item");
-		System.out.println("Enter 2 to update details");
+		System.out.println("======== SELECT CHOICE ========\n(1)Remove item  (2)Update details");
 		int choice = in.nextInt();
-		switch(choice) {
-				case 1:
-						removeMenuItem(num);
-						break;
-				case 2:
-					if(menuItem.get(num).getItemType() != TypeOfItem.SET) {
-						updateMenuItem(num);
-					}
-					else {
-						updatePromotionSet(num);
-					}
-					break;
-				default: System.out.println("Invalid entry!");
-					
+		while(true) {
+			switch(choice) {
+			case 1:
+				removeMenuItem(num);
+				return;
+			case 2:
+				if(menuItem.get(num-1).getItemType() != TypeOfItem.SET)
+					updateMenuItem(num);
+				else
+				updatePromotionSet(num);
+				return;
+			default:
+				System.out.println("Invalid entry!");	
+			}		
 		}
+
 	}
 	public void createMenuItem() { 
 		String name;
@@ -94,7 +94,7 @@ public class Menu {
 			}
 			if(choice>0 && choice<4) {
 				sort();
-				System.out.println("New Menu:");
+				System.out.println("UPDATED MENU");
 				showMenuItems();
 				return;
 			}
@@ -110,7 +110,7 @@ public class Menu {
 		else {
 			menuItem.remove(itemIndex);
 			System.out.println("Item is removed.");
-			System.out.println("New Menu:");
+			System.out.println("UPDATED MENU");
 			showMenuItems();
 		}
 	}
@@ -129,17 +129,17 @@ public class Menu {
 				case 1:
 					System.out.println("Enter new name: ");
 					menuItem.get(itemIndex).setName(in.nextLine());
-					System.out.println("Successful!");
+					System.out.println("Update successful!");
 					return;
 				case 2:
 					System.out.print("Enter new price: \n$");
 					menuItem.get(itemIndex).setPrice(in.nextDouble());
-					System.out.println("Successful!");
+					System.out.println("Update successful!");
 					return;
 				case 3:
 					System.out.println("Enter new description: ");
 					menuItem.get(itemIndex).setDescription(in.nextLine());
-					System.out.println("Successful!");
+					System.out.println("Update successful!");
 					return;
 				default:
 					System.out.println("Invalid choice entered");
@@ -165,7 +165,7 @@ public class Menu {
 		String description = "Promotional set consists of " + drinks + ", " + mains + ", " + dessert;
 		menuItem.add(new Set(name, price, description));
 		sort();
-		System.out.println("New Menu:");
+		System.out.println("UPDATED MENU");
 		showMenuItems();
 	}
 	
@@ -185,12 +185,12 @@ public class Menu {
 					in.nextLine();
 					System.out.println("Enter new name: ");
 					menuItem.get(itemIndex).setName(in.nextLine());
-					System.out.println("Successful!");
+					System.out.println("Update successful!");
 					return;
 				case 2:
 					System.out.print("Enter new price: \n$");
 					menuItem.get(itemIndex).setPrice(in.nextDouble());
-					System.out.println("Successful!");
+					System.out.println("Update successful!");
 					return;
 				case 3:
 					in.nextLine();
@@ -202,7 +202,7 @@ public class Menu {
 					String dessert = in.nextLine();
 					String description = "Promotional set consists of " + drinks + ", " + mains + ", " + dessert;
 					menuItem.get(itemIndex).setDescription(description);
-					System.out.println("Successful!");
+					System.out.println("Update successful!");
 					return;
 				default:
 					System.out.println("Invalid choice entered");
@@ -221,20 +221,19 @@ public class Menu {
 			while(menuItem.get(i).getItemType() != item) {
 				item = TypeOfItem.values()[++j];
 				System.out.printf("\n%sS: \n",item);
-			}
+			}// print enum TypeOfItem as header
 			
 			System.out.printf("Item %d: %s, $%.2f: ",i+1,menuItem.get(i).getName(),menuItem.get(i).getPrice());
 			menuItem.get(i).printDescription();
 			System.out.println();
-		}
+		}//print corresponding menu items
 		for (TypeOfItem item1 : TypeOfItem.values()) {
 			item= item1;
 		}
 		while(item != TypeOfItem.values()[j]) {
 			System.out.printf("\n%sS: \n",TypeOfItem.values()[++j]);
-		}
+		}//print rest of enum TypeOfItem as header
 		
-		
-	}	
-
+	}
+}
 
