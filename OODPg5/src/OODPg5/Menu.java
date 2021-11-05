@@ -23,7 +23,7 @@ public class Menu {
 				  }
 			  }
 			}
-	}
+	}// sort menuItem according to enum TypeOfItem
 	public void editMenu() {
 		System.out.println("Enter item number");
 		int num = in.nextInt();
@@ -221,18 +221,18 @@ public class Menu {
 			while(menuItem.get(i).getItemType() != item) {
 				item = TypeOfItem.values()[++j];
 				System.out.printf("\n%sS: \n",item);
-			}
+			}// print enum TypeOfItem as header
 			
 			System.out.printf("Item %d: %s, $%.2f: ",i+1,menuItem.get(i).getName(),menuItem.get(i).getPrice());
 			menuItem.get(i).printDescription();
 			System.out.println();
-		}
+		}//print corresponding menu items
 		for (TypeOfItem item1 : TypeOfItem.values()) {
 			item= item1;
 		}
 		while(item != TypeOfItem.values()[j]) {
 			System.out.printf("\n%sS: \n",TypeOfItem.values()[++j]);
-		}
+		}//print rest of enum TypeOfItem as header
 		
 	}	
 
