@@ -13,31 +13,34 @@ public class Dessert implements MenuItem {
 		item = TypeOfItem.DESSERT;	
 	}
 	
+	public void printDescription() {
+		System.out.println(this.description);
+	}
+	//getters
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	
 	public double getPrice() {
 		return price;
+	}
+	
+	public TypeOfItem getItemType() {
+		return item;
+	}
+	
+	//setters
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
-	public void printDescription() {
-		System.out.println(this.description);
-	}
 	
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public TypeOfItem getItemType() {
-		return item;
-	}
+
 }
 

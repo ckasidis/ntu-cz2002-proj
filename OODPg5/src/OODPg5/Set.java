@@ -12,28 +12,28 @@ public class Set implements MenuItem {
 			this.description = description;
 			item = TypeOfItem.SET;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
+	
 	public void printDescription() {
 		System.out.printf(description);
 	}
+	
+	//getters
+	public String getName() {
+		return name;
+	}
 	public TypeOfItem getItemType() {
 		return item;
+	}
+	public double getPrice() {
+		return price;
+	}
+	
+	//setters
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public void setDescription(String description) {
 		this.description = description;

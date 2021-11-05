@@ -12,29 +12,30 @@ public class Drinks implements MenuItem{
 			this.description = description;
 			item = TypeOfItem.DRINK;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	public TypeOfItem getItemType() {
-		return item;
-	}
+	
 	public void printDescription() {
 		System.out.println(this.description);
 	}
-
+	
+	//getters
+	public String getName() {
+		return name;
+	}
+	public double getPrice() {
+		return price;
+	}
+	
+	public TypeOfItem getItemType() {
+		return item;
+	}
+	
+	//setters
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
