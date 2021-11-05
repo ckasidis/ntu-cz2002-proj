@@ -169,21 +169,6 @@ public class Menu {
 		showMenuItems();
 	}
 	
-	public void removePromotionSet(int itemIndex) {
-		
-		--itemIndex;
-		if(itemIndex < 0 || itemIndex > menuItem.size() - 1) {
-			System.out.println("Promotional set not in menu.");
-			return;
-		}
-		else {
-			menuItem.remove(itemIndex);
-			System.out.println("Item is removed.");
-			System.out.println("New Menu:");
-			showMenuItems();
-		}
-	}
-	
 	public void updatePromotionSet(int itemIndex) {
 		
 		--itemIndex;
