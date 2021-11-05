@@ -1,8 +1,9 @@
 package OODPg5;
 
+import java.util.Scanner;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Calendar;
 
 public class RRPSS {
 	static Scanner s = new Scanner(System.in);
@@ -46,16 +47,20 @@ public class RRPSS {
 	public static void printSalesRevenueReport() {
 		
 	}
-	public static void start() {
+	public static void start(Calendar date) {
 		int choice;
 		Menu menu = new  Menu();
 		//ArrayList<Order> Total_orders = new ArrayList<Order>();
+		//for(int i=0;i<10<i++){
+		//	Total_orders.add(new Order(i+1, date))} // assuming order(TableNumber, date)
+		//ArrayList<Order> finished_orders = new ArrayList<Order>();
 		
 		ArrayList<Table> tableList = new ArrayList<Table>();
 		
 		TableManager tables = new TableManager(tableList);
 		
 		System.out.println("Welcome to Restaurant Reservation and Point of Sale System");
+		System.out.println("Today's Date is:" + date.getTime());
 		while(true) {
 			System.out.println("1: Open Menu");
 			System.out.println("2: Boot table manager");
@@ -74,17 +79,44 @@ public class RRPSS {
 				case 3:
 						tables.reservation();break;
 				case 4:
+						System.out.println("Enter table number (1-10)");
+						int tn;
+						while((tn = s.nextInt())<1 || tn>10) {
+							System.out.println("Please enter an integer between 1-10");
+						}
+						Total_order.get(tn-1).setdetails(date,customer);
 						break;
 				case 5:
+						System.out.println("Enter table number (1-10)");
+						int tn;
+						while((tn = s.nextInt())<1 || tn>10) {
+							System.out.println("Please enter an integer between 1-10");
+						}
+						Total_order.get(tn-1).addMenuItem(menuItem));
 						break;
 				case 6:
+						System.out.println("Enter table number (1-10)");
+						int tn;
+						while((tn = s.nextInt())<1 || tn>10) {
+							System.out.println("Please enter an integer between 1-10");
+						}
+						finished_orders.add(Total_order.get(tn-1));
+						Total_order.printSalesInvoice();
+						Total_order.remove(tn-1);
 						break;
-				case 7: System.out.println("Shutting down..");return;
+				case 7:
+						System.out.println("Select option(1-2)");
+						System.out.println("1:print Sales Revenue for today");
+						System.out.println("1:print Sales Revenue for the month");
+						break;
+				case 8: System.out.println("Shutting down..");return;
 					default:System.out.println("Invalid entry!");
 			}
 		}
 	}
 	public static void main(String[] args) {
-		start();
+		Calendar calendar = Calendar.getInstance();
+		start(calendar);
 	}
 }
+
