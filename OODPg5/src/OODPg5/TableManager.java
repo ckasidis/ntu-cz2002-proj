@@ -72,7 +72,7 @@ public class TableManager {
 		System.out.println("Enter table number (1-10)");
 		int tmp4TableNo;
 		while((tmp4TableNo = sc.nextInt()) < 1 || tmp4TableNo > 10) {
-			System.out.println("Please enter an integer between 11-21");
+			System.out.println("Please enter an integer between 1-10");
 		}
 
 		System.out.println("Select a booking time (11-21)");
@@ -115,7 +115,7 @@ public class TableManager {
 		System.out.println("Enter table number (1-10)");
 		int tmp6TableNo = sc.nextInt();
 		while ((tmp6TableNo = sc.nextInt()) < 1 || tmp6TableNo > 10) {
-			System.out.println("Please enter an integer between 11-21");
+			System.out.println("Please enter an integer between 1-10");
 		}
 		
 		//find the table and unAssign
@@ -148,7 +148,7 @@ public class TableManager {
 						System.out.println("Enter table number (1-10)");
 						int tmp2TableNo;
 						while ((tmp2TableNo = sc.nextInt()) < 1 || tmp2TableNo > 10) {
-							System.out.println("Please enter an integer between 11-21");
+							System.out.println("Please enter an integer between 1-10");
 						}
 						
 						//find table and print status
