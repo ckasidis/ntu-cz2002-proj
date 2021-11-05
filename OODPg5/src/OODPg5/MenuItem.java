@@ -1,7 +1,7 @@
 package OODPg5;
 
 public interface MenuItem{
-	public enum TypeOfItem {DRINK , MAINCOURSE, DESSERT , SET};
+
 	public String getName();
 	public void setName(String name);
 	public double getPrice();
