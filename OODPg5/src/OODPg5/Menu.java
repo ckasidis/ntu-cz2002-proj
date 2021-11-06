@@ -6,7 +6,6 @@ import java.util.Collections;
 public class Menu {
 	
 	ArrayList<MenuItem> menuItem;
-	
 	Scanner in = new Scanner(System.in);
 	
 	public Menu() {
