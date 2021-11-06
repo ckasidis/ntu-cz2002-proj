@@ -14,3 +14,4 @@ public class Discount{
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
+}
