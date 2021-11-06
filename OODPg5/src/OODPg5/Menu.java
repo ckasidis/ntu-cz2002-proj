@@ -137,7 +137,7 @@ public class Menu {
 		System.out.print("Price of Set: \n$");
 		double price = in.nextDouble();
 		ArrayList<MenuItem> SetItem = new ArrayList<MenuItem>();
-		showMenuItems();
+		showMenuItems(false);
 		while(adding) {
 			System.out.println("Enter item to add to set (Enter -1 to quit): ");
 			if((itemIndex = in.nextInt())== -1) break;
@@ -184,7 +184,7 @@ public class Menu {
 				break;
 			case 4:
 				sort(menuItem);
-				showMenuItems();
+				showMenuItems(false);
 				System.out.println("Enter item to add from menu:");
 				int add_itemIndex = in.nextInt() - 1;
 				if(add_itemIndex < 0 || add_itemIndex > menuItem.size() || menuItem.get(add_itemIndex).getItemType() == TypeOfItem.SET) {
@@ -214,29 +214,29 @@ public class Menu {
 			}
 		}	
 }
-	public void showMenuItems() {
+	public void showMenuItems(boolean showSets) {
 		
 		int i,j=0;
 		System.out.println("\n\t======= RESTAURANT MENU =======\n");
 		System.out.print("DRINKS: \n");
 		TypeOfItem item = TypeOfItem.values()[j];
 		for(i=0;i<menuItem.size();i++) {
-			
+			if(!showSets && menuItem.get(i).getItemType() == TypeOfItem.SET) continue;
 			while(menuItem.get(i).getItemType() != item) {
 				item = TypeOfItem.values()[++j];
 				System.out.printf("\n%sS: \n",item);
-			}// print enum TypeOfItem as header
+			}
 			
 			System.out.printf("Item %d: %s, $%.2f: ",i+1,menuItem.get(i).getName(),menuItem.get(i).getPrice());
 			menuItem.get(i).printDescription();
 			System.out.println();
-		}//print corresponding menu items
+		}
 		for (TypeOfItem item1 : TypeOfItem.values()) {
 			item= item1;
 		}
 		while(item != TypeOfItem.values()[j]) {
-			System.out.printf("\n%sS: \n",TypeOfItem.values()[j++]);
-		}//print rest of enum TypeOfItem as header
+			System.out.printf("\n%sS: \n",TypeOfItem.values()[++j]);
+		}
 	}
 	private void sort(ArrayList<MenuItem> menuItemList) {
 		int i, prev=0;
