@@ -82,7 +82,7 @@ public class Menu {
 			System.out.println("Item successfully created!");
 		}
 	}
-	public void removeMenuItem(int itemIndex) {
+	private void removeMenuItem(int itemIndex) {
 		--itemIndex;
 		if(itemIndex < 0 || itemIndex > menuItem.size() - 1) {
 			System.out.println("Item not in menu.");
@@ -93,7 +93,7 @@ public class Menu {
 			System.out.println("Item is removed.");
 		}
 	}
-	public void updateMenuItem (int itemIndex) {
+	private void updateMenuItem (int itemIndex) {
 		--itemIndex;
 		if(itemIndex < 0 || itemIndex > menuItem.size() - 1) {
 			System.out.println("Promotional set not in menu.");
@@ -154,7 +154,7 @@ public class Menu {
 		System.out.println("Promotional Set succesfully created!");
 	}
 	
-public void updatePromotionSet(int itemIndex) {
+	private void updatePromotionSet(int itemIndex) {
 		
 		--itemIndex;
 		if(itemIndex < 0 || itemIndex > menuItem.size() - 1) {
