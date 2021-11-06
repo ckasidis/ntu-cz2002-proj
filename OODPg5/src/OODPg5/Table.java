@@ -100,7 +100,7 @@ public class Table {
 		
 		//locate time slot and set as reserved
 		for (TimeSlot ts : timeSlots) {
-			if (ts.getCustomer() == null && ts.getStartTime() == reservation.getStartTime() && ts.getDate() == reservation.date) { //edited
+			if (ts.getCustomer() == null && ts.getStartTime() == reservation.getStartTime() && ts.getDate() == reservation.getDate()) { //edited
 				ts.setCustomer(reservation.getCustomer());
 				System.out.println("Booked successfully");
 				System.out.println("--------------------");
