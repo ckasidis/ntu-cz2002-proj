@@ -3,6 +3,10 @@ package OODPg5;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
+///
+//import java.util.Calendar;
+import java.time.LocalDate;
+////
 
 public class Table {
 	private int tableNo;
@@ -18,12 +22,17 @@ public class Table {
 		
 		LocalTime startTime = LocalTime.parse("11:00:00");
 		LocalTime endTime = LocalTime.parse("12:00:00");
-				
-		//11:00-12:00 to 21:00-22:00 with 1hr interval between Slots
-		for (int i = 0; i < 11; i++) {
-			timeSlots.add(new TimeSlot(startTime, endTime));
-			startTime = startTime.plusHours(1);
-			endTime = endTime.plusHours(1);
+		LocalDate curDate = LocalDate.now(); //edited
+		
+		//dates for 1 month from now
+		for (int j=0; j <31; j++) {//edited
+			//11:00-12:00 to 21:00-22:00 with 1hr interval between Slots
+			for (int i = 0; i < 11; i++) {
+				timeSlots.add(new TimeSlot(startTime, endTime, curDate));//edited
+				startTime = startTime.plusHours(1);
+				endTime = endTime.plusHours(1);
+			}
+			curDate = curDate.plusDays(1);//edited
 		}
 	}
 	
@@ -42,7 +51,7 @@ public class Table {
 		//check reservation
 		for (TimeSlot ts : timeSlots) {
 			//find time slot
-			if (LocalTime.now().compareTo(ts.getStartTime()) >= 0 && LocalTime.now().compareTo(ts.getEndTime()) <= 0) {
+			if (LocalTime.now().compareTo(ts.getStartTime()) >= 0 && LocalTime.now().compareTo(ts.getEndTime()) <= 0 && LocalDate.now().equals(ts.getDate())) { //edited
 				//if another customer reserved this slot, can assign the table to this customer only if another customer did not arrive in 5 minutes
 				if (ts.getCustomer() != null && ts.getCustomer().getContactNo() != customer.getContactNo()) {
 					if (Duration.between(LocalTime.now(), ts.getStartTime()).toMinutes() > 5) return false;
@@ -79,7 +88,7 @@ public class Table {
 		System.out.println("--------------------");
 		System.out.println("Bookings for Table " + tableNo);
 		for (TimeSlot ts : timeSlots) {
-			System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is " + 
+			System.out.println(ts.getDate() + " from" + ts.getStartTime() + " to " + ts.getEndTime() + " is " + //edited
 							  ( ts.getCustomer() != null ? "BOOKED, Name: " + ts.getCustomer().getName() + 
 									  ", Contact Number: " + ts.getCustomer().getContactNo() : "FREE"));
 		}
@@ -91,7 +100,7 @@ public class Table {
 		
 		//locate time slot and set as reserved
 		for (TimeSlot ts : timeSlots) {
-			if (ts.getCustomer() == null && ts.getStartTime() == reservation.getStartTime()) {
+			if (ts.getCustomer() == null && ts.getStartTime() == reservation.getStartTime() && ts.getDate() == reservation.date) { //edited
 				ts.setCustomer(reservation.getCustomer());
 				System.out.println("Booked successfully");
 				System.out.println("--------------------");
@@ -107,9 +116,9 @@ public class Table {
 		return false;
 	}
 	
-	public void freeSlot(LocalTime startTime) {
+	public void freeSlot(LocalTime startTime, LocalDate date) { //edited
 		for (TimeSlot ts : timeSlots) {
-			if (ts.getStartTime() == startTime) {
+			if (ts.getStartTime() == startTime && ts.getDate() == date ) { //edited
 				if (ts.getCustomer() != null) {
 					System.out.println("Free time slot successfully");
 					ts.setCustomer(null);
