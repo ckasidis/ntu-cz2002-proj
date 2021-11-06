@@ -43,6 +43,21 @@ public class TableManager {
 	}
 	private static void bookReservation() {
 		Customer tmp3Cus = new Customer();
+		
+		System.out.println("Select a booking month (1-12)"); //edited
+		int tmp3Mon;
+		while ((tmp3Mon = sc.nextInt()) < 1 || tmp3Mon > 12) {
+			System.out.println("Please enter an integer between 1-12");
+		}	
+		
+		System.out.println("Select a booking day (1-31)"); //edited
+		int tmp3Day;
+		while ((tmp3Day = sc.nextInt()) < 1 || tmp3Day> 31) {
+			System.out.println("Please enter an integer between 1-31");
+		}	
+		
+		LocalDate tmp3Date = LocalDate.of(LocalDate.now().getYear(), tmp3Mon, tmp3Day); //edited
+		
 		System.out.println("Select a booking time (enter 11-21)");
 		int tmp3Int;
 		while ((tmp3Int = sc.nextInt()) < 11 || tmp3Int > 21) {
@@ -57,7 +72,7 @@ public class TableManager {
 		}
 
 		//find a table with enough seats
-		Reservation tmp3reservation = new Reservation(tmp3Cus, tmp3StartTime, tmp3Pax);
+		Reservation tmp3reservation = new Reservation(tmp3Cus, tmp3StartTime, tmp3Pax, tmp3Date); //edited
 		boolean booked = false;
 		for (Table table: tableList) {
 			if (tmp3Pax <= table.getNumOfSeats()) {
