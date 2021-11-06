@@ -2,7 +2,6 @@ package OODPg5;
 
 import java.util.ArrayList;
 
-
 public class Set implements MenuItem {
 	private String name;
 	private double price;

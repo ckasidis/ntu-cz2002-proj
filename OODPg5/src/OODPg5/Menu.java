@@ -1,7 +1,6 @@
 package OODPg5;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import java.util.Collections;
 
 public class Menu {
