@@ -17,6 +17,18 @@ public class Customer {
 		while((contact = s.nextLong())<100000000 || contact >99999999) {
 			System.out.println("Enter an 8 digit number!");
 		};
+		System.out.println("Enter 'Y' if customer has discount.(Enter any other input if no discount)");
+		s.nextLine();
+		char c;
+		if((c = s.nextLine().charAt(0)) == 'y' || c == 'Y'){;
+			System.out.println("Enter discount amount");
+			double d;
+			while(( d= s.nextInt())<0 || d >1) {
+				System.out.println("Enter a decimal between (0-1)!");
+				discount.add(new Discount(d));
+			};
+		}
+		
 	}
 	Customer(String n,long c){
 		name = n;

@@ -69,7 +69,17 @@ public class Order {
 
 		System.out.println("");
 
-		System.out.println("Total bill: $"+sum);
+		System.out.println("Subtotal: $"+sum+" SGD");
+		//Check for membership
+			//if/else apply discount
+		//if (customer.getDiscount())  ***Currently no "assign/unassign" membership to customer so doing it this way***
+		int discount = sum*customer.getDiscount();
+		sum = sum - discount;
+
+		//Add GST
+		sum = sum * 1.07; //7%
+
+		System.out.println("Total bill: $"+sum+" SGD");
 		System.out.println("Thank you, "+ customerName + ", for dining here.");
 
 		/** Example Invoice
@@ -81,7 +91,8 @@ public class Order {
 		Order #z abc ---$xx
 		Order #z abc ---$xx
 
-		Total bill: $xxx
+		Subtotal: $xxx SGD
+		Total bill: $xxx SGD
 		Thank you, xyz, for dining here.
 		**/
 
