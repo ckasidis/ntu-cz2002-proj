@@ -235,6 +235,7 @@ public class Menu {
 			item= item1;
 		}
 		while(item != TypeOfItem.values()[j]) {
+			if(!showSets && menuItem.get(i).getItemType() == TypeOfItem.SET) {++j;continue;}
 			System.out.printf("\n%sS: \n",TypeOfItem.values()[++j]);
 		}
 	}
