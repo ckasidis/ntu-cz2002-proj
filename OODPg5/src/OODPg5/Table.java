@@ -22,17 +22,12 @@ public class Table {
 		
 		LocalTime startTime = LocalTime.parse("11:00:00");
 		LocalTime endTime = LocalTime.parse("12:00:00");
-		LocalDate curDate = LocalDate.now(); //edited
 		
 		//dates for 1 month from now
-		for (int j=0; j <31; j++) {//edited
-			//11:00-12:00 to 21:00-22:00 with 1hr interval between Slots
-			for (int i = 0; i < 11; i++) {
-				timeSlots.add(new TimeSlot(startTime, endTime, curDate));//edited
-				startTime = startTime.plusHours(1);
-				endTime = endTime.plusHours(1);
-			}
-			curDate = curDate.plusDays(1);//edited
+		for (int i = 0; i < 11; i++) {
+			timeSlots.add(new TimeSlot(startTime, endTime));//edited
+			startTime = startTime.plusHours(1);
+			endTime = endTime.plusHours(1);
 		}
 	}
 	
@@ -42,29 +37,86 @@ public class Table {
 	public Customer getCustomer() {return customer;}
 	public ArrayList<TimeSlot> getTimeSlots() {return timeSlots;}
 	
+	//remove expired reservations
+	private void removeExpired() {
+		for (TimeSlot ts : timeSlots) {
+			if (!ts.getReservationList().isEmpty()) {
+				for (Reservation res : ts.getReservationList()) {
+					//if current date > book date, remove reservation
+					if (LocalDate.now().compareTo(res.getDate()) > 0) {
+						System.out.println("Reservation Expired for");
+						System.out.println("Book Date: " + res.getDate());
+						System.out.println("Book Time: " + res.getStartTime());
+						System.out.println("Customer: " + res.getCustomer().getName());
+						ts.removeReservation(res.getDate());
+					} else if (LocalDate.now().compareTo(res.getDate()) == 0) {
+						//if late 15 minutes after book time, remove reservation
+						if (Duration.between(res.getStartTime(), LocalTime.now()).toMinutes() > 10) {
+							System.out.println("Reservation Expired for");
+							System.out.println("Book Date: " + res.getDate());
+							System.out.println("Book Time: " + res.getStartTime());
+							System.out.println("Customer: " + res.getCustomer().getName());
+							ts.removeReservation(res.getDate());
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	//assign and unAssign
 	public boolean assign(Customer customer) {
+		//remove all expired reservations
+		removeExpired();
 		
-		//check vacancy
+		//if occupied, cannot assign
 		if (this.customer != null) return false;
 		
 		//check reservation
 		for (TimeSlot ts : timeSlots) {
-			//find time slot
-			if (LocalTime.now().compareTo(ts.getStartTime()) >= 0 && LocalTime.now().compareTo(ts.getEndTime()) <= 0 && LocalDate.now().equals(ts.getDate())) { //edited
-				//if another customer reserved this slot, can assign the table to this customer only if another customer did not arrive in 5 minutes
-				if (ts.getCustomer() != null && ts.getCustomer().getContactNo() != customer.getContactNo()) {
-					if (Duration.between(LocalTime.now(), ts.getStartTime()).toMinutes() > 5) return false;
-					else {
-						System.out.println("Reserved slot by " + ts.getCustomer().getName() + " has expired (exceeded 5 minutes from booked time)");
-						ts.setCustomer(null);
-						this.customer = customer;
-						System.out.println(customer.getName() + " assigned to table " + tableNo);
-						return true;
+			//locate time slot
+			if (LocalTime.now().compareTo(ts.getStartTime()) >= 0 && LocalTime.now().compareTo(ts.getEndTime()) < 0) {
+				if (!ts.getReservationList().isEmpty()) {
+					for (Reservation res : ts.getReservationList()) {
+						//locate date
+						if (LocalDate.now().equals(res.getDate())) {
+							//table reserved by this customer and the reservation is not expired, can assign
+							if (res.getCustomer().getContactNo() == customer.getContactNo()) {
+								ts.removeReservation(res.getDate());
+								this.customer = customer;
+								System.out.println(customer.getName() + " assigned to table " + tableNo);
+								return true;
+							//table reserved by another customer, cannot assign
+							} else return false;
+						}
 					}
-				//If this customer reserved this slot or there is no reservation, can assign the table
+				}
+				
+				//no reservation, can assign if customer arrive before XX:20 (to avoid clash with next time slot)
+				if (Duration.between(ts.getStartTime(), LocalTime.now()).toMinutes() <= 20) {
+					this.customer = customer;
+					System.out.println(customer.getName() + " assigned to table " + tableNo);
+					return true;
+				}
+				
+				//can also assign if this slot is not the last slot and next slot is not reserved
+				if (timeSlots.indexOf(ts) == timeSlots.size()-1) {
+					System.out.println("We are closing!");
+					return false;
+				}
+				TimeSlot tsNext = timeSlots.get(timeSlots.indexOf(ts)+1);
+				if (!tsNext.getReservationList().isEmpty()) {
+					for (Reservation res : tsNext.getReservationList()) {
+						//if there is reservation in next slot, cannot assign
+						if (LocalDate.now().equals(res.getDate())) {
+							System.out.println("Clash with next Reservation!");
+							return false;
+						} 
+					}
+					this.customer = customer;
+					System.out.println(customer.getName() + " assigned to table " + tableNo);
+					return true;
 				} else {
-					ts.setCustomer(null);
 					this.customer = customer;
 					System.out.println(customer.getName() + " assigned to table " + tableNo);
 					return true;
@@ -75,38 +127,64 @@ public class Table {
 	}
 	
 	public void unAssign() {
+		//remove all expired reservations
+		removeExpired();
+		
 		if (this.customer != null) {
 			this.customer = null;
 			System.out.println("Table unassigned successfully");
 		} else System.out.println("Table is already unasigned");
 	}
 	
-	public void printTableStatus() {
+	public void printTableStatus(LocalDate date) {
+		//remove all expired reservations
+		removeExpired();
+		
 		System.out.println("Table " + tableNo + " (" + numOfSeats + " Max Seats)");
 		System.out.println("Current Time: " + LocalTime.now());
-		System.out.println("Availability: " + (this.customer != null ? "Occupied by " + this.customer.getName() : "Unoccupied"));
+		System.out.println("Availability: " + (customer != null ? "Occupied by " + customer.getName() : "Unoccupied"));
 		System.out.println("--------------------");
-		System.out.println("Bookings for Table " + tableNo);
+		System.out.println("Bookings for Table " + tableNo + " on " + date);
 		for (TimeSlot ts : timeSlots) {
-			System.out.println(ts.getDate() + " from" + ts.getStartTime() + " to " + ts.getEndTime() + " is " + //edited
-							  ( ts.getCustomer() != null ? "BOOKED, Name: " + ts.getCustomer().getName() + 
-									  ", Contact Number: " + ts.getCustomer().getContactNo() : "FREE"));
+			boolean booked = false;
+			if (!ts.getReservationList().isEmpty()) {
+				for (Reservation res : ts.getReservationList()) {
+					if (res.getDate().equals(date)) {
+						System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is BOOKED" + 
+								", Name: " + res.getCustomer().getName() + 
+								", Contact Number: " + res.getCustomer().getContactNo());
+						booked = true;
+						break;
+					}
+				} if (!booked) System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is FREE");
+			} else {
+				System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is FREE");
+			}
 		}
 		System.out.println("--------------------");
 	}
 	
 	//book slot & free slot
 	public boolean bookSlot(Reservation reservation) {
+		//remove all expired reservations
+		removeExpired();
 		
-		//locate time slot and set as reserved
+		//locate time slot
 		for (TimeSlot ts : timeSlots) {
-			if (ts.getCustomer() == null && ts.getStartTime() == reservation.getStartTime() && ts.getDate() == reservation.getDate()) { //edited
-				ts.setCustomer(reservation.getCustomer());
+			if (ts.getStartTime() == reservation.getStartTime()) {
+				//if that time slot is already booked at the same date, reservation failed
+				if (!ts.getReservationList().isEmpty()) {
+					for (Reservation res : ts.getReservationList()) {
+						if (res.getDate().equals(reservation.getDate())) return false;
+					}
+				}
+				ts.addReservation(reservation);
 				System.out.println("Booked successfully");
 				System.out.println("--------------------");
 				System.out.println("Table Number: " + tableNo);
 				System.out.println("Customer Name: " + reservation.getCustomer().getName());
 				System.out.println("Contact Number: " + reservation.getCustomer().getContactNo());
+				System.out.println("Booked Date: " + reservation.getDate());
 				System.out.println("Booked Time: " + reservation.getStartTime());
 				System.out.println("Number of Pax: " + reservation.getNumOfPax());
 				System.out.println("--------------------");
@@ -116,13 +194,25 @@ public class Table {
 		return false;
 	}
 	
-	public void freeSlot(LocalTime startTime, LocalDate date) { //edited
+	public void freeSlot(LocalTime startTime, LocalDate date) {
+		//remove all expired reservations
+		removeExpired();
+		
+		//locate time slot
 		for (TimeSlot ts : timeSlots) {
-			if (ts.getStartTime() == startTime && ts.getDate() == date ) { //edited
-				if (ts.getCustomer() != null) {
-					System.out.println("Free time slot successfully");
-					ts.setCustomer(null);
-				} else System.out.println("Time slot is already free");
+			if (ts.getStartTime() == startTime) {
+				//locate reservation with this date
+				if (!ts.getReservationList().isEmpty()) {
+					for (Reservation res : ts.getReservationList()) {
+						if (res.getDate().equals(date)) {
+							System.out.println("Free time slot successfully");
+							ts.removeReservation(date);
+							return;
+						}
+					}
+				}
+				System.out.println("Time slot is already free");
+				return;
 			}
 		}
 	}

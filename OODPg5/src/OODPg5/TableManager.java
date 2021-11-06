@@ -24,23 +24,7 @@ public class TableManager {
 			tableSize += 2;
 		}
 	}
-	public void reservation()
-	{
-		
-		int c = sc.nextInt();
-		System.out.println("1: book reservation");
-		System.out.println("2: remove reservation");
-		switch(c){
-				case 1: //book reservation			
-					
-					bookReservation();
-					break;
-				case 2: //remove reservation
-					
-					removeReservation();
-					break;
-		}
-	}
+
 	private static void bookReservation() {
 		Customer tmp3Cus = new Customer();
 		
@@ -156,7 +140,21 @@ public class TableManager {
 			}
 		}
 	}
-	public void bootTableManager() {
+	public void reservation()
+	{
+		System.out.println("1: book reservation");
+		System.out.println("2: remove reservation");
+		int c = sc.nextInt();
+		switch(c){
+			case 1: //book reservation			
+				bookReservation();
+				break;
+			case 2: //remove reservation
+				removeReservation();
+				break;
+		}
+	}
+	public void checkOrAssignTable() {
 		int c;
 		
 		while(true) {
@@ -169,35 +167,51 @@ public class TableManager {
 			c = sc.nextInt();
 			switch(c) {
 				case 1: //check all table status
-						
-						for (Table table: tableList)
-							table.printTableStatus();
-						break;
-				case 2: //check table status
-					
-						System.out.println("Enter table number (1-10)");
-						int tmp2TableNo;
-						while ((tmp2TableNo = sc.nextInt()) < 1 || tmp2TableNo > 10) {
-							System.out.println("Please enter an integer between 1-10");
+					System.out.println("Select month (1-12)"); //edited
+					int tmp1Mon;
+					while ((tmp1Mon = sc.nextInt()) < 1 || tmp1Mon > 12) {
+						System.out.println("Please enter an integer between 1-12");
+					}	
+					System.out.println("Select day (1-31)"); //edited
+					int tmp1Day;
+					while ((tmp1Day = sc.nextInt()) < 1 || tmp1Day> 31) {
+						System.out.println("Please enter an integer between 1-31");
+					}	
+					LocalDate tmp1Date = LocalDate.of(LocalDate.now().getYear(), tmp1Mon, tmp1Day); 
+					for (Table table: tableList)
+						table.printTableStatus(tmp1Date);
+					break;
+				case 2: //check table status				
+					System.out.println("Enter table number (1-10)");
+					int tmp2TableNo;
+					while ((tmp2TableNo = sc.nextInt()) < 1 || tmp2TableNo > 10) {
+						System.out.println("Please enter an integer between 1-10");
+					}
+					System.out.println("Select month (1-12)"); //edited
+					int tmp2Mon;
+					while ((tmp2Mon = sc.nextInt()) < 1 || tmp2Mon > 12) {
+						System.out.println("Please enter an integer between 1-12");
+					}	
+					System.out.println("Select day (1-31)"); //edited
+					int tmp2Day;
+					while ((tmp2Day = sc.nextInt()) < 1 || tmp2Day> 31) {
+						System.out.println("Please enter an integer between 1-31");
+					}	
+					LocalDate tmp2Date = LocalDate.of(LocalDate.now().getYear(), tmp2Mon, tmp2Day); 
+					//find table and print status
+					for (Table table: tableList) {
+						if (table.getTableNo() == tmp2TableNo) {
+							table.printTableStatus(tmp2Date);
+							break;
 						}
-						
-						//find table and print status
-						for (Table table: tableList) {
-							if (table.getTableNo() == tmp2TableNo) {
-								table.printTableStatus();
-								break;
-							}
-						}
-						break;
-
+					}
+					break;
 				case 3: //assign table
-						
-						assignTable();
-						break;
-				case 4: //unAssign table
-						
-						unAssignTable();
-						break;
+					assignTable();
+					break;
+				case 4: //unAssign table	
+					unAssignTable();
+					break;
 				case 5: return;
 				default: System.out.println("invalid entry!");
 			}

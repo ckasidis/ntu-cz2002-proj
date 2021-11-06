@@ -14,7 +14,7 @@ public class Customer {
 		System.out.println("Enter name of customer:");//get name and contacts for customer
 		name = s.nextLine();
 		System.out.println("Enter contacts:");
-		while((contact = s.nextLong())<100000000 || contact >99999999) {
+		while((contact = s.nextLong())<10000000 || contact >99999999) {
 			System.out.println("Enter an 8 digit number!");
 		};
 		System.out.println("Enter 'Y' if customer has discount.(Enter any other input if no discount)");
@@ -56,7 +56,7 @@ public class Customer {
 		return contact;
 	}
 	public void setContact(long c) {
-		if(c<100000000 && c >99999999)
+		if(c<10000000 && c >99999999)
 			contact = c;
 		else
 			System.out.println("invalid contacts!");

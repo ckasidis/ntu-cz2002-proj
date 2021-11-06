@@ -58,7 +58,7 @@ public class RRPSS {
 		
 		System.out.println("Welcome to Restaurant Reservation and Point of Sale System");
 		System.out.println("Today's Date is:" + date.getTime());
-		try {
+//		try {
 			while(true) {
 				System.out.println("1: Open Menu");
 				System.out.println("2: Boot table manager");
@@ -73,7 +73,7 @@ public class RRPSS {
 					case 1: 
 							showMenu(menu);break;
 					case 2:
-							tables.bootTableManager();break;
+							tables.checkOrAssignTable();break;
 					case 3:
 							tables.reservation();break;
 					case 4:
@@ -102,35 +102,35 @@ public class RRPSS {
 							//Total_order.printSalesInvoice();
 							//Total_order.remove(tn2-1);
 							break;
-					case 7:
-							System.out.println("Select option(1-2)");
-							int checkToday;
-							while((checkToday = s.nextInt())<1 || checkToday>2) {
-							System.out.println("1:print Sales Revenue for today");
-							System.out.println("2:print Sales Revenue for the month");
-							}
-							if(checkToday == 1) {
-								SaleRevenue.calculateSaleRevenue(true);
-							}else {
-								SaleRevenue.calculateSaleRevenue(false);
-							}
-							break;
+//					case 7:
+//							System.out.println("Select option(1-2)");
+//							int checkToday;
+//							while((checkToday = s.nextInt())<1 || checkToday>2) {
+//							System.out.println("1:print Sales Revenue for today");
+//							System.out.println("2:print Sales Revenue for the month");
+//							}
+//							if(checkToday == 1) {
+//								SaleRevenue.calculateSaleRevenue(true);
+//							}else {
+//								SaleRevenue.calculateSaleRevenue(false);
+//							}
+//							break;
 					case 8: System.out.println("Shutting down..");return;
 						default:System.out.println("Invalid entry!");
 				}
 			}
-		}
-		catch (NumberFormatException e){
-			System.out.println("Invalid integer! Try again.");
-			String clear = s.nextLine();
-		}
-		catch(Exception e) {
-			String clear = s.nextLine();
-			System.out.println("Invalid input! Try again.");
-		}
-		finally {
-			start(menu, tables, date);
-		}
+//		}
+//		catch (NumberFormatException e){
+//			System.out.println("Invalid integer! Try again.");
+//			String clear = s.nextLine();
+//		}
+//		catch(Exception e) {
+//			String clear = s.nextLine();
+//			System.out.println("Invalid input! Try again.");
+//		}
+//		finally {
+//			start(menu, tables, date);
+//		}
 	}
 	public static void main(String[] args) {
 		Menu menu = new  Menu();
