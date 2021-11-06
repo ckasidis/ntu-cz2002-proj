@@ -1,7 +1,5 @@
 package OODPg5;
-
 import java.util.Scanner;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -61,65 +59,64 @@ public class RRPSS {
 //		try {
 			while(true) {
 				System.out.println("1: Open Menu");
-				System.out.println("2: Boot table manager");
-				System.out.println("3: Book/Remove a reservation");
-				System.out.println("4: Take Order");
-				System.out.println("5: Update order");
-				System.out.println("6: Print order invoice");
-				System.out.println("7: Print Sales Revenue Report");
-				System.out.println("8: Shut down! <all data will be lost>");
+				System.out.println("2: Check/Reserve/Assign Table");
+				System.out.println("3: Take Order");
+				System.out.println("4: Update order");
+				System.out.println("5: Print order invoice");
+				System.out.println("6: Print Sales Revenue Report");
+				System.out.println("7: Shut down! <all data will be lost>");
 				choice = s.nextInt();
 				switch(choice) {
 					case 1: 
-							showMenu(menu);break;
+						showMenu(menu);
+						break;
 					case 2:
-							tables.checkOrAssignTable();break;
+						tables.bootTableManager();
+						break;
 					case 3:
-							tables.reservation();break;
+						System.out.println("Enter table number (1-10)");
+						int tn;
+						while((tn = s.nextInt())<1 || tn>10) {
+							System.out.println("Please enter an integer between 1-10");
+						}
+						//Total_order.get(tn-1).setdetails(date,customer);
+						break;
 					case 4:
-							System.out.println("Enter table number (1-10)");
-							int tn;
-							while((tn = s.nextInt())<1 || tn>10) {
-								System.out.println("Please enter an integer between 1-10");
-							}
-							//Total_order.get(tn-1).setdetails(date,customer);
-							break;
+						System.out.println("Enter table number (1-10)");
+						int tn1;
+						while((tn1 = s.nextInt())<1 || tn1>10) {
+							System.out.println("Please enter an integer between 1-10");
+						}
+						//Total_order.get(tn1-1).addMenuItem(menuItem));
+						break;
 					case 5:
-							System.out.println("Enter table number (1-10)");
-							int tn1;
-							while((tn1 = s.nextInt())<1 || tn1>10) {
-								System.out.println("Please enter an integer between 1-10");
-							}
-							//Total_order.get(tn1-1).addMenuItem(menuItem));
-							break;
-					case 6:
-							System.out.println("Enter table number (1-10)");
-							int tn2;
-							while((tn2 = s.nextInt())<1 || tn2>10) {
-								System.out.println("Please enter an integer between 1-10");
-							}
-							//finished_orders.add(Total_order.get(tn2-1));
-							//Total_order.printSalesInvoice();
-							//Total_order.remove(tn2-1);
-							break;
-//					case 7:
-//							System.out.println("Select option(1-2)");
-//							int checkToday;
-//							while((checkToday = s.nextInt())<1 || checkToday>2) {
-//							System.out.println("1:print Sales Revenue for today");
-//							System.out.println("2:print Sales Revenue for the month");
-//							}
-//							if(checkToday == 1) {
-//								SaleRevenue.calculateSaleRevenue(true);
-//							}else {
-//								SaleRevenue.calculateSaleRevenue(false);
-//							}
-//							break;
-					case 8: System.out.println("Shutting down..");return;
+						System.out.println("Enter table number (1-10)");
+						int tn2;
+						while((tn2 = s.nextInt())<1 || tn2>10) {
+							System.out.println("Please enter an integer between 1-10");
+						}
+						//finished_orders.add(Total_order.get(tn2-1));
+						//Total_order.printSalesInvoice();
+						//Total_order.remove(tn2-1);
+						break;
+//					case 6:
+//						System.out.println("Select option(1-2)");
+//						int checkToday;
+//						while((checkToday = s.nextInt())<1 || checkToday>2) {
+//						System.out.println("1:print Sales Revenue for today");
+//						System.out.println("2:print Sales Revenue for the month");
+//						}
+//						if(checkToday == 1) {
+//							SaleRevenue.calculateSaleRevenue(true);
+//						}else {
+//							SaleRevenue.calculateSaleRevenue(false);
+//						}
+//						break;
+					case 7: System.out.println("Shutting down..");return;
 						default:System.out.println("Invalid entry!");
 				}
 			}
-//		}
+		}
 //		catch (NumberFormatException e){
 //			System.out.println("Invalid integer! Try again.");
 //			String clear = s.nextLine();
@@ -131,7 +128,7 @@ public class RRPSS {
 //		finally {
 //			start(menu, tables, date);
 //		}
-	}
+//	}
 	public static void main(String[] args) {
 		Menu menu = new  Menu();
 		ArrayList<Table> tableList = new ArrayList<Table>();

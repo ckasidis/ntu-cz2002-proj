@@ -44,19 +44,19 @@ public class Table {
 				for (Reservation res : ts.getReservationList()) {
 					//if current date > book date, remove reservation
 					if (LocalDate.now().compareTo(res.getDate()) > 0) {
-						System.out.println("Reservation Expired for");
-						System.out.println("Book Date: " + res.getDate());
-						System.out.println("Book Time: " + res.getStartTime());
-						System.out.println("Customer: " + res.getCustomer().getName());
+						System.out.println("Reservation Expired for Customer: " + res.getCustomer().getName());
+						System.out.println("Book Date: " + res.getDate() + ", Book Time: " + res.getStartTime());
+						System.out.println("Current Date: " + LocalDate.now() + ", Current Time: " + LocalTime.now());
 						ts.removeReservation(res.getDate());
+						return;
 					} else if (LocalDate.now().compareTo(res.getDate()) == 0) {
 						//if late 15 minutes after book time, remove reservation
 						if (Duration.between(res.getStartTime(), LocalTime.now()).toMinutes() > 10) {
-							System.out.println("Reservation Expired for");
-							System.out.println("Book Date: " + res.getDate());
-							System.out.println("Book Time: " + res.getStartTime());
-							System.out.println("Customer: " + res.getCustomer().getName());
+							System.out.println("Reservation Expired for Customer: " + res.getCustomer().getName());
+							System.out.println("Book Date: " + res.getDate() + ", Book Time: " + res.getStartTime());
+							System.out.println("Current Date: " + LocalDate.now() + ", Current Time: " + LocalTime.now());
 							ts.removeReservation(res.getDate());
+							return;
 						}
 					}
 				}

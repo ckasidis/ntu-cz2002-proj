@@ -37,6 +37,7 @@ public class TimeSlot {
 		if (!reservationList.isEmpty()) {
 			for (Reservation res : reservationList) {
 				if (res.getDate().equals(date)) reservationList.remove(res);
+				break;
 			}
 		}
 	}
