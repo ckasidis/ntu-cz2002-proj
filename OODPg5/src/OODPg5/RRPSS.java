@@ -12,12 +12,12 @@ public class RRPSS {
 	
 	private static void showMenu(Menu menu) {
 		int c;
+		while(true) {
 		menu.showMenuItems();
 		System.out.println("1: Create menu item");
 		System.out.println("2: Create promotion set");
 		System.out.println("3: Edit menu item");
 		System.out.println("4: return");
-		while(true) {
 			c = s.nextInt();
 			switch(c){
 				case 1:	
