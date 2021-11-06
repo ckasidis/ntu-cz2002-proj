@@ -1,6 +1,7 @@
 package OODPg5;
 
 import java.time.LocalTime;
+import java.time.LocalDate; //edited
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -74,6 +75,20 @@ public class TableManager {
 		while((tmp4TableNo = sc.nextInt()) < 1 || tmp4TableNo > 10) {
 			System.out.println("Please enter an integer between 1-10");
 		}
+		
+		System.out.println("Select a booking month (1-12)"); //edited
+		int tmp4Mon;
+		while ((tmp4Mon = sc.nextInt()) < 1 || tmp4Mon > 12) {
+			System.out.println("Please enter an integer between 1-12");
+		}	
+		
+		System.out.println("Select a booking day (1-31)"); //edited
+		int tmp4Day;
+		while ((tmp4Day = sc.nextInt()) < 1 || tmp4Day> 31) {
+			System.out.println("Please enter an integer between 1-31");
+		}	
+		
+		LocalDate tmp4Date = LocalDate.of(LocalDate.now().getYear(), tmp4Mon, tmp4Day); //edited
 
 		System.out.println("Select a booking time (11-21)");
 		int tmp4Int;
@@ -85,7 +100,7 @@ public class TableManager {
 		//find the table and free slot
 		for (Table table: tableList) {
 			if (table.getTableNo() == tmp4TableNo) {
-				table.freeSlot(tmp4StartTime);
+				table.freeSlot(tmp4StartTime, tmp4Date); //edited
 				break;
 			}
 		}
