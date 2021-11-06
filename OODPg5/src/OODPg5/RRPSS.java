@@ -104,8 +104,16 @@ public class RRPSS {
 							break;
 					case 7:
 							System.out.println("Select option(1-2)");
+							int checkToday;
+							while((checkToday = s.nextInt())<1 || checkToday>2) {
 							System.out.println("1:print Sales Revenue for today");
-							System.out.println("1:print Sales Revenue for the month");
+							System.out.println("2:print Sales Revenue for the month");
+							}
+							if(checkToday == 1) {
+								SaleRevenue.calculateSaleRevenue(true);
+							}else {
+								SaleRevenue.calculateSaleRevenue(false);
+							}
 							break;
 					case 8: System.out.println("Shutting down..");return;
 						default:System.out.println("Invalid entry!");
