@@ -1,6 +1,7 @@
 package OODPg5;
 
 import java.time.LocalTime;
+import java.time.Duration;
 import java.time.LocalDate; //edited
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -42,12 +43,29 @@ public class TableManager {
 		
 		LocalDate date = LocalDate.of(LocalDate.now().getYear(), mon, day); //edited
 		
+		//cannot reserve before current date
+		if (LocalDate.now().compareTo(date) > 0) {
+			System.out.println("Cannot Reserve!, please choose current or later date to make a reservation");
+			System.out.println("Your Date: " + date + ", Current Date: " + LocalDate.now());
+			return;
+		} 
+		
 		System.out.println("Select a booking time (enter 11-21)");
 		int tmp;
 		while ((tmp = sc.nextInt()) < 11 || tmp > 21) {
 			System.out.println("Please enter an integer between 11-21");
 		}
 		LocalTime startTime = LocalTime.of(tmp, 0);
+		
+		//can only book 3 time slots (> 2 hour) in advance for same day reservation
+		if (LocalDate.now().equals(date)) {
+			if (Duration.between(LocalTime.now(), startTime).toHours() <= 2) {
+				System.out.println("Cannot Reserve!, Please reserve a time slot more than 2 hours in advance!");
+				System.out.println("Your Date: " + date + ", Your Time: " + startTime);
+				System.out.println("Current Date: " + LocalDate.now() + ", Current Time: " + LocalTime.now());
+				return;
+			}
+		}
 		
 		System.out.println("Enter number of person per table");
 		int pax;
@@ -106,6 +124,12 @@ public class TableManager {
 	}
 	private void assignTable() {
 		Customer cus = new Customer();
+		
+		//cannot assign if came after 40 minutes before closing time
+		if (Duration.between(LocalTime.now(), LocalTime.parse("22:00:00")).toMinutes() < 40) {
+			System.out.println("Sorry! we are closing");
+			return;
+		}
 		
 		System.out.println("Enter number of person per table");
 		int pax;
