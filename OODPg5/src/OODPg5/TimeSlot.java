@@ -7,7 +7,7 @@ import java.time.LocalDate;//
 /**
  * Represent a time slot during restaurant opening hours
  * 
- * @author Group 6
+ * @author Group 5
  *
  */
 public class TimeSlot {

@@ -6,15 +6,44 @@ import java.util.ArrayList;
 ///
 //import java.util.Calendar;
 import java.time.LocalDate;
-////
+
+/**
+ *Represents a table in the restaurant.
+ *
+ *Table can be used during the opening hours from 1100-2200
+ *Table can be booked for 1 hour time slots
+ *
+ * @author Group 5
+ *
+ */
+
 
 public class Table {
+	/**
+	 * Unique ID for each table
+	 */
 	private int tableNo;
+	/**
+	 * Total number of seats available in Table
+	 */
 	private int numOfSeats;
+	/**
+	 * The customer assigned to the table
+	 */
 	private Customer customer;
+	/**
+	 * The list of timeslot
+	 */
 	private ArrayList<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
 	
 	//constructor
+	/**
+	 * Creates a table in the restaurant.
+	 * 1 hour time slots available for the table from 1100 to 2200
+	 * 
+	 * @param TableNo Table number of the table
+	 * @param numOfSeats Number of seats available in the table
+	 */
 	public Table(int TableNo, int numOfSeats) {
 		this.tableNo = TableNo;
 		this.numOfSeats = numOfSeats;
@@ -32,12 +61,31 @@ public class Table {
 	}
 	
 	//getters
+	/**
+	 * Get the table number of the table
+	 * @return Table number of the table
+	 */
 	public int getTableNo() {return tableNo;}
+	/**
+	 * Get the number of seats available in the table
+	 * @return Number of seats available in the table
+	 */
 	public int getNumOfSeats() {return numOfSeats;}
+	/**
+	 * Get the customer assigned to table
+	 * @return Customer assigned to table, null if table is free
+	 */
 	public Customer getCustomer() {return customer;}
+	/**
+	 * Get the array list of time slots
+	 * @return Array list of time slots
+	 */
 	public ArrayList<TimeSlot> getTimeSlots() {return timeSlots;}
 	
 	//remove expired reservations
+	/**
+	 * Remove expired timeslots
+	 */
 	private void removeExpired() {
 		for (TimeSlot ts : timeSlots) {
 			if (!ts.getReservationList().isEmpty()) {
@@ -65,6 +113,11 @@ public class Table {
 	}
 	
 	//assign and unAssign
+	/**
+	 * Assign a customer to the table
+	 * @param customer Customer to be assigned the table
+	 * @return TRUE if customer is assigned the table
+	 */
 	public boolean assign(Customer customer) {
 		//remove all expired reservations
 		removeExpired();
@@ -101,6 +154,7 @@ public class Table {
 				
 				//can also assign if this slot is not the last slot and next slot is not reserved
 				if (timeSlots.indexOf(ts) == timeSlots.size()-1) {
+					System.out.println("We are closing!");
 					return false;
 				}
 				TimeSlot tsNext = timeSlots.get(timeSlots.indexOf(ts)+1);
@@ -108,6 +162,7 @@ public class Table {
 					for (Reservation res : tsNext.getReservationList()) {
 						//if there is reservation in next slot, cannot assign
 						if (LocalDate.now().equals(res.getDate())) {
+							System.out.println("Clash with next Reservation!");
 							return false;
 						} 
 					}
@@ -124,6 +179,9 @@ public class Table {
 		return false;
 	}
 	
+	/**
+	 * Unassign the table, table is now free
+	 */
 	public void unAssign() {
 		//remove all expired reservations
 		removeExpired();
@@ -134,6 +192,10 @@ public class Table {
 		} else System.out.println("Table is already unasigned");
 	}
 	
+	/**
+	 * Print the booking status for the table
+	 * @param date Date of the booking status to be printed
+	 */
 	public void printTableStatus(LocalDate date) {
 		//remove all expired reservations
 		removeExpired();
@@ -163,6 +225,11 @@ public class Table {
 	}
 	
 	//book slot & free slot
+	/**
+	 * Book a time slot for the table
+	 * @param reservation Reservation booked for the table
+	 * @return TRUE if time slot booked for the table
+	 */
 	public boolean bookSlot(Reservation reservation) {
 		//remove all expired reservations
 		removeExpired();
@@ -192,6 +259,11 @@ public class Table {
 		return false;
 	}
 	
+	/**
+	 * Free the time slot for the table
+	 * @param startTime Starting time for the time slot to be freed
+	 * @param date Date of the time slot to be freed
+	 */
 	public void freeSlot(LocalTime startTime, LocalDate date) {
 		//remove all expired reservations
 		removeExpired();

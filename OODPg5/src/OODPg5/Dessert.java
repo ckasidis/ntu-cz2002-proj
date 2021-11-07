@@ -1,13 +1,25 @@
 package OODPg5;
 /**
  * Represents a dessert sold in the restaurant
- * @author Group 6
+ * @author Group 5
  *
  */
 public class Dessert implements MenuItem {
+	/**
+	 * Type of the item (Dessert)
+	 */
 	private TypeOfItem item;
+	/**
+	 * Name of the dessert
+	 */
 	private String name;
+	/**
+	 * Price of the dessert
+	 */
 	private double price;
+	/**
+	 * Description of the dessert
+	 */
 	private String description;
 	
 	/**

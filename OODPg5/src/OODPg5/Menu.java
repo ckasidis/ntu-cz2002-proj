@@ -2,15 +2,29 @@ package OODPg5;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
-
+/**
+ * Represents the menu of the restaurant
+ * 
+ * @author Group 5
+ *
+ */
 public class Menu {
-	
+	/**
+	 * Array list of the items in the menu
+	 */
 	ArrayList<MenuItem> menuItem;
 	Scanner in = new Scanner(System.in);
-	
+	/**
+	 * Creates a menu
+	 */
 	public Menu() {
 		menuItem = new ArrayList<MenuItem>();
 	}
+	
+	/**
+	 * Options to edit the menu:
+	 * Remove or update menu item
+	 */
 	public void editMenu() {
 		
 		System.out.println("Enter item number:");
@@ -35,6 +49,9 @@ public class Menu {
 		}
 
 	}
+	/**
+	 * Create a menu item using user input of type, name, price and description
+	 */
 	public void createMenuItem() { 
 		String name;
 		String description;
@@ -82,6 +99,11 @@ public class Menu {
 			System.out.println("Item successfully created!");
 		}
 	}
+	
+	/**
+	 * Remove menu item 
+	 * @param itemIndex Index of the item in the menu to be removed
+	 */
 	private void removeMenuItem(int itemIndex) {
 		--itemIndex;
 		if(itemIndex < 0 || itemIndex > menuItem.size() - 1) {
@@ -93,6 +115,11 @@ public class Menu {
 			System.out.println("Item is removed.");
 		}
 	}
+	
+	/**
+	 * Update name, price or description of the menu item
+	 * @param itemIndex Index of the item in the menu to be updated
+	 */
 	private void updateMenuItem (int itemIndex) {
 		--itemIndex;
 		if(itemIndex < 0 || itemIndex > menuItem.size() - 1) {
@@ -126,7 +153,9 @@ public class Menu {
 			}
 	}
 
-
+	/**
+	 * Create a promotional set of existing menu items
+	 */
 	public void createPromotionSet() {
 		int itemIndex;
 		String description;
@@ -154,6 +183,10 @@ public class Menu {
 		System.out.println("Promotional Set succesfully created!");
 	}
 	
+	/**
+	 * Update name, price, description and items in the promotional set
+	 * @param itemIndex
+	 */
 	private void updatePromotionSet(int itemIndex) {
 		
 		--itemIndex;
@@ -214,6 +247,10 @@ public class Menu {
 			}
 		}	
 }
+	/**
+	 * Show items in the menu
+	 * @param showSets If TRUE, sets in the menu are shown
+	 */
 	public void showMenuItems(boolean showSets) {
 		
 		int i,j=0;
@@ -239,6 +276,11 @@ public class Menu {
 			System.out.printf("\n%sS: \n",TypeOfItem.values()[++j]);
 		}
 	}
+	
+	/**
+	 * Sorts the items in menu according to item type
+	 * @param menuItemList List of items in the menu
+	 */
 	private void sort(ArrayList<MenuItem> menuItemList) {
 		int i, prev=0;
 		if(menuItemList.size()<=1) return;
