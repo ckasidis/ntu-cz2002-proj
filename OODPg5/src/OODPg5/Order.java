@@ -4,21 +4,47 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Represents an order in the restaurant
+ * @author Group 5
+ *
+ */
 public class Order {
 	static int checkNo =0;
+	/**
+	 * Array list of items ordered
+	 */
 	private ArrayList<MenuItem> orderItem;
-
+	/**
+	 * Customer that placed the order
+	 */
 	private Customer customer;
+	/**
+	 * Staff facilitating the order
+	 */
 	private Staff staff;
+	/**
+	 * Table number of table assigned for the order
+	 */
 	private int table_no;
+	/**
+	 * Check number of the order
+	 */
 	private int cNumber;
+	/**
+	 * Total to be paid by customer
+	 */
 	private double finalCheck;
 
 //An order should indicate the staff who created the order.
 //Order invoice can be printed to list the order details (eg, table number, timestamp)
 //	and a complete breakdown of order items details with taxes details.
-	
+	/**
+	 * Create an order
+	 * @param customer Customer that placed the order
+	 * @param staff Staff facilitating the order
+	 * @param tableNo Table number of table assigned for the order
+	 */
 	public Order(Customer customer, Staff staff, int tableNo) {
 		this.customer = customer;
 		this.staff = staff;
@@ -26,13 +52,26 @@ public class Order {
 		cNumber = checkNo++;
 		finalCheck =0;
 	}
+	
+	/**
+	 * Add item to the list of order items
+	 * @param mi Item to be added into the order
+	 */
 	public void addOrder(MenuItem mi) {
 		orderItem.add(mi);
 		sort(orderItem);		
 	}
+	/**
+	 * Remove item from the list of order items
+	 * @param mi Item to be removed from the order
+	 */
 	public void removeOrder(MenuItem mi) {
 		orderItem.remove(mi);
 	}
+	
+	/**
+	 * View all the items ordered
+	 */
 	public void viewOrder() {
 		int temp = 1, count=0;
 		MenuItem tm = orderItem.get(0);
@@ -45,9 +84,19 @@ public class Order {
 			count++;
 		}
 	}
+	
+	/**
+	 * Get the table number of table assigned for the order
+	 * @return Table number of table assigned for the order
+	 */
 	public int getTableNum() {
 		return table_no;
 	}
+	
+	/**
+	 * Sort the items in the list 
+	 * @param menuItemList List of items
+	 */
 	private void sort(ArrayList<MenuItem> menuItemList) {
 		int prev;
 		if(menuItemList.size()<=1) return;
@@ -60,6 +109,10 @@ public class Order {
 			  }
 		}
 	}
+	
+	/**
+	 * Print the order invoice
+	 */
 	public void printOrderInvoice() {
 		LocalDateTime date = LocalDateTime.now();
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E dd/MM/yyyy HH:mm");
