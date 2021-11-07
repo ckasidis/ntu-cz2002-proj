@@ -6,11 +6,24 @@ import java.time.LocalDate; //edited
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * System to manage assignment of table
+ * @author Group 5
+ *
+ */
 public class TableManager {
+	/**
+	 * A list of all the tables in the restaurant
+	 */
 	private static ArrayList<Table> tableList;
 	
 	static Scanner sc = new Scanner(System.in);
-	
+	/**
+	 * Creates a system to manage the assignment of tables in the restaurant.
+	 * There are 2 tables each with 2,4,6,8 and 10 seats respectively.
+	 * 
+	 * @param tm This is the list of Tables
+	 */
 	public TableManager(ArrayList<Table> tm) {
 		tableList = tm;
 		int tableNo = 1;
@@ -25,6 +38,13 @@ public class TableManager {
 			tableSize += 2;
 		}
 	}
+	
+	/**
+	 * Books a reservation according to input date, time and number of persons.
+	 * Booking must be made 2 hours in advance.
+	 * 
+	 * A free table with sufficient seats will be assigned.
+	 */
 
 	private static void bookReservation() {
 		Customer cus = new Customer();
@@ -86,6 +106,13 @@ public class TableManager {
 		if (!booked) System.out.println("Reservation failed, please try another time slot");
 	
 	}
+	
+	/**
+	 * Removes a reservation according to input table number, date and time
+	 * Table booked for the reservation will be freed
+	 *  
+	 */
+	
 	private static void removeReservation() {
 		System.out.println("Enter table number (1-10)");
 		int tableNo;
@@ -122,6 +149,12 @@ public class TableManager {
 			}
 		}
 	}
+	
+	/**
+	 * Assigns free Table with sufficient capacity to incoming customer with input number of persons
+	 * Customer not assigned a table 40 minutes before closing time
+	 */
+	
 	private void assignTable() {
 		Customer cus = new Customer();
 		
@@ -149,6 +182,11 @@ public class TableManager {
 		if (!assigned) System.out.println("Assigning failed");
 
 	}
+	
+	/**
+	 * Unassigns a Table with input table number 
+	 * and sets table free 
+	 */
 	private void unAssignTable() {
 		System.out.println("Enter table number (1-10)");
 		int tableNo;
@@ -164,6 +202,11 @@ public class TableManager {
 			}
 		}
 	}
+	
+	/**
+	 * Allows selection of all operations to manage the tables 
+	 * 
+	 */
 
 	public void bootTableManager() {
 		int c;
