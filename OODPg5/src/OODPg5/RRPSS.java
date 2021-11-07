@@ -19,16 +19,15 @@ public class RRPSS {
 			c = s.nextInt();
 			switch(c){
 				case 1:	
-						menu.createMenuItem(); 
-						break;
+					menu.createMenuItem(); 
+					break;
 				case 2: 
-						menu.createPromotionSet();
-						break;
+					menu.createPromotionSet();
+					break;
 				case 3:
-						menu.editMenu();
-						break;
+					menu.editMenu();
+					break;
 				case 4:return;
-						
 				default: System.out.println("invalid entry");break;
 			}
 

@@ -127,13 +127,13 @@ public class TableManager {
 	}
 	private void unAssignTable() {
 		System.out.println("Enter table number (1-10)");
-		int tableNo = sc.nextInt();
+		int tableNo;
 		while ((tableNo = sc.nextInt()) < 1 || tableNo > 10) {
 			System.out.println("Please enter an integer between 1-10");
 		}
 		
 		//find the table and unAssign
-		for (Table table: tableList) {
+		for (Table table : tableList) {
 			if (table.getTableNo() == tableNo) {
 				table.unAssign();
 				break;
@@ -145,7 +145,7 @@ public class TableManager {
 		int c;
 		
 		while(true) {
-			System.out.println("Check Table");
+			System.out.println("Table Manager");
 			System.out.println("1: check all table status");
 			System.out.println("2: check table status");
 			System.out.println("3: book reservation");
