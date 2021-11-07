@@ -13,7 +13,7 @@ public class Customer {
 		
 		System.out.println("Enter name of customer:");//get name and contacts for customer
 		name = s.nextLine();
-		System.out.println("Enter contacts:");
+		System.out.println("Enter contact number:");
 		while((contact = s.nextLong())<10000000 || contact >99999999) {
 			System.out.println("Enter an 8 digit number!");
 		};

@@ -145,7 +145,7 @@ public class TableManager {
 		int c;
 		
 		while(true) {
-			System.out.println("Choose your method");
+			System.out.println("Check Table");
 			System.out.println("1: check all table status");
 			System.out.println("2: check table status");
 			System.out.println("3: book reservation");

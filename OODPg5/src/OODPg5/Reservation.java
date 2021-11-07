@@ -18,8 +18,16 @@ public class Reservation {
 	}
 
 	//getters
-	public Customer getCustomer() {return customer;}
-	public LocalTime getStartTime() {return startTime;}
-	public int getNumOfPax() {return numOfPax;}
-	public LocalDate getDate() {return date;}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public LocalTime getStartTime() {
+		return startTime;
+	}
+	public int getNumOfPax() {
+		return numOfPax;
+	}
+	public LocalDate getDate() {
+		return date;
+	}
 }

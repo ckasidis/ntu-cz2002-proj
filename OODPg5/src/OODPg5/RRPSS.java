@@ -56,10 +56,10 @@ public class RRPSS {
 		
 		System.out.println("Welcome to Restaurant Reservation and Point of Sale System");
 		System.out.println("Today's Date is:" + date.getTime());
-//		try {
+		try {
 			while(true) {
 				System.out.println("1: Open Menu");
-				System.out.println("2: Check/Reserve/Assign Table");
+				System.out.println("2: Table Manager");
 				System.out.println("3: Take Order");
 				System.out.println("4: Update order");
 				System.out.println("5: Print order invoice");
@@ -117,18 +117,18 @@ public class RRPSS {
 				}
 			}
 		}
-//		catch (NumberFormatException e){
-//			System.out.println("Invalid integer! Try again.");
-//			String clear = s.nextLine();
-//		}
-//		catch(Exception e) {
-//			String clear = s.nextLine();
-//			System.out.println("Invalid input! Try again.");
-//		}
-//		finally {
-//			start(menu, tables, date);
-//		}
-//	}
+		catch (NumberFormatException e){
+			System.out.println("Invalid integer! Try again.");
+			String clear = s.nextLine();
+		}
+		catch(Exception e) {
+			String clear = s.nextLine();
+			System.out.println("Invalid input! Try again.");
+		}
+		finally {
+			start(menu, tables, date);
+		}
+	}
 	public static void main(String[] args) {
 		Menu menu = new  Menu();
 		ArrayList<Table> tableList = new ArrayList<Table>();
