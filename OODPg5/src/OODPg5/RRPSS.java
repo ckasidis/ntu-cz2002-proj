@@ -1,7 +1,8 @@
 package OODPg5;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class RRPSS {
 	static Scanner s = new Scanner(System.in);
@@ -44,19 +45,19 @@ public class RRPSS {
 	public static void printSalesRevenueReport() {
 		
 	}
-	public static void start(Menu menu, TableManager tables, Calendar date) {
+	public static void start(Menu menu, TableManager tables) {
 		int choice;
 		
-		//ArrayList<Order> Total_orders = new ArrayList<Order>();
-		//for(int i=0;i<10<i++){
-		//	Total_orders.add(new Order(i+1, date))} // assuming order(TableNumber, date)
-		//ArrayList<Order> finished_orders = new ArrayList<Order>();
-		
-		
-		System.out.println("Welcome to Restaurant Reservation and Point of Sale System");
-		System.out.println("Today's Date is:" + date.getTime());
+		ArrayList<Order> Total_orders = new ArrayList<Order>();
+	///	for(int i=0;i<10<i++){
+	//		Total_orders.add(new Order(i+1, date))} // assuming order(TableNumber, date)
+		ArrayList<Order> finished_orders = new ArrayList<Order>();
 		try {
 			while(true) {
+				LocalDateTime date = LocalDateTime.now();
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E dd/MM/yyyy HH:mm:ss");
+				System.out.println("Welcome to Restaurant Reservation and Point of Sale System");
+				System.out.println("Date:" + date.format(dtf));
 				System.out.println("1: Open Menu");
 				System.out.println("2: Table Manager");
 				System.out.println("3: Take Order");
@@ -125,7 +126,7 @@ public class RRPSS {
 			System.out.println("Invalid input! Try again.");
 		}
 		finally {
-			start(menu, tables, date);
+			start(menu, tables);
 		}
 	}
 	public static void main(String[] args) {
@@ -133,7 +134,6 @@ public class RRPSS {
 		ArrayList<Table> tableList = new ArrayList<Table>();
 		
 		TableManager tables = new TableManager(tableList);
-		Calendar calendar = Calendar.getInstance();
-		start(menu, tables, calendar);
+		start(menu, tables);
 	}
 }
