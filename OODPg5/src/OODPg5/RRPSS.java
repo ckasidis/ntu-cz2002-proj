@@ -8,6 +8,8 @@ public class RRPSS {
 	static Scanner s = new Scanner(System.in);
 	static final boolean showSet = true;
 	private Table[] table;
+	private ArrayList<Order> total_orders = new ArrayList<Order>();
+	private ArrayList<Order> finished_orders = new ArrayList<Order>();
 	
 	private static void showMenu(Menu menu) {
 		int c;
@@ -35,6 +37,11 @@ public class RRPSS {
 		}
 
 	}
+	public void replaceTableOrder(Customer customer, Staff staff, int tableNo) {
+		Order newTableOrder = new Order(customer, staff, tableNo);
+		total_orders.set(tableNo-1, newTableOrder);
+	}
+	
 	public static void  order(Staff staff) {
 		
 	}
@@ -48,10 +55,9 @@ public class RRPSS {
 	public static void start(Menu menu, TableManager tables) {
 		int choice;
 		
-		ArrayList<Order> Total_orders = new ArrayList<Order>();
 	///	for(int i=0;i<10<i++){
 	//		Total_orders.add(new Order(i+1, date))} // assuming order(TableNumber, date)
-		ArrayList<Order> finished_orders = new ArrayList<Order>();
+		
 		try {
 			while(true) {
 				LocalDateTime date = LocalDateTime.now();
@@ -129,6 +135,7 @@ public class RRPSS {
 			start(menu, tables);
 		}
 	}
+	
 	public static void main(String[] args) {
 		Menu menu = new  Menu();
 		ArrayList<Table> tableList = new ArrayList<Table>();
