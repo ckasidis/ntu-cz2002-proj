@@ -38,13 +38,16 @@ public class Customer {
 		discount.add(d);
 	}
 	public double getDiscount(double price) {
-		if(discount.size()==0) return 0;
+		if(discount.size()==0) {
+			System.out.printf("         <NO MEMBER DISCOUNTS>\n");
+			return 0;
+		}
 		double highest_discount=0;
 		for(int i=0;i<discount.size();i++) {
 			if(discount.get(i).getDiscount()>highest_discount)
 				highest_discount = discount.get(i).getDiscount();
 		}
-		return highest_discount;
+		return highest_discount*price;
 	}
 	public String getName() {
 		return name;
