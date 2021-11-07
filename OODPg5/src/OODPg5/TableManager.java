@@ -176,11 +176,15 @@ public class TableManager {
 			if (pax <= table.getNumOfSeats()) {
 				//assigned return false if assigning failed
 				assigned = table.assign(cus);
-				if (assigned) break;
+				if (assigned) {
+					//get staff
+					//replaceTableOrder(table.getCustomer(), <Staff Object> ,table.getTableNo());
+					return;
+				}
 			}
 		}
-		if (!assigned) System.out.println("Assigning failed");
-
+		System.out.println("Assigning failed");
+		return;
 	}
 	
 	/**
