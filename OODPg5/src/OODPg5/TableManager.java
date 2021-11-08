@@ -155,13 +155,12 @@ public class TableManager {
 	 * Customer not assigned a table 40 minutes before closing time
 	 */
 	
-	private void assignTable() {
-		Customer cus = new Customer();
+	public int assignTable(Customer cus) {
 		
 		//cannot assign if came after 40 minutes before closing time
 		if (Duration.between(LocalTime.now(), LocalTime.parse("22:00:00")).toMinutes() < 40) {
 			System.out.println("Sorry! we are closing");
-			return;
+			return -1;
 		}
 		
 		System.out.println("Enter number of person per table");
@@ -179,32 +178,32 @@ public class TableManager {
 				if (assigned) {
 					//get staff
 					//replaceTableOrder(table.getCustomer(), <Staff Object> ,table.getTableNo());
-					return;
+					return table.getTableNo();
 				}
 			}
 		}
 		System.out.println("Assigning failed");
-		return;
+		return -1;
 	}
 	
 	/**
 	 * Unassigns a Table with input table number 
 	 * and sets table free 
 	 */
-	private void unAssignTable() {
+	public int unAssignTable() {
 		System.out.println("Enter table number (1-10)");
 		int tableNo;
 		while ((tableNo = sc.nextInt()) < 1 || tableNo > 10) {
 			System.out.println("Please enter an integer between 1-10");
 		}
-		
 		//find the table and unAssign
 		for (Table table : tableList) {
 			if (table.getTableNo() == tableNo) {
 				table.unAssign();
-				break;
+				return table.getTableNo();
 			}
 		}
+		return -1;
 	}
 	
 	/**
@@ -221,9 +220,7 @@ public class TableManager {
 			System.out.println("2: check table status");
 			System.out.println("3: book reservation");
 			System.out.println("4: remove reservation");
-			System.out.println("5: assign table");
-			System.out.println("6: unAssign table");
-			System.out.println("7: return");
+			System.out.println("5: return");
 			c = sc.nextInt();
 			switch(c) {
 				case 1: //check all table status
@@ -272,13 +269,7 @@ public class TableManager {
 				case 4:
 					removeReservation();
 					break;
-				case 5: //assign table
-					assignTable();
-					break;
-				case 6: //unAssign table	
-					unAssignTable();
-					break;
-				case 7: return;
+				case 5: return;
 				default: System.out.println("invalid entry!");
 			}
 		}
