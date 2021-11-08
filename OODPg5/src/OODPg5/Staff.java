@@ -7,6 +7,17 @@ public class Staff {
 	private String jobTitle;
 	
 	//Constructors
+	public Staff() {
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter name of Staff");
+		name = s.nextLine();
+		System.out.println("Enter gender");
+		gender = s.nextLine().charAt(0);
+		employeeID = ID++;
+		System.out.println("Enter Job Title");
+		jobTitle = s.nextLine();
+		System.out.printf("Employee %s (%c),%s, will be on duty today!");
+	}
 	public Staff(String name, String gender, int employeeID, String jobTitle) {
 		this.name  = name;
 		this.gender = gender;
