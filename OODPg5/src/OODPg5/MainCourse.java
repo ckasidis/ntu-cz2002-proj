@@ -35,7 +35,10 @@ public class MainCourse implements MenuItem {
 			this.description = description;
 			item = TypeOfItem.MAINCOURSE;
 	}
-	
+	public MenuItem toOrder() {
+		MainCourse mi= new MainCourse(name,price,description);
+		return mi;
+	}
 	/**
 	 * Print the description of the main course
 	 */
