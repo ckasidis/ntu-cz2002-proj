@@ -34,7 +34,10 @@ public class Dessert implements MenuItem {
 		this.description = description;
 		item = TypeOfItem.DESSERT;	
 	}
-	
+	public MenuItem toOrder() {
+		Dessert mi= new Dessert(name,price,description);
+		return mi;
+	};
 	/**
 	 * Print the description of the dessert
 	 */
