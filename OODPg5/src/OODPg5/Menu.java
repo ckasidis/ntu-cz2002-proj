@@ -49,6 +49,14 @@ public class Menu {
 		}
 
 	}
+	public Object getMenuItem() {
+		System.out.println("Enter item number:");
+		int item = in.nextInt();
+		while(item < 0 || item > menuItem.size() - 1) {
+			System.out.println("Item not in menu.");
+		}
+		return menuItem.get(item-1).toOrder();
+	}
 	/**
 	 * Create a menu item using user input of type, name, price and description
 	 */
