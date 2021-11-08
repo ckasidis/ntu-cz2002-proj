@@ -44,7 +44,14 @@ public class Set implements MenuItem {
 	/**
 	 * Get the name of the set 
 	 */
-
+	public MenuItem toOrder() {
+		 ArrayList<MenuItem> setcopy = new ArrayList<MenuItem>();
+		for(MenuItem item: menuItem) {
+			setcopy.add(item.toOrder());
+		}
+		Set mi= new Set(name,price,description,setcopy);
+		return mi;
+	};
 	public String getName() {
 		return name;
 	}
