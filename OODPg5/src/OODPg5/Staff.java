@@ -32,7 +32,7 @@ public class Staff {
 		return name;
 	}
 
-	public String getGender() {
+	public char getGender() {
 		return gender;
 	}
 
