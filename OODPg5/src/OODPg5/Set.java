@@ -51,7 +51,7 @@ public class Set implements MenuItem {
 		}
 		Set mi= new Set(name,price,description,setcopy);
 		return mi;
-	};
+	}
 	public String getName() {
 		return name;
 	}
