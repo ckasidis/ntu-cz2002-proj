@@ -10,7 +10,7 @@ import java.time.LocalDate;
 /**
  *Represents a table in the restaurant.
  *
- *Table can be used during the opening hours from 1100-2200
+ *Table can be used during the opening hours from 11:00-22:00
  *Table can be booked for 1 hour time slots
  *
  * @author Group 5
@@ -206,17 +206,16 @@ public class Table {
 		System.out.println("--------------------");
 		System.out.println("Bookings for Table " + tableNo + " on " + date);
 		for (TimeSlot ts : timeSlots) {
-			boolean booked = false;
 			if (!ts.getReservationList().isEmpty()) {
 				for (Reservation res : ts.getReservationList()) {
 					if (res.getDate().equals(date)) {
 						System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is BOOKED" + 
 								", Name: " + res.getCustomer().getName() + 
 								", Contact Number: " + res.getCustomer().getContactNo());
-						booked = true;
 						break;
 					}
-				} if (!booked) System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is FREE");
+				} 
+				System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is FREE");
 			} else {
 				System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is FREE");
 			}
