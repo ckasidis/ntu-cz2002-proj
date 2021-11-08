@@ -1,8 +1,9 @@
 package OODPg5;
 
 public class Staff {
+	static int ID = 0;
 	private String name;
-	private String gender;
+	private char gender;
 	private int employeeID;
 	private String jobTitle;
 	
@@ -23,6 +24,7 @@ public class Staff {
 		this.gender = gender;
 		this.employeeID = employeeID;
 		this.jobTitle = jobTitle;
+		employeeID = ID++;
 	}
 
 	//Getters and Setters
