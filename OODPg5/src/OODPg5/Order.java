@@ -3,14 +3,16 @@ package OODPg5;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 /**
  * Represents an order in the restaurant
  * @author Group 5
  *
  */
 public class Order {
-	static int checkNo =0;
+	static int checkNo =1;
 	/**
 	 * Array list of items ordered
 	 */
@@ -34,8 +36,8 @@ public class Order {
 	/**
 	 * Total to be paid by customer
 	 */
-	private double finalCheck;
-
+	private double finalPrice;
+	private LocalDate date;
 //An order should indicate the staff who created the order.
 //Order invoice can be printed to list the order details (eg, table number, timestamp)
 //	and a complete breakdown of order items details with taxes details.
@@ -45,14 +47,20 @@ public class Order {
 	 * @param staff Staff facilitating the order
 	 * @param tableNo Table number of table assigned for the order
 	 */
+	public Order(int tableNo) {
+		customer =new Customer("Empty",9999999);
+		table_no = tableNo;
+		cNumber = 0;
+		finalPrice =0;
+		date = LocalDate.now();
+	}
 	public Order(Customer customer, Staff staff, int tableNo) {
 		this.customer = customer;
 		this.staff = staff;
 		table_no = tableNo;
 		cNumber = checkNo++;
-		finalCheck =0;
+		finalPrice =0;
 	}
-	
 	/**
 	 * Add item to the list of order items
 	 * @param mi Item to be added into the order
@@ -61,12 +69,37 @@ public class Order {
 		orderItem.add(mi);
 		sort(orderItem);		
 	}
+	public LocalDate getDate() {
+		return date;
+	}
+	public int getCheckNo() {
+		return cNumber;
+	}
+	public double getfinalPrice() {
+		return finalPrice;
+	}
+	public void addOrderItem(MenuItem mi) {
+		orderItem.add(mi);
+		sort(orderItem);		
+	}
+
 	/**
 	 * Remove item from the list of order items
 	 * @param mi Item to be removed from the order
 	 */
-	public void removeOrder(MenuItem mi) {
-		orderItem.remove(mi);
+	public void removeOrderItem() {
+		Scanner s = new Scanner(System.in);
+		int temp =1;
+		for(MenuItem oi: orderItem) {
+			System.out.printf("Order #%d:  %s \t %.2f",temp++,oi.getName(),oi.getPrice());
+		}
+		int itemIndex = s.nextInt();
+		System.out.println("Enter order number of item to remove");
+		if(itemIndex < 1 || itemIndex > orderItem.size()) {
+			System.out.println("Item not in menu.");
+			return;
+		}
+		orderItem.remove(itemIndex-1);
 	}
 	
 	/**
@@ -135,8 +168,8 @@ public class Order {
 		temp = temp + sum*0.1;
 		System.out.printf("         MEMBER DISCOUNTS:    $%.2f SGD\n", customer.getDiscount(sum));
 		System.out.println("-----------------------------------------");
-		finalCheck = temp-customer.getDiscount(sum);
-		System.out.printf("                    TOTAL:    $%.2f SGD\n", finalCheck);
+		finalPrice = temp-customer.getDiscount(sum);
+		System.out.printf("                    TOTAL:    $%.2f SGD\n", finalPrice);
 		System.out.println("-----------------------------------------");
 		System.out.println("*****************************************");
 		System.out.println("**    Thank you for dining with us!    **");
