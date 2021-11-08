@@ -39,4 +39,5 @@ public interface MenuItem{
 	 * @param description Description of the menu item
 	 */
 	public void setDescription(String description);
+	public MenuItem toOrder();
 }
