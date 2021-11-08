@@ -217,10 +217,8 @@ public class Table {
 						break;
 					}
 				} 
-				if (!booked) System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is FREE");
-			} else {
-				System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is FREE");
 			}
+			if (!booked) System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is FREE");
 		}
 		System.out.println("--------------------");
 	}
