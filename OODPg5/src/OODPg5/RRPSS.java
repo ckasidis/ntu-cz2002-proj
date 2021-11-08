@@ -1,4 +1,5 @@
 package OODPg5;
+package rrps;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.*;
@@ -8,8 +9,6 @@ public class RRPSS {
 	static Scanner s = new Scanner(System.in);
 	static final boolean showSet = true;
 	private Table[] table;
-	private ArrayList<Order> total_orders = new ArrayList<Order>();
-	private ArrayList<Order> finished_orders = new ArrayList<Order>();
 	
 	private static void showMenu(Menu menu) {
 		int c;
@@ -37,13 +36,27 @@ public class RRPSS {
 		}
 
 	}
-	public void replaceTableOrder(Customer customer, Staff staff, int tableNo) {
-		Order newTableOrder = new Order(customer, staff, tableNo);
-		total_orders.set(tableNo-1, newTableOrder);
-	}
-	
-	public static void  order(Staff staff) {
-		
+	public static void  updateOrder(Menu menu,Order order) {
+		menu.showMenuItems(showSet);
+		while(true) {
+			order.viewOrder();
+			System.out.println("======= SELECT CHOICE =======\n(1)add item to order (2)Remove item from order (3)Return");
+			int c = s.nextInt();
+			switch(c) {
+				case 1:
+						menu.showMenuItems(showSet);
+						System.out.println("Choose item to add to order");
+						order.addOrderItem(menu.getMenuItem());
+						break;
+				case 2:
+						menu.showMenuItems(showSet);
+						System.out.println("Choose item to remove from order");
+						order.removeOrderItem();
+						break;
+				case 3:return;
+				default:System.out.println("Invalid option!");
+			}
+		}
 	}
 
 	public static void orderInvoice(int tableNumber) {
@@ -52,12 +65,12 @@ public class RRPSS {
 	public static void printSalesRevenueReport() {
 		
 	}
-	public static void start(Menu menu, TableManager tables) {
+	public static void start(Menu menu, TableManager tables, ArrayList<Order> SalesRecord, ArrayList<Staff> staffs) {
 		int choice;
 		
-	///	for(int i=0;i<10<i++){
-	//		Total_orders.add(new Order(i+1, date))} // assuming order(TableNumber, date)
-		
+		ArrayList<Order> table_orders = new ArrayList<Order>();
+		for(int i=0;i<10;i++){
+			table_orders.add(new Order(i+1));} // assuming order(TableNumber, date)
 		try {
 			while(true) {
 				LocalDateTime date = LocalDateTime.now();
@@ -66,9 +79,9 @@ public class RRPSS {
 				System.out.println("Date:" + date.format(dtf));
 				System.out.println("1: Open Menu");
 				System.out.println("2: Table Manager");
-				System.out.println("3: Take Order");
-				System.out.println("4: Update order");
-				System.out.println("5: Print order invoice");
+				System.out.println("3: assign table");
+				System.out.println("4: unAssign table");
+				System.out.println("5: Update order");
 				System.out.println("6: Print Sales Revenue Report");
 				System.out.println("7: Shut down! <all data will be lost>");
 				choice = s.nextInt();
@@ -80,18 +93,21 @@ public class RRPSS {
 						tables.bootTableManager();
 						break;
 					case 3:
-						System.out.println("Enter table number (1-10)");
-						int tn;
-						while((tn = s.nextInt())<1 || tn>10) {
-							System.out.println("Please enter an integer between 1-10");
+						Customer cus = new Customer();
+						int tb = tables.assignTable(cus);
+						System.out.println("Enter Staff ID");
+						int ID = s.nextInt();
+						s.nextLine();
+						if(tb!=-1) {
+							table_orders.set(tb-1, new Order(cus,staffs.get(ID),tb));
 						}
-						//Total_order.get(tn-1).setdetails(date,customer);
 						break;
 					case 4:
-						System.out.println("Enter table number (1-10)");
-						int tn1;
-						while((tn1 = s.nextInt())<1 || tn1>10) {
-							System.out.println("Please enter an integer between 1-10");
+						int tb1 = tables.unAssignTable();
+						if(table_orders.get(tb1-1).getCheckNo() !=0) {
+							table_orders.get(tb1-1).printOrderInvoice();
+							SalesRecord.add(table_orders.get(tb1-1));
+							table_orders.set(tb1-1, new Order(tb1-1));
 						}
 						//Total_order.get(tn1-1).addMenuItem(menuItem));
 						break;
@@ -101,9 +117,7 @@ public class RRPSS {
 						while((tn2 = s.nextInt())<1 || tn2>10) {
 							System.out.println("Please enter an integer between 1-10");
 						}
-						//finished_orders.add(Total_order.get(tn2-1));
-						//Total_order.printSalesInvoice();
-						//Total_order.remove(tn2-1);
+						updateOrder(menu, table_orders.get(tn2-1));
 						break;
 //					case 6:
 //						System.out.println("Select option(1-2)");
@@ -132,15 +146,20 @@ public class RRPSS {
 			System.out.println("Invalid input! Try again.");
 		}
 		finally {
-			start(menu, tables);
+			start(menu, tables, SalesRecord,staffs);
 		}
 	}
-	
 	public static void main(String[] args) {
+		ArrayList<Staff> staffs = new ArrayList<Staff>();
+		while(s.nextInt()!=-1) {
+			s.nextLine();
+			staffs.add(new Staff());
+			System.out.println("Enter -1 to stop adding staff to roster.");
+		}
 		Menu menu = new  Menu();
 		ArrayList<Table> tableList = new ArrayList<Table>();
-		
+		ArrayList<Order> salesRecord = new ArrayList<Order>();
 		TableManager tables = new TableManager(tableList);
-		start(menu, tables);
+		start(menu, tables, salesRecord,staffs);
 	}
 }
