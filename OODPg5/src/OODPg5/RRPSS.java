@@ -1,15 +1,26 @@
 package OODPg5;
-package rrps;
+//package rrps;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the Restaurant Reservation and Point of Sale System of the restaurant
+ * @author Group 5
+ *
+ */
 public class RRPSS {
 	static Scanner s = new Scanner(System.in);
 	static final boolean showSet = true;
+	/**
+	 * Array of tables in the restaurant
+	 */
 	private Table[] table;
-	
+	/**
+	 * Create, display and edit the menu of the restaurant
+	 * @param menu Menu of the restaurant
+	 */
 	private static void showMenu(Menu menu) {
 		int c;
 		while(true) {
@@ -36,6 +47,11 @@ public class RRPSS {
 		}
 
 	}
+	/**
+	 * Update the order placed by the customer in the restaurant
+	 * @param menu Menu of the restaurant
+	 * @param order Order placed by the customer
+	 */
 	public static void  updateOrder(Menu menu,Order order) {
 		menu.showMenuItems(showSet);
 		while(true) {
@@ -58,13 +74,28 @@ public class RRPSS {
 			}
 		}
 	}
-
+	
+	/**
+	 * Order invoice of order for a particular table 
+	 * @param tableNumber Table number of the table
+	 */
 	public static void orderInvoice(int tableNumber) {
 		
 	}
+	/**
+	 * Print the report for sales revenue
+	 */
 	public static void printSalesRevenueReport() {
 		
 	}
+	
+	/**
+	 * Allows user to operate the RRPSS of the restaurant
+	 * @param menu Menu of the restaurant
+	 * @param tables Tables in the restaurant
+	 * @param SalesRecord Array list of orders placed in the restaurant
+	 * @param staffs Array list of staffs working at the restaurant
+	 */
 	public static void start(Menu menu, TableManager tables, ArrayList<Order> SalesRecord, ArrayList<Staff> staffs) {
 		int choice;
 		
@@ -149,6 +180,7 @@ public class RRPSS {
 			start(menu, tables, SalesRecord,staffs);
 		}
 	}
+	
 	public static void main(String[] args) {
 		ArrayList<Staff> staffs = new ArrayList<Staff>();
 		while(s.nextInt()!=-1) {
