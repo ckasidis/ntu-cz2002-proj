@@ -284,5 +284,7 @@ public class Table {
 				return;
 			}
 		}
+		System.out.println("Time Slot not found, please choose another start time");
+		return;
 	}
 }
