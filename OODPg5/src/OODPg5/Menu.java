@@ -49,7 +49,7 @@ public class Menu {
 		}
 
 	}
-	public Object getMenuItem() {
+	public MenuItem getMenuItem() {
 		System.out.println("Enter item number:");
 		int item = in.nextInt();
 		while(item < 0 || item > menuItem.size() - 1) {
