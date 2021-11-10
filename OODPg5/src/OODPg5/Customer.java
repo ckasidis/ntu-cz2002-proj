@@ -31,19 +31,35 @@ public class Customer {
 		System.out.println("Enter name of customer:");//get name and contacts for customer
 		name = s.nextLine();
 		System.out.println("Enter contact number:");
-		while((contact = s.nextLong())<10000000 || contact >99999999) {
+		while(!s.hasNextLong()){
+			System.out.println("Enter a number!!!");
+			s.next();
+		}
+		while((contact = s.nextLong())<9999999 || contact >99999999) {
 			System.out.println("Enter an 8 digit number!");
-		};
+			while(!s.hasNextLong()){
+				System.out.println("Enter a number!!!");
+				s.next();
+			}
+		}
 		System.out.println("Enter 'Y' if customer has discount.(Enter any other input if no discount)");
 		s.nextLine();
 		char c;
 		if((c = s.nextLine().charAt(0)) == 'y' || c == 'Y'){;
 			System.out.println("Enter discount amount");
 			double d;
-			while(( d= s.nextInt())<0 || d >1) {
+			while(!s.hasNextDouble()){
 				System.out.println("Enter a decimal between (0-1)!");
-				discount.add(new Discount(d));
-			};
+				s.next();
+			}
+			while(( d= s.nextDouble())<0 || d >1) {
+				System.out.println("Enter a decimal between (0-1)!");
+				while(!s.hasNextDouble()){
+					System.out.println("Enter a decimal between (0-1)!");
+					s.next();
+				}
+			}
+			discount.add(new Discount(d));
 		}
 		
 	}
