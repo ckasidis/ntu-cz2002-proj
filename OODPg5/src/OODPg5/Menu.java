@@ -25,37 +25,47 @@ public class Menu {
 	 * Options to edit the menu:
 	 * Remove or update menu item
 	 */
-	public void editMenu() {
+		public void editMenu() {
 		
 		System.out.println("Enter item number:");
 		int num = in.nextInt();
 		System.out.println("======= SELECT CHOICE =======\n(1)Remove item  (2)Update details");
-		int choice = in.nextInt();
-		switch(choice) {
-		case 1:
-			removeMenuItem(num);
-			return;
-		case 2:
-			if(menuItem.get(num-1).getItemType() != TypeOfItem.SET)
-				updateMenuItem(num);
-			else
-			updatePromotionSet(num);
-			return;
-		case 3:
-			break;
-		default:
-			System.out.println("Invalid entry!");
-			break;		
+		if(in.hasNextInt()) {
+			int choice = in.nextInt();
+			switch(choice) {
+			case 1:
+				removeMenuItem(num);
+				return;
+			case 2:
+				if(menuItem.get(num-1).getItemType() != TypeOfItem.SET)
+					updateMenuItem(num);
+				else
+				updatePromotionSet(num);
+				return;
+			case 3:
+				break;
+			default:
+				System.out.println("Invalid entry!");
+				break;		
+			}
 		}
-
+		else {
+			System.out.println("Enter an integer!!!");
+			in.next();
+		}
 	}
 	public MenuItem getMenuItem() {
 		System.out.println("Enter item number:");
+		while(!in.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			in.next();
+		}
 		int item = in.nextInt();
 		while(item < 0 || item > menuItem.size() - 1) {
 			System.out.println("Item not in menu.");
 		}
 		return menuItem.get(item-1).toOrder();
+		
 	}
 	/**
 	 * Create a menu item using user input of type, name, price and description
@@ -65,46 +75,52 @@ public class Menu {
 		String description;
 		double price;
 		System.out.printf("====== SELECT ITEM TO CREATE ====== \n(1)Drink  (2)MainCourse  (3)Dessert\n");
-		int choice = in.nextInt();
-		in.nextLine();
-		switch(choice) {
-		case 1:
-			System.out.println("Drink name: ");
-			name = in.nextLine();
-			System.out.print("Price of drink: \n$");
-			price = in.nextDouble();
+		if(in.hasNextInt()) {
+			int choice = in.nextInt();
 			in.nextLine();
-			System.out.println("Description of drink: ");
-			description = in.nextLine();
-			menuItem.add(new Drinks(name, price, description));
-			break;
-		case 2:
-			System.out.println("MainCourse name: ");
-			name = in.nextLine();
-			System.out.print("Price of Maincourse: \n$");
-			price = in.nextDouble();
-			in.nextLine();
-			System.out.println("Description of Maincourse: ");
-			description = in.nextLine();
-			menuItem.add(new MainCourse(name, price, description));
-			break;
-		case 3:
-			System.out.println("Dessert name: ");
-			name = in.nextLine();
-			System.out.print("Price of Dessert: \n$");
-			price = in.nextDouble();
-			in.nextLine();
-			System.out.println("Description of dessert: ");
-			description = in.nextLine();
-			menuItem.add(new Dessert(name, price, description));
-			break;
-		default:
-			System.out.println("Inavlid choice entered.");
-			break;
+			switch(choice) {
+			case 1:
+				System.out.println("Drink name: ");
+				name = in.nextLine();
+				System.out.print("Price of drink: \n$");
+				price = in.nextDouble();
+				in.nextLine();
+				System.out.println("Description of drink: ");
+				description = in.nextLine();
+				menuItem.add(new Drinks(name, price, description));
+				break;
+			case 2:
+				System.out.println("MainCourse name: ");
+				name = in.nextLine();
+				System.out.print("Price of Maincourse: \n$");
+				price = in.nextDouble();
+				in.nextLine();
+				System.out.println("Description of Maincourse: ");
+				description = in.nextLine();
+				menuItem.add(new MainCourse(name, price, description));
+				break;
+			case 3:
+				System.out.println("Dessert name: ");
+				name = in.nextLine();
+				System.out.print("Price of Dessert: \n$");
+				price = in.nextDouble();
+				in.nextLine();
+				System.out.println("Description of dessert: ");
+				description = in.nextLine();
+				menuItem.add(new Dessert(name, price, description));
+				break;
+			default:
+				System.out.println("Inavlid choice entered.");
+				break;
+			}
+			if(choice>0 && choice<4) {
+				sort(menuItem);
+				System.out.println("Item successfully created!");
+			}
 		}
-		if(choice>0 && choice<4) {
-			sort(menuItem);
-			System.out.println("Item successfully created!");
+		else {
+			System.out.println("Enter an integer!!!");
+			in.next();
 		}
 	}
 	
@@ -136,29 +152,35 @@ public class Menu {
 		}
 		else {
 			System.out.printf("========= SELECT UPDATE =========\n(1)Name  (2)Price  (3)Description\n");
-			int choice = in.nextInt();
-			in.nextLine();
-			switch(choice) {
-			case 1:
-				System.out.println("Enter new name: ");
-				menuItem.get(itemIndex).setName(in.nextLine());
-				System.out.println("Update successful!");
-				break;
-			case 2:
-				System.out.print("Enter new price: \n$");
-				menuItem.get(itemIndex).setPrice(in.nextDouble());
-				System.out.println("Update successful!");
-				break;
-			case 3:
-				System.out.println("Enter new description: ");
-				menuItem.get(itemIndex).setDescription(in.nextLine());
-				System.out.println("Update successful!");
-				break;
-			default:
-				System.out.println("Invalid choice entered.");
-				break;
+			if(in.hasNextInt()) {
+				int choice = in.nextInt();
+				in.nextLine();
+				switch(choice) {
+					case 1:
+						System.out.println("Enter new name: ");
+						menuItem.get(itemIndex).setName(in.nextLine());
+						System.out.println("Update successful!");
+						break;
+					case 2:
+						System.out.print("Enter new price: \n$");
+						menuItem.get(itemIndex).setPrice(in.nextDouble());
+						System.out.println("Update successful!");
+						break;
+					case 3:
+						System.out.println("Enter new description: ");
+						menuItem.get(itemIndex).setDescription(in.nextLine());
+						System.out.println("Update successful!");
+						break;
+					default:
+						System.out.println("Invalid choice entered.");
+						break;
 				}
 			}
+			else {
+				System.out.println("Enter an integer!!!");
+				in.next();
+			}
+		}
 	}
 
 	/**
@@ -172,11 +194,19 @@ public class Menu {
 		System.out.println("Set name: ");
 		String name = in.nextLine();
 		System.out.print("Price of Set: \n$");
+		while(!in.hasNextDouble()){
+			System.out.println("Enter a double!!!");
+			in.next();
+		}
 		double price = in.nextDouble();
 		ArrayList<MenuItem> SetItem = new ArrayList<MenuItem>();
 		showMenuItems(false);
 		while(adding) {
 			System.out.println("Enter item to add to set (Enter -1 to quit): ");
+			while(!in.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				in.next();
+			}
 			if((itemIndex = in.nextInt())== -1) break;
 			itemIndex--;
 			while(itemIndex < 0 || itemIndex > menuItem.size() - 1 || menuItem.get(itemIndex).getItemType()== TypeOfItem.SET)
@@ -204,54 +234,72 @@ public class Menu {
 		}
 		else {
 			System.out.printf("========= SELECT UPDATE =========\n(1)Name  (2)Price  (3)Description  (4)Add Item  (5)Remove Item\n");
-			int choice = in.nextInt();
-			switch(choice) {
-			case 1:
-				in.nextLine();
-				System.out.println("Enter new name: ");
-				menuItem.get(itemIndex).setName(in.nextLine());
-				System.out.println("Update successful!");
-				break;
-			case 2:
-				System.out.print("Enter new price: \n$");
-				menuItem.get(itemIndex).setPrice(in.nextDouble());
-				System.out.println("Update successful!");
-				break;
-			case 3:
-				in.nextLine();
-				String description = in.nextLine();
-				menuItem.get(itemIndex).setDescription(description);
-				System.out.println("Update successful!");
-				break;
-			case 4:
-				sort(menuItem);
-				showMenuItems(false);
-				System.out.println("Enter item to add from menu:");
-				int add_itemIndex = in.nextInt() - 1;
-				if(add_itemIndex < 0 || add_itemIndex > menuItem.size() || menuItem.get(add_itemIndex).getItemType() == TypeOfItem.SET) {
-					System.out.println("Not from menu (Sets cannot be chosen).");
-					System.out.println("Update unsuccessful!");
+			if(in.hasNextInt()) {
+				int choice = in.nextInt();
+				switch(choice) {
+					case 1:
+						in.nextLine();
+						System.out.println("Enter new name: ");
+						menuItem.get(itemIndex).setName(in.nextLine());
+						System.out.println("Update successful!");
+						break;
+					case 2:
+						System.out.print("Enter new price: \n$");
+						while(!in.hasNextDouble()){
+							System.out.println("Enter a double!!!");
+							in.next();
+						}
+						menuItem.get(itemIndex).setPrice(in.nextDouble());
+						System.out.println("Update successful!");
+						break;
+					case 3:
+						in.nextLine();
+						String description = in.nextLine();
+						menuItem.get(itemIndex).setDescription(description);
+						System.out.println("Update successful!");
+						break;
+					case 4:
+						sort(menuItem);
+						showMenuItems(false);
+						System.out.println("Enter item to add from menu:");
+						while(!in.hasNextInt()){
+							System.out.println("Enter an integer!!!");
+							in.next();
+						}
+						int add_itemIndex = in.nextInt() - 1;
+						if(add_itemIndex < 0 || add_itemIndex > menuItem.size() || menuItem.get(add_itemIndex).getItemType() == TypeOfItem.SET) {
+							System.out.println("Not from menu (Sets cannot be chosen).");
+							System.out.println("Update unsuccessful!");
+						}
+						else if ( menuItem.get(itemIndex) instanceof Set) {
+							Set sets = (Set)menuItem.get(itemIndex);
+							sets.addItem(menuItem.get(add_itemIndex));
+							System.out.println("Update successful!");
+							}
+						break;
+					case 5:
+						if( menuItem.get(itemIndex) instanceof Set) {
+							Set sets = (Set)menuItem.get(itemIndex);
+							sets.showSet();
+							System.out.println("Enter item to remove from set:");
+							while(!in.hasNextInt()){
+								System.out.println("Enter an integer!!!");
+								in.next();
+							}
+							if(sets.removeItem(in.nextInt() - 1)) 
+								System.out.print("Update successful.");
+							else 
+								System.out.println("Update unsuccessful.");
+						}
+						break;
+					default:
+						System.out.println("Invalid choice entered.");
+						break;
 				}
-				else if ( menuItem.get(itemIndex) instanceof Set) {
-					Set sets = (Set)menuItem.get(itemIndex);
-					sets.addItem(menuItem.get(add_itemIndex));
-					System.out.println("Update successful!");
-					}
-				break;
-			case 5:
-				if( menuItem.get(itemIndex) instanceof Set) {
-					Set sets = (Set)menuItem.get(itemIndex);
-					sets.showSet();
-					System.out.println("Enter item to remove from set:");
-					if(sets.removeItem(in.nextInt() - 1)) 
-						System.out.print("Update successful.");
-					else 
-						System.out.println("Update unsuccessful.");
-				}
-				break;
-			default:
-				System.out.println("Invalid choice entered.");
-				break;
+			}
+			else {
+				System.out.println("Enter an integer!!!");
+				in.next();
 			}
 		}	
 }
