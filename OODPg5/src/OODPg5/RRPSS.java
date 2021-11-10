@@ -83,7 +83,10 @@ public class RRPSS {
 			}
 		}
 	}
-	
+		/**
+		 * Print sales revenue of the restaurant for a day, a month or a year
+		 * @param sales Sale revenue record of the restaurant
+		 */
 		public static void printSalesrevenue(SaleRevenue sales) {
 		int c, mon,day;
 		LocalDate date = LocalDate.now(),ld;
@@ -242,6 +245,10 @@ public class RRPSS {
 			start(menu, tables, sales,staffs);
 		}
 	}
+	/**
+	 * User interface for RRPSS
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		ArrayList<Staff> staffs = new ArrayList<Staff>();
 		int c=0;
