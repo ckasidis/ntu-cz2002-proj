@@ -56,7 +56,6 @@ public class RRPSS {
 	 * @param order Order placed by the customer
 	 */
 	public static void  updateOrder(Menu menu,Order order) {
-		menu.showMenuItems(showSet);
 			while(true) {
 				order.viewOrder();
 				System.out.println("======= SELECT CHOICE =======\n(1)add item to order (2)Remove item from order (3)Return");
@@ -182,6 +181,7 @@ public class RRPSS {
 						case 3:
 							Customer cus = new Customer();
 							int tb = tables.assignTable(cus);
+							System.out.println("Table assigned:"+ tb);
 							System.out.println("Enter Staff ID");
 							if(s.hasNextInt()) {
 								int ID = s.nextInt();
@@ -252,7 +252,7 @@ public class RRPSS {
 	public static void main(String[] args) {
 		ArrayList<Staff> staffs = new ArrayList<Staff>();
 		int c=0;
-		System.out.println("Input Staff members!");
+		System.out.println("Input Staff members to roster!");
 		do {
 			staffs.add(new Staff());
 			System.out.println("Enter -1 to stop adding staff to roster.");
