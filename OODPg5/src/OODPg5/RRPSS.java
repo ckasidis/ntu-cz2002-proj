@@ -1,6 +1,7 @@
 package OODPg5;
 //package rrps;
 import java.util.Scanner;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -75,18 +76,55 @@ public class RRPSS {
 		}
 	}
 	
-	/**
-	 * Order invoice of order for a particular table 
-	 * @param tableNumber Table number of the table
-	 */
-	public static void orderInvoice(int tableNumber) {
+		public static void printSalesrevenue(SaleRevenue sales) {
+		int c, mon,day;
+		LocalDate date = LocalDate.now(),ld;
+		DateTimeFormatter f = DateTimeFormatter.ofPattern( "dd/MM" ) ;
+		String input;
 		
-	}
-	/**
-	 * Print the report for sales revenue
-	 */
-	public static void printSalesRevenueReport() {
-		
+			while(true) {
+				System.out.printf("========= SELECT OPTION =========\n(1)Print today  (2)Print this month  (3)Print whole year  (4)Select a day  (5)Select a Month  (6)Quit\n");
+				c = s.nextInt();
+				switch(c) {
+					case 1: sales.printSalesRevenueDay(date);
+							return;
+					case 2:	sales.printSalesRevenueMonth(date);
+							return;
+					case 3:	sales.printSalesRevenueYear();
+							return;
+					case 4:	
+							s.nextLine();
+							System.out.println("Enter Date (dd/MM):");
+							input = s.nextLine();
+							try 
+								{
+								    ld = LocalDate.parse( input , f ) ;
+								    sales.printSalesRevenueDay(ld);
+								}
+							catch ( DateTimeParseException e )
+							{
+							   System.out.println("Enter a valid date(dd/MM)!!");
+							}
+							return;
+					case 5:
+							s.nextLine();
+							System.out.println("Enter Date (dd/MM):");
+							input = s.nextLine();
+							try 
+								{
+								    ld = LocalDate.parse( input , f ) ;
+								    sales.printSalesRevenueMonth(ld);
+								}
+							catch ( DateTimeParseException e )
+							{
+							   System.out.println("Enter a valid date(dd/MM)!!");
+							}
+							return;
+					case 6: return;
+					default: System.out.println("Invalid Input!");
+						
+				}
+			}
 	}
 	
 	/**
@@ -96,7 +134,7 @@ public class RRPSS {
 	 * @param SalesRecord Array list of orders placed in the restaurant
 	 * @param staffs Array list of staffs working at the restaurant
 	 */
-	public static void start(Menu menu, TableManager tables, ArrayList<Order> SalesRecord, ArrayList<Staff> staffs) {
+	public static void start(Menu menu, TableManager tables, SaleRevenue sales, ArrayList<Staff> staffs) {
 		int choice;
 		
 		ArrayList<Order> table_orders = new ArrayList<Order>();
@@ -137,10 +175,9 @@ public class RRPSS {
 						int tb1 = tables.unAssignTable();
 						if(table_orders.get(tb1-1).getCheckNo() !=0) {
 							table_orders.get(tb1-1).printOrderInvoice();
-							SalesRecord.add(table_orders.get(tb1-1));
+							sales.addOrder(table_orders.get(tb1-1));
 							table_orders.set(tb1-1, new Order(tb1-1));
 						}
-						//Total_order.get(tn1-1).addMenuItem(menuItem));
 						break;
 					case 5:
 						System.out.println("Enter table number (1-10)");
@@ -150,48 +187,37 @@ public class RRPSS {
 						}
 						updateOrder(menu, table_orders.get(tn2-1));
 						break;
-//					case 6:
-//						System.out.println("Select option(1-2)");
-//						int checkToday;
-//						while((checkToday = s.nextInt())<1 || checkToday>2) {
-//						System.out.println("1:print Sales Revenue for today");
-//						System.out.println("2:print Sales Revenue for the month");
-//						}
-//						if(checkToday == 1) {
-//							SaleRevenue.calculateSaleRevenue(true);
-//						}else {
-//							SaleRevenue.calculateSaleRevenue(false);
-//						}
-//						break;
+					case 6:		
+						printSalesrevenue(sales);
+						break;
 					case 7: System.out.println("Shutting down..");return;
 						default:System.out.println("Invalid entry!");
 				}
 			}
 		}
-		catch (NumberFormatException e){
-			System.out.println("Invalid integer! Try again.");
+		catch(InputMismatchException e) {
+			System.out.println("Enter an integer!!!");
 			String clear = s.nextLine();
+			return;
 		}
 		catch(Exception e) {
 			String clear = s.nextLine();
 			System.out.println("Invalid input! Try again.");
 		}
 		finally {
-			start(menu, tables, SalesRecord,staffs);
+			start(menu, tables, sales,staffs);
 		}
 	}
-	
 	public static void main(String[] args) {
 		ArrayList<Staff> staffs = new ArrayList<Staff>();
-		while(s.nextInt()!=-1) {
-			s.nextLine();
+		do {
 			staffs.add(new Staff());
 			System.out.println("Enter -1 to stop adding staff to roster.");
-		}
+		}while(s.nextInt()!=-1);
 		Menu menu = new  Menu();
 		ArrayList<Table> tableList = new ArrayList<Table>();
-		ArrayList<Order> salesRecord = new ArrayList<Order>();
+		SaleRevenue sales = new SaleRevenue();
 		TableManager tables = new TableManager(tableList);
-		start(menu, tables, salesRecord,staffs);
+		start(menu, tables, sales,staffs);
 	}
 }
