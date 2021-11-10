@@ -7,7 +7,6 @@ public class SaleRevenue {
 
 	private ArrayList<ArrayList<Order>> year = new ArrayList<ArrayList<Order>>();
 
-
 	public SaleRevenue() {
 		System.out.println("Record up to 1 year of Sales");
 		for(int i=0;i<12;i++) {
@@ -20,28 +19,27 @@ public class SaleRevenue {
 	}
 	public void printSalesRevenueDay(LocalDate date) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		System.out.println("Date:" + date.format(dtf));
-		
+	
 		int mnth = date.getMonthValue()-1;
 		double totalRevenue =0;
 		for(Order o: year.get(mnth)) {
 			if(o.getDate().compareTo(date)==0)
+				System.out.println("Date:" + o.getDate().format(dtf));
 				o.viewOrder();
 				totalRevenue += o.getfinalPrice();
 		}
 		System.out.println("Total Revenue for the day:"+totalRevenue);
 	}
 	public void printSalesRevenueMonth(LocalDate date) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/yyyy");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd/MM");
-		System.out.println("Date:" + date.format(dtf));
 		
 		LocalDate tempDate = date.withDayOfMonth(1);
 		int mnth = date.getMonthValue()-1;
 		double totalRevenue =0;
 		for(Order o: year.get(mnth-1)) {
 			if(o.getDate().compareTo(tempDate)!=0) {
-				System.out.println("Date:" + date.format(dtf1));
+				System.out.println("Date:" + date.format(dtf));
 				tempDate = o.getDate();
 			}
 			o.viewOrder();
