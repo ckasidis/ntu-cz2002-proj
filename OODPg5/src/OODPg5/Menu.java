@@ -60,9 +60,13 @@ public class Menu {
 			System.out.println("Enter an integer!!!");
 			in.next();
 		}
-		int item = in.nextInt();
-		while(item < 0 || item > menuItem.size() - 1) {
+		int item;
+		while((item = in.nextInt()) < 1 || item > menuItem.size()) {
 			System.out.println("Item not in menu.");
+			while(!in.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				in.next();
+			}
 		}
 		return menuItem.get(item-1).toOrder();
 		
@@ -328,7 +332,7 @@ public class Menu {
 			item= item1;
 		}
 		while(item != TypeOfItem.values()[j]) {
-			if(!showSets && menuItem.get(i).getItemType() == TypeOfItem.SET) {++j;continue;}
+			if(!showSets && menuItem.get(i-1).getItemType() == TypeOfItem.SET) {++j;continue;}
 			System.out.printf("\n%sS: \n",TypeOfItem.values()[++j]);
 		}
 	}
