@@ -51,14 +51,30 @@ public class TableManager {
 		
 		System.out.println("Select a booking month (1-12)"); //edited
 		int mon;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
 		while ((mon = sc.nextInt()) < 1 || mon > 12) {
 			System.out.println("Please enter an integer between 1-12");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 		}	
 		
 		System.out.println("Select a booking day (1-31)"); //edited
 		int day;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
 		while ((day = sc.nextInt()) < 1 || day> 31) {
 			System.out.println("Please enter an integer between 1-31");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 		}	
 		
 		LocalDate date = LocalDate.of(LocalDate.now().getYear(), mon, day); //edited
@@ -72,8 +88,16 @@ public class TableManager {
 		
 		System.out.println("Select a booking time (enter 11-21)");
 		int tmp;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
 		while ((tmp = sc.nextInt()) < 11 || tmp > 21) {
 			System.out.println("Please enter an integer between 11-21");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 		}
 		LocalTime startTime = LocalTime.of(tmp, 0);
 		
@@ -89,8 +113,16 @@ public class TableManager {
 		
 		System.out.println("Enter number of person per table");
 		int pax;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
 		while((pax = sc.nextInt()) > 10 || pax < 1) {
 			System.out.println("Please enter 1-10 people");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 		}
 
 		//find a table with enough seats
@@ -116,28 +148,60 @@ public class TableManager {
 	private static void removeReservation() {
 		System.out.println("Enter table number (1-10)");
 		int tableNo;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
 		while((tableNo = sc.nextInt()) < 1 || tableNo > 10) {
 			System.out.println("Please enter an integer between 1-10");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 		}
 		
 		System.out.println("Select a booking month (1-12)"); //edited
 		int mon;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
 		while ((mon = sc.nextInt()) < 1 || mon > 12) {
 			System.out.println("Please enter an integer between 1-12");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 		}	
 		
 		System.out.println("Select a booking day (1-31)"); //edited
 		int day;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
 		while ((day = sc.nextInt()) < 1 || day> 31) {
 			System.out.println("Please enter an integer between 1-31");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 		}	
 		
 		LocalDate date = LocalDate.of(LocalDate.now().getYear(), mon, day); //edited
 
 		System.out.println("Select a booking time (11-21)");
 		int tmp;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
 		while ((tmp = sc.nextInt()) < 11 || tmp > 21) {
 			System.out.println("Please enter an integer between 11-21");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 		}		
 		LocalTime startTime = LocalTime.of(tmp, 0);
 		
@@ -165,8 +229,16 @@ public class TableManager {
 		
 		System.out.println("Enter number of person per table");
 		int pax;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
 		while ((pax = sc.nextInt()) > 10 || pax < 1) {
 			System.out.println("Please enter 1-10 people");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 		}
 
 		//find a table with enough seats
@@ -193,8 +265,16 @@ public class TableManager {
 	public int unAssignTable() {
 		System.out.println("Enter table number (1-10)");
 		int tableNo;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
 		while ((tableNo = sc.nextInt()) < 1 || tableNo > 10) {
 			System.out.println("Please enter an integer between 1-10");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 		}
 		//find the table and unAssign
 		for (Table table : tableList) {
@@ -221,17 +301,37 @@ public class TableManager {
 			System.out.println("3: book reservation");
 			System.out.println("4: remove reservation");
 			System.out.println("5: return");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
 			c = sc.nextInt();
 			switch(c) {
 				case 1: //check all table status
 					System.out.println("Select month (1-12)"); //edited
 					int tmp1Mon;
+					while(!sc.hasNextInt()){
+						System.out.println("Enter an integer!!!");
+						sc.next();
+					}
 					while ((tmp1Mon = sc.nextInt()) < 1 || tmp1Mon > 12) {
+						while(!sc.hasNextInt()){
+							System.out.println("Enter an integer!!!");
+							sc.next();
+						}
 						System.out.println("Please enter an integer between 1-12");
 					}	
 					System.out.println("Select day (1-31)"); //edited
 					int tmp1Day;
+					while(!sc.hasNextInt()){
+						System.out.println("Enter an integer!!!");
+						sc.next();
+					}
 					while ((tmp1Day = sc.nextInt()) < 1 || tmp1Day> 31) {
+						while(!sc.hasNextInt()){
+							System.out.println("Enter an integer!!!");
+							sc.next();
+						}
 						System.out.println("Please enter an integer between 1-31");
 					}	
 					LocalDate tmp1Date = LocalDate.of(LocalDate.now().getYear(), tmp1Mon, tmp1Day); 
@@ -241,18 +341,42 @@ public class TableManager {
 				case 2: //check table status				
 					System.out.println("Enter table number (1-10)");
 					int tmp2TableNo;
+					while(!sc.hasNextInt()){
+						System.out.println("Enter an integer!!!");
+						sc.next();
+					}
 					while ((tmp2TableNo = sc.nextInt()) < 1 || tmp2TableNo > 10) {
 						System.out.println("Please enter an integer between 1-10");
+						while(!sc.hasNextInt()){
+							System.out.println("Enter an integer!!!");
+							sc.next();
+						}
 					}
 					System.out.println("Select month (1-12)"); //edited
 					int tmp2Mon;
+					while(!sc.hasNextInt()){
+						System.out.println("Enter an integer!!!");
+						sc.next();
+					}
 					while ((tmp2Mon = sc.nextInt()) < 1 || tmp2Mon > 12) {
 						System.out.println("Please enter an integer between 1-12");
+						while(!sc.hasNextInt()){
+							System.out.println("Enter an integer!!!");
+							sc.next();
+						}
 					}	
 					System.out.println("Select day (1-31)"); //edited
 					int tmp2Day;
+					while(!sc.hasNextInt()){
+						System.out.println("Enter an integer!!!");
+						sc.next();
+					}
 					while ((tmp2Day = sc.nextInt()) < 1 || tmp2Day> 31) {
 						System.out.println("Please enter an integer between 1-31");
+						while(!sc.hasNextInt()){
+							System.out.println("Enter an integer!!!");
+							sc.next();
+						}
 					}	
 					LocalDate tmp2Date = LocalDate.of(LocalDate.now().getYear(), tmp2Mon, tmp2Day); 
 					//find table and print status
