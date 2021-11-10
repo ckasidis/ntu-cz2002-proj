@@ -6,12 +6,6 @@ import java.time.format.DateTimeFormatter;
 public class SaleRevenue {
 
 	private ArrayList<ArrayList<Order>> year = new ArrayList<ArrayList<Order>>();
-	
-
-	private Double totalRevenue;
-
-	private String checkToday;
-	private String checkMonth;
 
 
 	public SaleRevenue() {
