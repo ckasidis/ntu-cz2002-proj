@@ -31,12 +31,16 @@ public class Staff {
 		Scanner s = new Scanner(System.in);
 		System.out.println("Enter name of Staff");
 		name = s.nextLine();
-		System.out.println("Enter gender");
-		gender = s.nextLine().charAt(0);
+		System.out.println("Enter gender(M/F)");
+		gender = Character.toUpperCase(s.nextLine().charAt(0));
+		while(gender != 'M' && gender != 'F'){
+			System.out.println("Enter a valid gender M/F");
+			gender = Character.toUpperCase(s.nextLine().charAt(0));
+		}
 		employeeID = ID++;
 		System.out.println("Enter Job Title");
 		jobTitle = s.nextLine();
-		System.out.printf("Employee %s (%c),%s, will be on duty today!");
+		System.out.printf("Employee %s (%c),%s, will be on duty today!\n",name,gender,jobTitle);
 	}
 	/**
 	 * Creates of the restaurant
