@@ -93,13 +93,20 @@ public class Order {
 		for(MenuItem oi: orderItem) {
 			System.out.printf("Order #%d:  %s \t %.2f",temp++,oi.getName(),oi.getPrice());
 		}
-		int itemIndex = s.nextInt();
 		System.out.println("Enter order number of item to remove");
-		if(itemIndex < 1 || itemIndex > orderItem.size()) {
-			System.out.println("Item not in menu.");
+		if(s.hasNextInt()) {
+			int itemIndex = s.nextInt();
+			if(itemIndex < 1 || itemIndex > orderItem.size()) {
+				System.out.println("Item not in menu.");
+				return;
+			}
+			orderItem.remove(itemIndex-1);
+		}
+		else {
+			System.out.println("Enter an integer!!!");
+			s.next();
 			return;
 		}
-		orderItem.remove(itemIndex-1);
 	}
 	
 	/**
