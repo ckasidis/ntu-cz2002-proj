@@ -28,7 +28,7 @@ public class Set implements MenuItem {
 	 */
 	private ArrayList<MenuItem> menuItem;
 	/**
-	 * Create a set of items to be sold 
+	 * Create a set of menu items to be sold 
 	 * @param name Name of the set
 	 * @param price Price of the set
 	 * @param description Description of the set
@@ -42,7 +42,7 @@ public class Set implements MenuItem {
 			item = TypeOfItem.SET;
 	}
 	/**
-	 * Get the name of the set 
+	 * Creates a set of menu items to be sold
 	 */
 	public MenuItem toOrder() {
 		 ArrayList<MenuItem> setcopy = new ArrayList<MenuItem>();
@@ -52,6 +52,9 @@ public class Set implements MenuItem {
 		Set mi= new Set(name,price,description,setcopy);
 		return mi;
 	}
+	/**
+	 * Get the name of the set 
+	 */
 	public String getName() {
 		return name;
 	}

@@ -37,6 +37,9 @@ public class Order {
 	 * Total to be paid by customer
 	 */
 	private double finalPrice;
+	/**
+	 * Date of order placed
+	 */
 	private LocalDate date;
 //An order should indicate the staff who created the order.
 //Order invoice can be printed to list the order details (eg, table number, timestamp)
@@ -69,15 +72,34 @@ public class Order {
 		orderItem.add(mi);
 		sort(orderItem);		
 	}
+	
+	/**
+	 * Get the date of order placed
+	 * @return Date of order placed
+	 */
 	public LocalDate getDate() {
 		return date;
 	}
+	
+	/**
+	 * Get the check number of the order
+	 * @return Check number of the order
+	 */
 	public int getCheckNo() {
 		return cNumber;
 	}
+	
+	/**
+	 * Get the total to be paid by customer
+	 * @return Total to be paid by customer
+	 */
 	public double getfinalPrice() {
 		return finalPrice;
 	}
+	/**
+	 * Add menu item to the order list
+	 * @param mi Menu item to be added
+	 */
 	public void addOrderItem(MenuItem mi) {
 		orderItem.add(mi);
 		sort(orderItem);		

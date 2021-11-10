@@ -32,7 +32,7 @@ public class Table {
 	 */
 	private Customer customer;
 	/**
-	 * The list of timeslot
+	 * The list of time slots
 	 */
 	private ArrayList<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
 	
@@ -84,7 +84,7 @@ public class Table {
 	
 	//remove expired reservations
 	/**
-	 * Remove expired timeslots
+	 * Remove expired time slots
 	 */
 	private void removeExpired() {
 		for (TimeSlot ts : timeSlots) {

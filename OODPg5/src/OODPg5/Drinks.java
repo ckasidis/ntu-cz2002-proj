@@ -35,6 +35,9 @@ public class Drinks implements MenuItem{
 			this.description = description;
 			item = TypeOfItem.DRINK;
 	}
+	/**
+	 * Creates a dessert to be sold
+	 */
 	public MenuItem toOrder() {
 		Drinks mi= new Drinks(name,price,description);
 		return mi;

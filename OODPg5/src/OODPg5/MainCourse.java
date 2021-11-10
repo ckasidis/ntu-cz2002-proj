@@ -35,6 +35,9 @@ public class MainCourse implements MenuItem {
 			this.description = description;
 			item = TypeOfItem.MAINCOURSE;
 	}
+	/**
+	 * Creates a main course item to be sold
+	 */
 	public MenuItem toOrder() {
 		MainCourse mi= new MainCourse(name,price,description);
 		return mi;

@@ -39,5 +39,9 @@ public interface MenuItem{
 	 * @param description Description of the menu item
 	 */
 	public void setDescription(String description);
+	/**
+	 * Creates a menu item to be sold
+	 * @return Menu item sold
+	 */
 	public MenuItem toOrder();
 }
