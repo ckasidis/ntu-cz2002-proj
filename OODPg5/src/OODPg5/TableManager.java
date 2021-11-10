@@ -287,8 +287,8 @@ public class TableManager {
 	}
 	
 	/**
-	 * Allows selection of all operations to manage the tables 
-	 * 
+	 * Allows selection of all operations to manage the tables: 
+	 * Check table status, Book reservation, Remove reservation
 	 */
 
 	public void bootTableManager() {

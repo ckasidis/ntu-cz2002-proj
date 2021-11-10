@@ -1,5 +1,5 @@
 package OODPg5;
-/**'
+/**
  * Represents a discount given to customer
  * @author Group 5
  *
