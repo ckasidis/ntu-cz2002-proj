@@ -45,9 +45,7 @@ public class Order {
 //Order invoice can be printed to list the order details (eg, table number, timestamp)
 //	and a complete breakdown of order items details with taxes details.
 	/**
-	 * Create an order
-	 * @param customer Customer that placed the order
-	 * @param staff Staff facilitating the order
+	 * Create an empty order
 	 * @param tableNo Table number of table assigned for the order
 	 */
 	public Order(int tableNo) {
@@ -57,6 +55,12 @@ public class Order {
 		finalPrice =0;
 		date = LocalDate.now();
 	}
+	/**
+	 * Create an order
+	 * @param customer Customer that placed the order
+	 * @param staff Staff facilitating the order
+	 * @param tableNo Table number of table assigned for the order
+	 */
 	public Order(Customer customer, Staff staff, int tableNo) {
 		this.customer = customer;
 		this.staff = staff;
