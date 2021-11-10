@@ -2,21 +2,41 @@ package OODPg5;
 import java.util.ArrayList;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Represents the sales revenue of the restaurant
+ * @author Group 5
+ *
+ */
 public class SaleRevenue {
-
+	/**
+	 * Array list of orders placed in a year, 
+	 * consisting of array list of orders placed in each month of the year
+	 */
 	private ArrayList<ArrayList<Order>> year = new ArrayList<ArrayList<Order>>();
-
+	
+	/**
+	 * Creates a nested array list to record sales revenue of restaurant for up to a year
+	 */
 	public SaleRevenue() {
 		System.out.println("Record up to 1 year of Sales");
 		for(int i=0;i<12;i++) {
 			year.add(new ArrayList<Order>());
 		}
 	}
+	
+	/**
+	 * Record an order placed as part of the year's sales revenue
+	 * @param order Order to be recorded
+	 */
 	public void addOrder(Order order) {
 		int mnth = order.getDate().getMonthValue()-1;
 		year.get(mnth).add(order);
 	}
+	
+	/**
+	 * Print all the sales revenue for the stated date
+	 * @param date Date of the recorded sales revenue needed
+	 */
 	public void printSalesRevenueDay(LocalDate date) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
@@ -30,6 +50,11 @@ public class SaleRevenue {
 		}
 		System.out.println("Total Revenue for the day:"+totalRevenue);
 	}
+	
+	/**
+	 * Print all the sales revenue for the stated date's month
+	 * @param date Date of the month of recorded sales revenue needed
+	 */
 	public void printSalesRevenueMonth(LocalDate date) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd/MM");
@@ -47,6 +72,10 @@ public class SaleRevenue {
 		}
 		System.out.println("Total Revenue for the Month:"+totalRevenue);
 	}
+	
+	/**
+	 * Print the all the recorded sales revenue up to a year
+	 */
 	public void printSalesRevenueYear() {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("MM/yyyy");
