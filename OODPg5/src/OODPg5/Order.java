@@ -16,7 +16,7 @@ public class Order {
 	/**
 	 * Array list of items ordered
 	 */
-	private ArrayList<MenuItem> orderItem;
+	private ArrayList<MenuItem> orderItem = new ArrayList<MenuItem>();
 	/**
 	 * Customer that placed the order
 	 */
@@ -67,6 +67,7 @@ public class Order {
 		table_no = tableNo;
 		cNumber = checkNo++;
 		finalPrice =0;
+		date = LocalDate.now();
 	}
 	/**
 	 * Add item to the list of order items
@@ -117,7 +118,7 @@ public class Order {
 		Scanner s = new Scanner(System.in);
 		int temp =1;
 		for(MenuItem oi: orderItem) {
-			System.out.printf("Order #%d:  %s \t %.2f",temp++,oi.getName(),oi.getPrice());
+			System.out.printf("Order #%d:  %s \t %.2f\n",temp++,oi.getName(),oi.getPrice());
 		}
 		System.out.println("Enter order number of item to remove");
 		if(s.hasNextInt()) {
@@ -139,16 +140,22 @@ public class Order {
 	 * View all the items ordered
 	 */
 	public void viewOrder() {
-		int temp = 1, count=0;
-		MenuItem tm = orderItem.get(0);
+		int temp = 1, count=1;
+		if(orderItem.size()==0) {
+			System.out.println("Order empty");
+			return;
+		}
+		String tm = orderItem.get(0).getName();
 		for (int i=1;i<orderItem.size();i++){
-			if(tm != orderItem.get(i)) {
-				System.out.printf("Order #%d: %d %s \t %.2f",temp++,count,orderItem.get(i).getName(),orderItem.get(i).getPrice());
+			if(tm != orderItem.get(i).getName()) {
+				System.out.printf("Order #%d: %d %s \t %.2f\n",temp++,count,orderItem.get(i-1).getName(),orderItem.get(i-1).getPrice());
 				count =0;
-				tm = orderItem.get(i);
+				tm = orderItem.get(i).getName();
 			}
 			count++;
 		}
+		int i =orderItem.size()-1;
+		System.out.printf("Order #%d: %d %s \t %.2f\n",temp++,count,orderItem.get(i).getName(),orderItem.get(i).getPrice());
 	}
 	
 	/**
@@ -166,11 +173,11 @@ public class Order {
 	private void sort(ArrayList<MenuItem> menuItemList) {
 		int prev;
 		if(menuItemList.size()<=1) return;
-		for (int i=0;i<orderItem.size()-1;i++) {
+		for (int i=0;i<menuItemList.size()-1;i++) {
 			prev = i+1;
-			for (int j=i+1; j<orderItem.size();j++) {
-				if(orderItem.get(i) == orderItem.get(j)) {
-					Collections.swap(orderItem, prev, j);
+			for (int j=i+1; j<menuItemList.size();j++) {
+				if(orderItem.get(i) == menuItemList.get(j)) {
+					Collections.swap(menuItemList, prev, j);
 				}
 			  }
 		}
@@ -196,18 +203,19 @@ public class Order {
 			sum = sum + mi.getPrice();
 		}
 		temp = sum;
-		System.out.printf("                 Subtotal:    $%.2f SGD\n", temp = sum);
-		System.out.printf("         10% SERVICE CHRG:    $%.2f SGD\n", sum*0.1);
-		temp = temp + sum*0.1;
-		System.out.printf("         MEMBER DISCOUNTS:    $%.2f SGD\n", customer.getDiscount(sum));
+		System.out.printf("                 Subtotal:    $%.2f SGD\n", sum);
+		double svc = sum*0.1;
+		System.out.printf("         10%% SERVICE CHRG:    $%.2f SGD\n", svc);
+		temp = temp + svc;
+		double disc = customer.getDiscount(sum);
+		System.out.printf("         MEMBER DISCOUNTS:    $%.2f SGD\n", disc);
 		System.out.println("-----------------------------------------");
-		finalPrice = temp-customer.getDiscount(sum);
+		finalPrice = temp-disc;
 		System.out.printf("                    TOTAL:    $%.2f SGD\n", finalPrice);
 		System.out.println("-----------------------------------------");
 		System.out.println("*****************************************");
 		System.out.println("**    Thank you for dining with us!    **");
 		System.out.println("*****************************************");
-
 	}
 
 }
