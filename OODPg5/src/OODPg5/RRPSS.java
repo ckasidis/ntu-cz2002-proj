@@ -209,6 +209,12 @@ public class RRPSS {
 							}
 							break;
 						case 5:
+							System.out.println("Occupied Tables:");
+							for(Order o: table_orders) {
+								if(o.getCheckNo()!=0) {
+									System.out.printf("table no:%d ,customer name: %s \n",o.getTableNum(),o.getCustomer().getName());
+								}
+							}
 							int tb1 = tables.unAssignTable();
 							if(table_orders.get(tb1-1).getCheckNo() !=0) {
 								table_orders.get(tb1-1).printOrderInvoice();
