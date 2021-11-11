@@ -44,7 +44,7 @@ public class Staff {
 		employeeID = ID++;
 		System.out.println("Enter Job Title");
 		jobTitle = sc.nextLine();
-		System.out.printf("Employee %s (%c),%s, will be on duty today!\n",name,gender,jobTitle);
+		System.out.printf("Employee %s (%c), %s, will be on duty today!\n",name,gender,jobTitle);
 	}
 	/**
 	 * Creates of the restaurant

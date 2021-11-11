@@ -163,12 +163,13 @@ public class RRPSS {
 				System.out.println("Welcome to Restaurant Reservation and Point of Sale System");
 				System.out.println("Date:" + date.format(dtf));
 				System.out.println("1: Open Menu");
-				System.out.println("2: Manage Reservations");
-				System.out.println("3: Assign table");
-				System.out.println("4: Unassign table");
-				System.out.println("5: Update order");
-				System.out.println("6: Print Sales Revenue Report");
-				System.out.println("7: Shut down! <all data will be lost>");
+				System.out.println("2: Check Table Availability and Reservations");
+				System.out.println("3: Add or Remove Reservation");
+				System.out.println("4: Assign table");
+				System.out.println("5: Unassign table");
+				System.out.println("6: Update order");
+				System.out.println("7: Print Sales Revenue Report");
+				System.out.println("8: Shut down! <all data will be lost>");
 				if(sc.hasNextInt()) {
 					choice = sc.nextInt();
 					switch(choice) {
@@ -176,9 +177,12 @@ public class RRPSS {
 							showMenu(menu);
 							break;
 						case 2:
-							tables.manageReservations();
+							tables.checkTableStatus();
 							break;
 						case 3:
+							tables.manageReservations();
+							break;
+						case 4:
 							Customer cus = new Customer();
 							int tb = tables.assignTable(cus);
 							System.out.println("Staff on duty today:");
@@ -202,7 +206,7 @@ public class RRPSS {
 								sc.next();
 							}
 							break;
-						case 4:
+						case 5:
 							int tb1 = tables.unAssignTable();
 							if(table_orders.get(tb1-1).getCheckNo() !=0) {
 								table_orders.get(tb1-1).printOrderInvoice();
@@ -210,7 +214,7 @@ public class RRPSS {
 								table_orders.set(tb1-1, new Order(tb1-1));
 							}
 							break;
-						case 5:
+						case 6:
 							System.out.println("Enter table number (1-10)");
 							int tn2=0;
 							do{
@@ -227,10 +231,10 @@ public class RRPSS {
 							}while(tn2<1 || tn2>10);
 							updateOrder(menu, table_orders.get(tn2-1));
 							break;
-						case 6:		
+						case 7:		
 							printSalesrevenue(sales);
 							break;
-						case 7: System.out.println("Shutting down..");return;
+						case 8: System.out.println("Shutting down..");return;
 							default:System.out.println("Invalid entry!");
 					}
 				}
@@ -259,12 +263,11 @@ public class RRPSS {
 		System.out.println("Input Staff members to roster!");
 		do {
 			staffs.add(new Staff());
-			System.out.println("Enter any integer to continue adding.(-1 to start)");
+			System.out.println("Enter any character to continue adding.(-1 to start)");
 			if(sc.hasNextInt()) {
 				c =sc.nextInt();
 			}
 			else {
-				System.out.println("Enter an integer!!!");
 				sc.next();
 			}
 		} while (c!=-1);

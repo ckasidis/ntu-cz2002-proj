@@ -102,14 +102,14 @@ public class TableManager {
 		LocalTime startTime = LocalTime.of(tmp, 0);
 		
 		//can only book 3 time slots (> 2 hour) in advance for same day reservation
-		if (LocalDate.now().equals(date)) {
-			if (Duration.between(LocalTime.now(), startTime).toHours() <= 2) {
-				System.out.println("Cannot Reserve!, Please reserve a time slot more than 2 hours in advance!");
-				System.out.println("Your Date: " + date + ", Your Time: " + startTime);
-				System.out.println("Current Date: " + LocalDate.now() + ", Current Time: " + LocalTime.now());
-				return;
-			}
-		}
+//		if (LocalDate.now().equals(date)) {
+//			if (Duration.between(LocalTime.now(), startTime).toHours() <= 2) {
+//				System.out.println("Cannot Reserve!, Please reserve a time slot more than 2 hours in advance!");
+//				System.out.println("Your Date: " + date + ", Your Time: " + startTime);
+//				System.out.println("Current Date: " + LocalDate.now() + ", Current Time: " + LocalTime.now());
+//				return;
+//			}
+//		}
 		
 		System.out.println("Enter number of person per table");
 		int pax;
@@ -305,12 +305,36 @@ public class TableManager {
 		int c;
 		
 		while(true) {
-			System.out.println("Table Manager");
+			System.out.println("Add or Remove Reservation");
+			System.out.println("1: book reservation");
+			System.out.println("2: remove reservation");
+			System.out.println("3: return");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
+			c = sc.nextInt();
+			switch(c) {
+				case 1: // book reservation
+					bookReservation();
+					break;
+				case 2:
+					removeReservation();
+					break;
+				case 3: return;
+				default: System.out.println("invalid entry!");
+			}
+		}	
+	}
+	
+	public void checkTableStatus() {
+		int c;
+		
+		while(true) {
+			System.out.println("Check Table Availability and Reservations");
 			System.out.println("1: check all table status");
 			System.out.println("2: check table status");
-			System.out.println("3: book reservation");
-			System.out.println("4: remove reservation");
-			System.out.println("5: return");
+			System.out.println("3: return");
 			while(!sc.hasNextInt()){
 				System.out.println("Enter an integer!!!");
 				sc.next();
@@ -323,13 +347,7 @@ public class TableManager {
 				case 2: //check table status				
 					checkTable();
 					break;
-				case 3: // book reservation
-					bookReservation();
-					break;
-				case 4:
-					removeReservation();
-					break;
-				case 5: return;
+				case 3: return;
 				default: System.out.println("invalid entry!");
 			}
 		}	
