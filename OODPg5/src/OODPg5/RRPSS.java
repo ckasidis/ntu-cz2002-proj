@@ -197,13 +197,14 @@ public class RRPSS {
 								sc.nextLine();
 								if(tb!=-1 && ID < staffs.size() && ID>-1) {
 									table_orders.set(tb-1, new Order(cus,staffs.get(ID),tb));
+									System.out.printf("Table %d assigned successfully.\n",tb);
 								}
 								else {
-									System.out.println("Invalid input!");
+									System.out.println("Invalid input!Try again");
 								}
 							}
 							else {
-								System.out.println("Enter an integer!!!");
+								System.out.println("Enter an integer!!!Try again");
 								sc.next();
 							}
 							break;
@@ -213,9 +214,16 @@ public class RRPSS {
 								table_orders.get(tb1-1).printOrderInvoice();
 								sales.addOrder(table_orders.get(tb1-1));
 								table_orders.set(tb1-1, new Order(tb1-1));
+								System.out.printf("Table %d Unassigned\n",tb1);
 							}
 							break;
 						case 6:
+							System.out.println("Occupied Tables:");
+							for(Order o: table_orders) {
+								if(o.getCheckNo()!=0) {
+									System.out.printf("table no:%d ,customer name: %s \n",o.getTableNum(),o.getCustomer().getName());
+								}
+							}
 							System.out.println("Enter table number (1-10)");
 							int tn2=0;
 							do{
@@ -230,8 +238,14 @@ public class RRPSS {
 									sc.next();
 								}
 							}while(tn2<1 || tn2>10);
+							
 							if (tables.getTableList().get(tn2-1).getCustomer() == null) {
 								System.out.println("No customer on this table!");
+								break;
+							}
+
+							if(table_orders.get(tn2-1).getCheckNo()==0) {
+								System.out.println("Table has no orders!");
 								break;
 							}
 							updateOrder(menu, table_orders.get(tn2-1));

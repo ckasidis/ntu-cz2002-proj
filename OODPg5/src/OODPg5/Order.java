@@ -85,7 +85,13 @@ public class Order {
 	public LocalDate getDate() {
 		return date;
 	}
-	
+	/**
+	 * Get the customer from order
+	 * @return Customer from order
+	 */
+	public Customer getCustomer() {
+		return customer;
+	}
 	/**
 	 * Get the check number of the order
 	 * @return Check number of the order
@@ -145,10 +151,13 @@ public class Order {
 			System.out.println("Order empty");
 			return;
 		}
+		double price=0;
 		String tm = orderItem.get(0).getName();
 		for (int i=1;i<orderItem.size();i++){
+			price = price+ orderItem.get(i-1).getPrice();
 			if(tm != orderItem.get(i).getName()) {
-				System.out.printf("Order #%d: %d %s \t %.2f\n",temp++,count,orderItem.get(i-1).getName(),orderItem.get(i-1).getPrice());
+				System.out.printf("Order #%d: %d %s \t %.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
+				price =0;
 				count =0;
 				tm = orderItem.get(i).getName();
 			}
@@ -171,12 +180,13 @@ public class Order {
 	 * @param menuItemList List of items
 	 */
 	private void sort(ArrayList<MenuItem> menuItemList) {
-		int prev;
+		int prev=0;
 		if(menuItemList.size()<=1) return;
-		for (int i=0;i<menuItemList.size()-1;i++) {
+		String order = menuItemList.get(0).getName();
+		for (int i=0;i<menuItemList.size()-1;i=prev) {
 			prev = i+1;
 			for (int j=i+1; j<menuItemList.size();j++) {
-				if(orderItem.get(i) == menuItemList.get(j)) {
+				if(order == menuItemList.get(j).getName()) {
 					Collections.swap(menuItemList, prev, j);
 				}
 			  }
