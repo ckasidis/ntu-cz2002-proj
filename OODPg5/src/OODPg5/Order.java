@@ -214,15 +214,19 @@ public class Order {
 		}
 		temp = sum;
 		System.out.printf("                 Subtotal:    $%.2f SGD\n", sum);
+		System.out.println("-----------------------------------------");
 		double svc = temp*0.1;
 		System.out.printf("         10%% SERVICE CHRG:    $%.2f SGD\n", svc);
 		temp = temp + svc;
+		System.out.printf("                              $%.2f SGD\n", temp);
+		System.out.println("-----------------------------------------");
 		double tax = temp*0.07;
 		System.out.printf("                   7%% GST:    $%.2f SGD\n", tax);
 		temp = temp + tax;
+		System.out.printf("                              $%.2f SGD\n", temp);
+		System.out.println("-----------------------------------------");
 		double disc = customer.getDiscount(sum);
 		System.out.printf("         MEMBER DISCOUNTS:    $%.2f SGD\n", disc);
-		System.out.println("-----------------------------------------");
 		finalPrice = temp-disc;
 		System.out.printf("                    TOTAL:    $%.2f SGD\n", finalPrice);
 		System.out.println("-----------------------------------------");
