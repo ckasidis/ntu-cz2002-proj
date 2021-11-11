@@ -156,7 +156,7 @@ public class Order {
 		for (i=1;i<orderItem.size();i++){
 			price = price+ orderItem.get(i-1).getPrice();
 			if(tm != orderItem.get(i).getName()) {
-				System.out.printf("Order #%d: %d %s \t %.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
+				System.out.printf("Order #%d: %d '%15s'%s \t '%6s'%.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
 				price =0;
 				count =0;
 				tm = orderItem.get(i).getName();
