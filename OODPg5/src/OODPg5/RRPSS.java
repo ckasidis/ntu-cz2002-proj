@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  *
  */
 public class RRPSS {
-	static Scanner s = new Scanner(System.in);
+	static Scanner sc = new Scanner(System.in);
 	static final boolean showSet = true;
 	/**
 	 * Create, display and edit the menu of the restaurant
@@ -27,8 +27,8 @@ public class RRPSS {
 				System.out.println("2: Create promotion set");
 				System.out.println("3: Edit menu item");
 				System.out.println("4: return");
-				if(s.hasNextInt()) {
-					c = s.nextInt();
+				if(sc.hasNextInt()) {
+					c = sc.nextInt();
 					switch(c){
 						case 1:	
 							menu.createMenuItem(); 
@@ -45,7 +45,7 @@ public class RRPSS {
 				}
 				else {
 					System.out.println("Enter an integer!!!");
-					s.next();
+					sc.next();
 				}
 		}
 
@@ -59,8 +59,8 @@ public class RRPSS {
 			while(true) {
 				order.viewOrder();
 				System.out.println("======= SELECT CHOICE =======\n(1)add item to order (2)Remove item from order (3)Return");
-				if(s.hasNextInt()) {
-					int c = s.nextInt();
+				if(sc.hasNextInt()) {
+					int c = sc.nextInt();
 					switch(c) {
 						case 1:
 								menu.showMenuItems(showSet);
@@ -78,7 +78,7 @@ public class RRPSS {
 			}
 			else {
 				System.out.println("Enter an integer!!!");
-				s.next();
+				sc.next();
 			}
 		}
 	}
@@ -94,8 +94,8 @@ public class RRPSS {
 		
 			while(true) {
 				System.out.printf("========= SELECT OPTION =========\n(1)Print today  (2)Print this month  (3)Print whole year  (4)Select a day  (5)Select a Month  (6)Quit\n");
-				if(s.hasNextInt()) {
-				c = s.nextInt();
+				if(sc.hasNextInt()) {
+				c = sc.nextInt();
 				switch(c) {
 					case 1: sales.printSalesRevenueDay(date);
 							return;
@@ -104,9 +104,9 @@ public class RRPSS {
 					case 3:	sales.printSalesRevenueYear();
 							return;
 					case 4:	
-							s.nextLine();
+							sc.nextLine();
 							System.out.println("Enter Date (dd/MM):");
-							input = s.nextLine();
+							input = sc.nextLine();
 							try 
 								{
 								    ld = LocalDate.parse( input , f ) ;
@@ -118,9 +118,9 @@ public class RRPSS {
 							}
 							return;
 					case 5:
-							s.nextLine();
+							sc.nextLine();
 							System.out.println("Enter Date (dd/MM):");
-							input = s.nextLine();
+							input = sc.nextLine();
 							try 
 								{
 								    ld = LocalDate.parse( input , f ) ;
@@ -138,7 +138,7 @@ public class RRPSS {
 			}
 			else {
 					System.out.println("Enter an integer!!!");
-					s.next();
+					sc.next();
 			}
 		}
 	}
@@ -169,14 +169,14 @@ public class RRPSS {
 				System.out.println("5: Update order");
 				System.out.println("6: Print Sales Revenue Report");
 				System.out.println("7: Shut down! <all data will be lost>");
-				if(s.hasNextInt()) {
-					choice = s.nextInt();
+				if(sc.hasNextInt()) {
+					choice = sc.nextInt();
 					switch(choice) {
 						case 1: 
 							showMenu(menu);
 							break;
 						case 2:
-							tables.bootTableManager();
+							tables.manageReservations();
 							break;
 						case 3:
 							Customer cus = new Customer();
@@ -188,9 +188,9 @@ public class RRPSS {
 							}
 							System.out.printf("\n");
 							System.out.println("Enter Staff ID");
-							if(s.hasNextInt()) {
-								int ID = s.nextInt();
-								s.nextLine();
+							if(sc.hasNextInt()) {
+								int ID = sc.nextInt();
+								sc.nextLine();
 								if(tb!=-1 && ID < staffs.size() && ID>-1) {
 									table_orders.set(tb-1, new Order(cus,staffs.get(ID),tb));
 								}
@@ -200,7 +200,7 @@ public class RRPSS {
 							}
 							else {
 								System.out.println("Enter an integer!!!");
-								s.next();
+								sc.next();
 							}
 							break;
 						case 4:
@@ -215,15 +215,15 @@ public class RRPSS {
 							System.out.println("Enter table number (1-10)");
 							int tn2=0;
 							do{
-								if(s.hasNextInt()) {
-									tn2 = s.nextInt();
+								if(sc.hasNextInt()) {
+									tn2 = sc.nextInt();
 									if(tn2<1 || tn2>10) {
 										System.out.println("Please enter an integer between 1-10");
 									}
 								}
 								else {
 									System.out.println("Enter an integer!!!");
-									s.next();
+									sc.next();
 								}
 							}while(tn2<1 || tn2>10);
 							updateOrder(menu, table_orders.get(tn2-1));
@@ -237,13 +237,13 @@ public class RRPSS {
 				}
 				else {
 					System.out.println("Enter an integer!!!");
-					s.next();
+					sc.next();
 				}
 			}
 		}
 
 		catch(Exception e) {
-			s.nextLine();
+			sc.nextLine();
 			System.out.println("Invalid input! Try again.");
 		}
 		finally {
@@ -261,12 +261,12 @@ public class RRPSS {
 		do {
 			staffs.add(new Staff());
 			System.out.println("Enter any integer to continue adding.(-1 to start)");
-			if(s.hasNextInt()) {
-				c =s.nextInt();
+			if(sc.hasNextInt()) {
+				c =sc.nextInt();
 			}
 			else {
 				System.out.println("Enter an integer!!!");
-				s.next();
+				sc.next();
 			}
 		}while(c!=-1);
 		Menu menu = new  Menu();

@@ -31,18 +31,18 @@ public class Staff {
 	 * Creates a staff of the restaurant with user inputs of name, gender and job title
 	 */
 	public Staff() {
-		Scanner s = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter name of Staff");
-		name = s.nextLine();
+		name = sc.nextLine();
 		System.out.println("Enter gender(M/F)");
-		gender = Character.toUpperCase(s.nextLine().charAt(0));
+		gender = Character.toUpperCase(sc.nextLine().charAt(0));
 		while(gender != 'M' && gender != 'F'){
 			System.out.println("Enter a valid gender M/F");
-			gender = Character.toUpperCase(s.nextLine().charAt(0));
+			gender = Character.toUpperCase(sc.nextLine().charAt(0));
 		}
 		employeeID = ID++;
 		System.out.println("Enter Job Title");
-		jobTitle = s.nextLine();
+		jobTitle = sc.nextLine();
 		System.out.printf("Employee %s (%c),%s, will be on duty today!\n",name,gender,jobTitle);
 	}
 	/**

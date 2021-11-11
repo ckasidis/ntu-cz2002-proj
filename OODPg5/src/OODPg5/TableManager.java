@@ -15,9 +15,9 @@ public class TableManager {
 	/**
 	 * A list of all the tables in the restaurant
 	 */
-	private static ArrayList<Table> tableList;
+	private ArrayList<Table> tableList;
 	
-	static Scanner sc = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
 	/**
 	 * Creates a system to manage the assignment of tables in the restaurant.
 	 * There are 2 tables each with 2,4,6,8 and 10 seats respectively.
@@ -46,7 +46,7 @@ public class TableManager {
 	 * A free table with sufficient seats will be assigned.
 	 */
 
-	private static void bookReservation() {
+	private void bookReservation() {
 		Customer cus = new Customer();
 		
 		System.out.println("Select a booking month (1-12)"); //edited
@@ -145,7 +145,7 @@ public class TableManager {
 	 *  
 	 */
 	
-	private static void removeReservation() {
+	private void removeReservation() {
 		System.out.println("Enter table number (1-10)");
 		int tableNo;
 		while(!sc.hasNextInt()){
@@ -214,11 +214,131 @@ public class TableManager {
 		}
 	}
 	
+	private void checkAllTable() {
+		System.out.println("Select month (1-12)"); //edited
+		int month;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
+		while ((month = sc.nextInt()) < 1 || month > 12) {
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
+			System.out.println("Please enter an integer between 1-12");
+		}	
+		System.out.println("Select day (1-31)"); //edited
+		int day;
+		while(!sc.hasNextInt()){
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
+		while ((day = sc.nextInt()) < 1 || day> 31) {
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
+			System.out.println("Please enter an integer between 1-31");
+		}	
+		LocalDate date = LocalDate.of(LocalDate.now().getYear(), month, day); 
+		for (Table table: tableList)
+			table.printTableStatus(date);
+	}
+	
+	 private void checkTable() {
+		 System.out.println("Enter table number (1-10)");
+			int tableNo;
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
+			while ((tableNo = sc.nextInt()) < 1 || tableNo > 10) {
+				System.out.println("Please enter an integer between 1-10");
+				while(!sc.hasNextInt()){
+					System.out.println("Enter an integer!!!");
+					sc.next();
+				}
+			}
+			System.out.println("Select month (1-12)"); //edited
+			int month;
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
+			while ((month = sc.nextInt()) < 1 || month > 12) {
+				System.out.println("Please enter an integer between 1-12");
+				while(!sc.hasNextInt()){
+					System.out.println("Enter an integer!!!");
+					sc.next();
+				}
+			}	
+			System.out.println("Select day (1-31)"); //edited
+			int day;
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
+			while ((day = sc.nextInt()) < 1 || day> 31) {
+				System.out.println("Please enter an integer between 1-31");
+				while(!sc.hasNextInt()){
+					System.out.println("Enter an integer!!!");
+					sc.next();
+				}
+			}	
+			LocalDate date = LocalDate.of(LocalDate.now().getYear(), month, day); 
+			//find table and print status
+			for (Table table: tableList) {
+				if (table.getTableNo() == tableNo) {
+					table.printTableStatus(date);
+					break;
+				}
+			}
+	 }
+	 
+	/**
+	 * Allows selection of all operations to manage the tables: 
+	 * Check table status, Book reservation, Remove reservation
+	 */
+
+	public void manageReservations() {
+		int c;
+		
+		while(true) {
+			System.out.println("Table Manager");
+			System.out.println("1: check all table status");
+			System.out.println("2: check table status");
+			System.out.println("3: book reservation");
+			System.out.println("4: remove reservation");
+			System.out.println("5: return");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
+			c = sc.nextInt();
+			switch(c) {
+				case 1: //check all table status
+					checkAllTable();
+					break;
+				case 2: //check table status				
+					checkTable();
+					break;
+				case 3: // book reservation
+					bookReservation();
+					break;
+				case 4:
+					removeReservation();
+					break;
+				case 5: return;
+				default: System.out.println("invalid entry!");
+			}
+		}	
+	}
+	
 	/**
 	 * Assigns free Table with sufficient capacity to incoming customer with input number of persons
 	 * Customer not assigned a table 40 minutes before closing time
 	 */
-	
 	public int assignTable(Customer cus) {
 		
 		//cannot assign if came after 40 minutes before closing time
@@ -248,8 +368,6 @@ public class TableManager {
 				//assigned return false if assigning failed
 				assigned = table.assign(cus);
 				if (assigned) {
-					//get staff
-					//replaceTableOrder(table.getCustomer(), <Staff Object> ,table.getTableNo());
 					return table.getTableNo();
 				}
 			}
@@ -285,118 +403,5 @@ public class TableManager {
 		}
 		return -1;
 	}
-	
-	/**
-	 * Allows selection of all operations to manage the tables: 
-	 * Check table status, Book reservation, Remove reservation
-	 */
-
-	public void bootTableManager() {
-		int c;
-		
-		while(true) {
-			System.out.println("Table Manager");
-			System.out.println("1: check all table status");
-			System.out.println("2: check table status");
-			System.out.println("3: book reservation");
-			System.out.println("4: remove reservation");
-			System.out.println("5: return");
-			while(!sc.hasNextInt()){
-				System.out.println("Enter an integer!!!");
-				sc.next();
-			}
-			c = sc.nextInt();
-			switch(c) {
-				case 1: //check all table status
-					System.out.println("Select month (1-12)"); //edited
-					int tmp1Mon;
-					while(!sc.hasNextInt()){
-						System.out.println("Enter an integer!!!");
-						sc.next();
-					}
-					while ((tmp1Mon = sc.nextInt()) < 1 || tmp1Mon > 12) {
-						while(!sc.hasNextInt()){
-							System.out.println("Enter an integer!!!");
-							sc.next();
-						}
-						System.out.println("Please enter an integer between 1-12");
-					}	
-					System.out.println("Select day (1-31)"); //edited
-					int tmp1Day;
-					while(!sc.hasNextInt()){
-						System.out.println("Enter an integer!!!");
-						sc.next();
-					}
-					while ((tmp1Day = sc.nextInt()) < 1 || tmp1Day> 31) {
-						while(!sc.hasNextInt()){
-							System.out.println("Enter an integer!!!");
-							sc.next();
-						}
-						System.out.println("Please enter an integer between 1-31");
-					}	
-					LocalDate tmp1Date = LocalDate.of(LocalDate.now().getYear(), tmp1Mon, tmp1Day); 
-					for (Table table: tableList)
-						table.printTableStatus(tmp1Date);
-					break;
-				case 2: //check table status				
-					System.out.println("Enter table number (1-10)");
-					int tmp2TableNo;
-					while(!sc.hasNextInt()){
-						System.out.println("Enter an integer!!!");
-						sc.next();
-					}
-					while ((tmp2TableNo = sc.nextInt()) < 1 || tmp2TableNo > 10) {
-						System.out.println("Please enter an integer between 1-10");
-						while(!sc.hasNextInt()){
-							System.out.println("Enter an integer!!!");
-							sc.next();
-						}
-					}
-					System.out.println("Select month (1-12)"); //edited
-					int tmp2Mon;
-					while(!sc.hasNextInt()){
-						System.out.println("Enter an integer!!!");
-						sc.next();
-					}
-					while ((tmp2Mon = sc.nextInt()) < 1 || tmp2Mon > 12) {
-						System.out.println("Please enter an integer between 1-12");
-						while(!sc.hasNextInt()){
-							System.out.println("Enter an integer!!!");
-							sc.next();
-						}
-					}	
-					System.out.println("Select day (1-31)"); //edited
-					int tmp2Day;
-					while(!sc.hasNextInt()){
-						System.out.println("Enter an integer!!!");
-						sc.next();
-					}
-					while ((tmp2Day = sc.nextInt()) < 1 || tmp2Day> 31) {
-						System.out.println("Please enter an integer between 1-31");
-						while(!sc.hasNextInt()){
-							System.out.println("Enter an integer!!!");
-							sc.next();
-						}
-					}	
-					LocalDate tmp2Date = LocalDate.of(LocalDate.now().getYear(), tmp2Mon, tmp2Day); 
-					//find table and print status
-					for (Table table: tableList) {
-						if (table.getTableNo() == tmp2TableNo) {
-							table.printTableStatus(tmp2Date);
-							break;
-						}
-					}
-					break;
-				case 3: // book reservation
-					bookReservation();
-					break;
-				case 4:
-					removeReservation();
-					break;
-				case 5: return;
-				default: System.out.println("invalid entry!");
-			}
-		}
-		
-	}
 }
+

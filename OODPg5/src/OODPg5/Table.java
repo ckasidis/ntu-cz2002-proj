@@ -154,7 +154,6 @@ public class Table {
 				
 				//can also assign if this slot is not the last slot and next slot is not reserved
 				if (timeSlots.indexOf(ts) == timeSlots.size()-1) {
-					System.out.println("We are closing!");
 					return false;
 				}
 				TimeSlot tsNext = timeSlots.get(timeSlots.indexOf(ts)+1);
@@ -162,7 +161,6 @@ public class Table {
 					for (Reservation res : tsNext.getReservationList()) {
 						//if there is reservation in next slot, cannot assign
 						if (LocalDate.now().equals(res.getDate())) {
-							System.out.println("Clash with next Reservation!");
 							return false;
 						} 
 					}
