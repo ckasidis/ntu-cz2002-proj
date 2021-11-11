@@ -163,9 +163,9 @@ public class RRPSS {
 				System.out.println("Welcome to Restaurant Reservation and Point of Sale System");
 				System.out.println("Date:" + date.format(dtf));
 				System.out.println("1: Open Menu");
-				System.out.println("2: Table Manager");
-				System.out.println("3: assign table");
-				System.out.println("4: unAssign table");
+				System.out.println("2: Manage Reservations");
+				System.out.println("3: Assign table");
+				System.out.println("4: Unassign table");
 				System.out.println("5: Update order");
 				System.out.println("6: Print Sales Revenue Report");
 				System.out.println("7: Shut down! <all data will be lost>");
@@ -181,10 +181,9 @@ public class RRPSS {
 						case 3:
 							Customer cus = new Customer();
 							int tb = tables.assignTable(cus);
-							System.out.println("Table assigned:"+ tb);
 							System.out.println("Staff on duty today:");
 							for(int i=0;i<staffs.size();i++) {
-								System.out.printf("|%s,ID=%d \t",i,staffs.get(i).getName(),staffs.get(i).getEmployeeID());
+								System.out.println("->" + staffs.get(i).getName() + ", ID = " + staffs.get(i).getEmployeeID());
 							}
 							System.out.printf("\n");
 							System.out.println("Enter Staff ID");
@@ -247,7 +246,7 @@ public class RRPSS {
 			System.out.println("Invalid input! Try again.");
 		}
 		finally {
-			start(menu, tables, sales,staffs);
+			start(menu, tables, sales, staffs);
 		}
 	}
 	/**
@@ -268,11 +267,11 @@ public class RRPSS {
 				System.out.println("Enter an integer!!!");
 				sc.next();
 			}
-		}while(c!=-1);
+		} while (c!=-1);
 		Menu menu = new  Menu();
 		ArrayList<Table> tableList = new ArrayList<Table>();
 		SaleRevenue sales = new SaleRevenue();
 		TableManager tables = new TableManager(tableList);
-		start(menu, tables, sales,staffs);
+		start(menu, tables, sales, staffs);
 	}
 }

@@ -135,12 +135,13 @@ public class Set implements MenuItem {
 	public void printDescription() {
 		System.out.println(description);
 		int j=0;
-		System.out.print("Promotional set consists of: ");
+		System.out.println("Promotional set consists of: ");
 		TypeOfItem item = TypeOfItem.values()[j];
 		for(int i=0;i<menuItem.size();i++) {
-			System.out.printf("\t%s, : ",menuItem.get(i).getName());
+			System.out.printf("-> %s : ",menuItem.get(i).getName());
 			menuItem.get(i).printDescription();
 		}
+		System.out.println("");
 	}
 	
 	/**

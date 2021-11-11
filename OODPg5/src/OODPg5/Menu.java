@@ -13,7 +13,7 @@ public class Menu {
 	 * Array list of the items in the menu
 	 */
 	ArrayList<MenuItem> menuItem;
-	Scanner in = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
 	/**
 	 * Creates a menu
 	 */
@@ -28,10 +28,10 @@ public class Menu {
 		public void editMenu() {
 		
 		System.out.println("Enter item number:");
-		int num = in.nextInt();
+		int num = sc.nextInt();
 		System.out.println("======= SELECT CHOICE =======\n(1)Remove item  (2)Update details");
-		if(in.hasNextInt()) {
-			int choice = in.nextInt();
+		if(sc.hasNextInt()) {
+			int choice = sc.nextInt();
 			switch(choice) {
 			case 1:
 				removeMenuItem(num);
@@ -51,21 +51,21 @@ public class Menu {
 		}
 		else {
 			System.out.println("Enter an integer!!!");
-			in.next();
+			sc.next();
 		}
 	}
 	public MenuItem getMenuItem() {
 		System.out.println("Enter item number:");
-		while(!in.hasNextInt()){
+		while(!sc.hasNextInt()){
 			System.out.println("Enter an integer!!!");
-			in.next();
+			sc.next();
 		}
 		int item;
-		while((item = in.nextInt()) < 1 || item > menuItem.size()) {
+		while((item = sc.nextInt()) < 1 || item > menuItem.size()) {
 			System.out.println("Item not in menu.");
-			while(!in.hasNextInt()){
+			while(!sc.hasNextInt()){
 				System.out.println("Enter an integer!!!");
-				in.next();
+				sc.next();
 			}
 		}
 		return menuItem.get(item-1).toOrder();
@@ -79,38 +79,38 @@ public class Menu {
 		String description;
 		double price;
 		System.out.printf("====== SELECT ITEM TO CREATE ====== \n(1)Drink  (2)MainCourse  (3)Dessert\n");
-		if(in.hasNextInt()) {
-			int choice = in.nextInt();
-			in.nextLine();
+		if(sc.hasNextInt()) {
+			int choice = sc.nextInt();
+			sc.nextLine();
 			switch(choice) {
 			case 1:
 				System.out.println("Drink name: ");
-				name = in.nextLine();
+				name = sc.nextLine();
 				System.out.print("Price of drink: \n$");
-				price = in.nextDouble();
-				in.nextLine();
+				price = sc.nextDouble();
+				sc.nextLine();
 				System.out.println("Description of drink: ");
-				description = in.nextLine();
+				description = sc.nextLine();
 				menuItem.add(new Drinks(name, price, description));
 				break;
 			case 2:
 				System.out.println("MainCourse name: ");
-				name = in.nextLine();
+				name = sc.nextLine();
 				System.out.print("Price of Maincourse: \n$");
-				price = in.nextDouble();
-				in.nextLine();
+				price = sc.nextDouble();
+				sc.nextLine();
 				System.out.println("Description of Maincourse: ");
-				description = in.nextLine();
+				description = sc.nextLine();
 				menuItem.add(new MainCourse(name, price, description));
 				break;
 			case 3:
 				System.out.println("Dessert name: ");
-				name = in.nextLine();
+				name = sc.nextLine();
 				System.out.print("Price of Dessert: \n$");
-				price = in.nextDouble();
-				in.nextLine();
+				price = sc.nextDouble();
+				sc.nextLine();
 				System.out.println("Description of dessert: ");
-				description = in.nextLine();
+				description = sc.nextLine();
 				menuItem.add(new Dessert(name, price, description));
 				break;
 			default:
@@ -124,7 +124,7 @@ public class Menu {
 		}
 		else {
 			System.out.println("Enter an integer!!!");
-			in.next();
+			sc.next();
 		}
 	}
 	
@@ -156,23 +156,23 @@ public class Menu {
 		}
 		else {
 			System.out.printf("========= SELECT UPDATE =========\n(1)Name  (2)Price  (3)Description\n");
-			if(in.hasNextInt()) {
-				int choice = in.nextInt();
-				in.nextLine();
+			if(sc.hasNextInt()) {
+				int choice = sc.nextInt();
+				sc.nextLine();
 				switch(choice) {
 					case 1:
 						System.out.println("Enter new name: ");
-						menuItem.get(itemIndex).setName(in.nextLine());
+						menuItem.get(itemIndex).setName(sc.nextLine());
 						System.out.println("Update successful!");
 						break;
 					case 2:
 						System.out.print("Enter new price: \n$");
-						menuItem.get(itemIndex).setPrice(in.nextDouble());
+						menuItem.get(itemIndex).setPrice(sc.nextDouble());
 						System.out.println("Update successful!");
 						break;
 					case 3:
 						System.out.println("Enter new description: ");
-						menuItem.get(itemIndex).setDescription(in.nextLine());
+						menuItem.get(itemIndex).setDescription(sc.nextLine());
 						System.out.println("Update successful!");
 						break;
 					default:
@@ -182,7 +182,7 @@ public class Menu {
 			}
 			else {
 				System.out.println("Enter an integer!!!");
-				in.next();
+				sc.next();
 			}
 		}
 	}
@@ -196,31 +196,31 @@ public class Menu {
 		boolean adding =true;
 		System.out.println("====== CREATE PROMOTIONAL SET ======");
 		System.out.println("Set name: ");
-		String name = in.nextLine();
+		String name = sc.nextLine();
 		System.out.print("Price of Set: \n$");
-		while(!in.hasNextDouble()){
+		while(!sc.hasNextDouble()){
 			System.out.println("Enter a double!!!");
-			in.next();
+			sc.next();
 		}
-		double price = in.nextDouble();
+		double price = sc.nextDouble();
 		ArrayList<MenuItem> SetItem = new ArrayList<MenuItem>();
 		showMenuItems(false);
 		while(adding) {
 			System.out.println("Enter item to add to set (Enter -1 to quit): ");
-			while(!in.hasNextInt()){
+			while(!sc.hasNextInt()){
 				System.out.println("Enter an integer!!!");
-				in.next();
+				sc.next();
 			}
-			if((itemIndex = in.nextInt())== -1) break;
+			if((itemIndex = sc.nextInt())== -1) break;
 			itemIndex--;
 			while(itemIndex < 0 || itemIndex > menuItem.size() - 1 || menuItem.get(itemIndex).getItemType()== TypeOfItem.SET)
 				System.out.print("Please choose from within menu.");
 			SetItem.add(menuItem.get(itemIndex));
 		}
 		sort(SetItem);
-		in.nextLine();
+		sc.nextLine();
 		System.out.println("Description of Promotional set: ");
-		description = in.nextLine();
+		description = sc.nextLine();
 		menuItem.add(new Set(name, price, description,SetItem));
 		System.out.println("Promotional Set succesfully created!");
 	}
@@ -238,27 +238,27 @@ public class Menu {
 		}
 		else {
 			System.out.printf("========= SELECT UPDATE =========\n(1)Name  (2)Price  (3)Description  (4)Add Item  (5)Remove Item\n");
-			if(in.hasNextInt()) {
-				int choice = in.nextInt();
+			if(sc.hasNextInt()) {
+				int choice = sc.nextInt();
 				switch(choice) {
 					case 1:
-						in.nextLine();
+						sc.nextLine();
 						System.out.println("Enter new name: ");
-						menuItem.get(itemIndex).setName(in.nextLine());
+						menuItem.get(itemIndex).setName(sc.nextLine());
 						System.out.println("Update successful!");
 						break;
 					case 2:
 						System.out.print("Enter new price: \n$");
-						while(!in.hasNextDouble()){
+						while(!sc.hasNextDouble()){
 							System.out.println("Enter a double!!!");
-							in.next();
+							sc.next();
 						}
-						menuItem.get(itemIndex).setPrice(in.nextDouble());
+						menuItem.get(itemIndex).setPrice(sc.nextDouble());
 						System.out.println("Update successful!");
 						break;
 					case 3:
-						in.nextLine();
-						String description = in.nextLine();
+						sc.nextLine();
+						String description = sc.nextLine();
 						menuItem.get(itemIndex).setDescription(description);
 						System.out.println("Update successful!");
 						break;
@@ -266,11 +266,11 @@ public class Menu {
 						sort(menuItem);
 						showMenuItems(false);
 						System.out.println("Enter item to add from menu:");
-						while(!in.hasNextInt()){
+						while(!sc.hasNextInt()){
 							System.out.println("Enter an integer!!!");
-							in.next();
+							sc.next();
 						}
-						int add_itemIndex = in.nextInt() - 1;
+						int add_itemIndex = sc.nextInt() - 1;
 						if(add_itemIndex < 0 || add_itemIndex > menuItem.size() || menuItem.get(add_itemIndex).getItemType() == TypeOfItem.SET) {
 							System.out.println("Not from menu (Sets cannot be chosen).");
 							System.out.println("Update unsuccessful!");
@@ -286,11 +286,11 @@ public class Menu {
 							Set sets = (Set)menuItem.get(itemIndex);
 							sets.showSet();
 							System.out.println("Enter item to remove from set:");
-							while(!in.hasNextInt()){
+							while(!sc.hasNextInt()){
 								System.out.println("Enter an integer!!!");
-								in.next();
+								sc.next();
 							}
-							if(sets.removeItem(in.nextInt() - 1)) 
+							if(sets.removeItem(sc.nextInt() - 1)) 
 								System.out.print("Update successful.");
 							else 
 								System.out.println("Update unsuccessful.");
@@ -303,7 +303,7 @@ public class Menu {
 			}
 			else {
 				System.out.println("Enter an integer!!!");
-				in.next();
+				sc.next();
 			}
 		}	
 }
@@ -335,6 +335,7 @@ public class Menu {
 			if(!showSets && menuItem.get(i-1).getItemType() == TypeOfItem.SET) {++j;continue;}
 			System.out.printf("\n%sS: \n",TypeOfItem.values()[++j]);
 		}
+		System.out.println("\n\t================================\n");
 	}
 	
 	/**

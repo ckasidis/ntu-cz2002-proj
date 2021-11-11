@@ -26,12 +26,13 @@ public class Staff {
 	 */
 	private String jobTitle;
 	
+	Scanner sc = new Scanner(System.in);
 	//Constructors
 	/**
 	 * Creates a staff of the restaurant with user inputs of name, gender and job title
 	 */
 	public Staff() {
-		Scanner sc = new Scanner(System.in);
+		
 		System.out.println("Enter name of Staff");
 		name = sc.nextLine();
 		System.out.println("Enter gender(M/F)");
