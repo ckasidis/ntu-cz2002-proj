@@ -146,14 +146,14 @@ public class Order {
 	 * View all the items ordered
 	 */
 	public void viewOrder() {
-		int temp = 1, count=1;
+		int temp = 1, count=1,i;
 		if(orderItem.size()==0) {
 			System.out.println("Order empty");
 			return;
 		}
 		double price=0;
 		String tm = orderItem.get(0).getName();
-		for (int i=1;i<orderItem.size();i++){
+		for (i=1;i<orderItem.size();i++){
 			price = price+ orderItem.get(i-1).getPrice();
 			if(tm != orderItem.get(i).getName()) {
 				System.out.printf("Order #%d: %d %s \t %.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
@@ -163,8 +163,8 @@ public class Order {
 			}
 			count++;
 		}
-		int i =orderItem.size()-1;
-		System.out.printf("Order #%d: %d %s \t %.2f\n",temp++,count,orderItem.get(i).getName(),orderItem.get(i).getPrice());
+		price = price+ orderItem.get(i-1).getPrice();
+		System.out.printf("Order #%d: %d %s \t %.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
 	}
 	
 	/**
