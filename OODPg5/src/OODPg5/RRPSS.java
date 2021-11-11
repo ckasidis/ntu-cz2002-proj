@@ -89,13 +89,14 @@ public class RRPSS {
 		public static void printSalesrevenue(SaleRevenue sales) {
 		int c, mon,day;
 		LocalDate date = LocalDate.now(),ld;
-		DateTimeFormatter f = DateTimeFormatter.ofPattern( "dd/MM" ) ;
+		DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MMM/yyyy"); ;
 		String input;
 		
 			while(true) {
 				System.out.printf("========= SELECT OPTION =========\n(1)Print today  (2)Print this month  (3)Print whole year  (4)Select a day  (5)Select a Month  (6)Quit\n");
-				if(sc.hasNextInt()) {
-				c = sc.nextInt();
+				System.out.println("Records up to 1 year");
+				if(s.hasNextInt()) {
+				c = s.nextInt();
 				switch(c) {
 					case 1: sales.printSalesRevenueDay(date);
 							return;
@@ -104,9 +105,9 @@ public class RRPSS {
 					case 3:	sales.printSalesRevenueYear();
 							return;
 					case 4:	
-							sc.nextLine();
-							System.out.println("Enter Date (dd/MM):");
-							input = sc.nextLine();
+							s.nextLine();
+							System.out.println("Enter Date :(eg 11/Jan/2001):");
+							input = s.nextLine();
 							try 
 								{
 								    ld = LocalDate.parse( input , f ) ;
@@ -114,13 +115,13 @@ public class RRPSS {
 								}
 							catch ( DateTimeParseException e )
 							{
-							   System.out.println("Enter a valid date(dd/MM)!!");
+							   System.out.println("Enter a valid date(eg 11/Jan/2001)!!");
 							}
 							return;
 					case 5:
-							sc.nextLine();
-							System.out.println("Enter Date (dd/MM):");
-							input = sc.nextLine();
+							s.nextLine();
+							System.out.println("Enter Date :(eg 11/Jan/2001):");
+							input = s.nextLine();
 							try 
 								{
 								    ld = LocalDate.parse( input , f ) ;
@@ -128,7 +129,7 @@ public class RRPSS {
 								}
 							catch ( DateTimeParseException e )
 							{
-							   System.out.println("Enter a valid date(dd/MM)!!");
+							   System.out.println("Enter Date :(eg 11/Jan/2001):");
 							}
 							return;
 					case 6: return;
@@ -138,7 +139,7 @@ public class RRPSS {
 			}
 			else {
 					System.out.println("Enter an integer!!!");
-					sc.next();
+					s.next();
 			}
 		}
 	}
