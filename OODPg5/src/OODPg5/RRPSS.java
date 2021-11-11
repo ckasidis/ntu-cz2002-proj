@@ -182,11 +182,16 @@ public class RRPSS {
 							Customer cus = new Customer();
 							int tb = tables.assignTable(cus);
 							System.out.println("Table assigned:"+ tb);
+							System.out.println("Staff on duty today:");
+							for(int i=0;i<staffs.size();i++) {
+								System.out.printf("|%s,ID=%d \t",i,staffs.get(i).getName(),staffs.get(i).getEmployeeID());
+							}
+							System.out.printf("\n");
 							System.out.println("Enter Staff ID");
 							if(s.hasNextInt()) {
 								int ID = s.nextInt();
 								s.nextLine();
-								if(tb!=-1 && ID < staffs.size()) {
+								if(tb!=-1 && ID < staffs.size() && ID>-1) {
 									table_orders.set(tb-1, new Order(cus,staffs.get(ID),tb));
 								}
 								else {
@@ -255,7 +260,7 @@ public class RRPSS {
 		System.out.println("Input Staff members to roster!");
 		do {
 			staffs.add(new Staff());
-			System.out.println("Enter -1 to stop adding staff to roster.");
+			System.out.println("Enter any integer to continue adding.(-1 to start)");
 			if(s.hasNextInt()) {
 				c =s.nextInt();
 			}
