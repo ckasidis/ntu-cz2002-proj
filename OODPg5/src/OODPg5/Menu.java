@@ -211,15 +211,21 @@ public class Menu {
 		showMenuItems(false);
 		while(adding) {
 			System.out.println("Enter item to add to set (Enter -1 to quit): ");
-			while(!sc.hasNextInt()){
+			while(!in.hasNextInt()){
 				System.out.println("Enter an integer!!!");
-				sc.next();
+				in.next();
 			}
-			if((itemIndex = sc.nextInt())== -1) break;
+			if((itemIndex = in.nextInt())== -1) break;
 			itemIndex--;
-			if (itemIndex < 0 || itemIndex > menuItem.size() - 1 || menuItem.get(itemIndex).getItemType()== TypeOfItem.SET)
-				System.out.print("Please choose from within menu.");
-			else SetItem.add(menuItem.get(itemIndex));
+			if(itemIndex < 0 || itemIndex > menuItem.size() - 1 ) {
+				System.out.println("Not added!Please choose from within menu.");
+				continue;
+			}
+			 if(menuItem.get(itemIndex).getItemType()== TypeOfItem.SET){
+				 System.out.println("Not added! Sets cannot be added to sets.");
+				 continue;
+			 }
+			SetItem.add(menuItem.get(itemIndex));
 		}
 		sort(SetItem);
 		sc.nextLine();
