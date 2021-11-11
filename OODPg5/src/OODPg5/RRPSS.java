@@ -185,6 +185,7 @@ public class RRPSS {
 						case 4:
 							Customer cus = new Customer();
 							int tb = tables.assignTable(cus);
+							if (tb == -1) break;
 							System.out.println("Staff on duty today:");
 							for(int i=0;i<staffs.size();i++) {
 								System.out.println("->" + staffs.get(i).getName() + ", ID = " + staffs.get(i).getEmployeeID());
@@ -229,6 +230,10 @@ public class RRPSS {
 									sc.next();
 								}
 							}while(tn2<1 || tn2>10);
+							if (tables.getTableList().get(tn2-1).getCustomer() == null) {
+								System.out.println("No customer on this table!");
+								break;
+							}
 							updateOrder(menu, table_orders.get(tn2-1));
 							break;
 						case 7:		
@@ -244,9 +249,7 @@ public class RRPSS {
 				}
 			}
 		}
-
 		catch(Exception e) {
-			sc.nextLine();
 			System.out.println("Invalid input! Try again.");
 		}
 		finally {
