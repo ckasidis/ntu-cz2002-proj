@@ -1,4 +1,7 @@
 package OODPg5;
+
+import java.util.Scanner;
+
 /**
  * Represents a staff of the restaurant
  * @author Group 5
