@@ -98,5 +98,6 @@ public class SaleRevenue {
 				}
 			}
 		}
+		System.out.println("Total Revenue for the Year:"+totalRevenue);
 	}
 }

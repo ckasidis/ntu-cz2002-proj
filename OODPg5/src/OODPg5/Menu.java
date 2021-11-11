@@ -74,7 +74,7 @@ public class Menu {
 	/**
 	 * Create a menu item using user input of type, name, price and description
 	 */
-	public void createMenuItem() { 
+	public void createMenuItem() {
 		String name;
 		String description;
 		double price;
@@ -114,7 +114,7 @@ public class Menu {
 				menuItem.add(new Dessert(name, price, description));
 				break;
 			default:
-				System.out.println("Inavlid choice entered.");
+				System.out.println("Invalid choice entered.");
 				break;
 			}
 			if(choice>0 && choice<4) {
@@ -191,6 +191,10 @@ public class Menu {
 	 * Create a promotional set of existing menu items
 	 */
 	public void createPromotionSet() {
+		if (menuItem.size() < 1) {
+			System.out.println("Menu Empty! Cannot create a set item");
+			return;
+		}
 		int itemIndex;
 		String description;
 		boolean adding =true;
@@ -213,9 +217,9 @@ public class Menu {
 			}
 			if((itemIndex = sc.nextInt())== -1) break;
 			itemIndex--;
-			while(itemIndex < 0 || itemIndex > menuItem.size() - 1 || menuItem.get(itemIndex).getItemType()== TypeOfItem.SET)
+			if (itemIndex < 0 || itemIndex > menuItem.size() - 1 || menuItem.get(itemIndex).getItemType()== TypeOfItem.SET)
 				System.out.print("Please choose from within menu.");
-			SetItem.add(menuItem.get(itemIndex));
+			else SetItem.add(menuItem.get(itemIndex));
 		}
 		sort(SetItem);
 		sc.nextLine();

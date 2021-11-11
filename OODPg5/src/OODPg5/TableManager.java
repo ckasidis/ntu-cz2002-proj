@@ -39,6 +39,9 @@ public class TableManager {
 		}
 	}
 	
+	public ArrayList<Table> getTableList() {
+		return tableList;
+	}
 	/**
 	 * Books a reservation according to input date, time and number of persons.
 	 * Booking must be made 2 hours in advance.
