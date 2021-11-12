@@ -109,7 +109,7 @@ public class RRPSS {
 								return;
 						case 4:	
 								sc.nextLine();
-								System.out.println("Enter Date :(eg 11/Jan/2001):");
+								System.out.println("Enter Date (eg 11/Jan/2001):");
 								inputDate = sc.nextLine();
 								try 
 									{
@@ -123,7 +123,17 @@ public class RRPSS {
 								return;
 						case 5:
 								System.out.println("Enter Month (1-12):");
-								inputMnth = sc.nextInt();
+								while(!sc.hasNextInt()){
+									System.out.println("Enter an integer!!!");
+									sc.next();
+								}
+								while ((inputMnth = sc.nextInt()) < 1 || inputMnth > 12) {
+									System.out.println("Please enter an integer between 1-12");
+									while(!sc.hasNextInt()){
+										System.out.println("Enter an integer!!!");
+										sc.next();
+									}
+								}
 								try 
 									{
 									    ;
@@ -131,7 +141,7 @@ public class RRPSS {
 									}
 								catch ( DateTimeParseException e )
 								{
-								   System.out.println("Enter Date :(eg 11/Jan/2001):");
+								   System.out.println("Enter Date (eg 11/Jan/2001):");
 								}
 								return;
 						case 6: return;
@@ -255,10 +265,6 @@ public class RRPSS {
 								break;
 							}
 
-							if(table_orders.get(tn2-1).getCheckNo()==0) {
-								System.out.println("Table has no orders!");
-								break;
-							}
 							updateOrder(menu, table_orders.get(tn2-1));
 							break;
 						case 7:		

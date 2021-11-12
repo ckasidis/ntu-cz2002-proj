@@ -63,7 +63,7 @@ public class SaleRevenue {
 		
 		int mnthIndex = mnth - 1;
 		double totalRevenue =0;
-		for(Order o: year.get(mnth)) {
+		for(Order o: year.get(mnthIndex)) {
 			System.out.println("");
 			System.out.println("Date:" + o.getDate().format(dtf1));
 			o.viewOrder();
