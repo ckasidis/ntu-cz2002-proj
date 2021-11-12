@@ -1,5 +1,5 @@
 package OODPg5;
-//package rrps;
+
 import java.util.Scanner;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -87,7 +87,9 @@ public class RRPSS {
 		 * @param sales Sale revenue record of the restaurant
 		 */
 		public static void printSalesrevenue(SaleRevenue sales) {
-		int c, mon, day;
+
+		int c;
+
 		LocalDate date = LocalDate.now(),ld;
 		DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MMM/yyyy"); ;
 		String input;
@@ -270,8 +272,7 @@ public class RRPSS {
 		}
 		catch(Exception e) {
 			System.out.println("Invalid input! Try again.");
-		}
-		finally {
+			System.out.println("Rebooting..");
 			start(menu, tables, sales, staffs);
 		}
 	}

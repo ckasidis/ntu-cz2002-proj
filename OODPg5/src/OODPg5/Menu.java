@@ -203,6 +203,7 @@ public class Menu {
 		boolean adding =true;
 		System.out.println("====== CREATE PROMOTIONAL SET ======");
 		System.out.println("Set name: ");
+		sc.nextLine();
 		String name = sc.nextLine();
 		System.out.print("Price of Set: \n$");
 		while(!sc.hasNextDouble()){
@@ -210,32 +211,35 @@ public class Menu {
 			sc.next();
 		}
 		double price = sc.nextDouble();
-		ArrayList<MenuItem> SetItem = new ArrayList<MenuItem>();
+		ArrayList<MenuItem> setItem = new ArrayList<MenuItem>();
 		showMenuItems(false);
 		while(adding) {
 			System.out.println("Enter item to add to set (Enter -1 to quit): ");
-			if (sc.hasNextInt()) {
-				if((itemIndex = sc.nextInt())== -1) break;
-				itemIndex--;
-				if(itemIndex < 0 || itemIndex > menuItem.size() - 1 ) {
-					System.out.println("Not added!Please choose from within menu.");
-					continue;
-				}
-				if(menuItem.get(itemIndex).getItemType()== TypeOfItem.SET){
-					System.out.println("Not added! Sets cannot be added to sets.");
-					continue;
-				}
-				SetItem.add(menuItem.get(itemIndex));
-			} else {
+			while(!sc.hasNextInt()){
 				System.out.println("Enter an integer!!!");
 				sc.next();
 			}
+			if((itemIndex = sc.nextInt())== -1) break;
+			itemIndex--;
+			if(itemIndex < 0 || itemIndex > menuItem.size() - 1 ) {
+				System.out.println("Not added!Please choose from within menu.");
+				continue;
+			}
+			 if(menuItem.get(itemIndex).getItemType()== TypeOfItem.SET){
+				 System.out.println("Not added! Sets cannot be added to sets.");
+				 continue;
+			 }
+			setItem.add(menuItem.get(itemIndex));
 		}
-		sort(SetItem);
+		sort(setItem);
 		sc.nextLine();
+		if(setItem.size()<=1) {
+			System.out.println("Set not created! Sets need more than 1 item.");
+			return;
+		}
 		System.out.println("Description of Promotional set: ");
 		description = sc.nextLine();
-		menuItem.add(new Set(name, price, description,SetItem));
+		menuItem.add(new Set(name, price, description,setItem));
 		System.out.println("Promotional Set succesfully created!");
 	}
 	

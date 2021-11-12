@@ -156,7 +156,7 @@ public class Order {
 		for (i=1;i<orderItem.size();i++){
 			price = price+ orderItem.get(i-1).getPrice();
 			if(tm != orderItem.get(i).getName()) {
-				System.out.printf("Order #%d: %d %20s    $%3.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
+				System.out.printf("Order #%d: %d %-15s    $%3.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
 				price =0;
 				count =0;
 				tm = orderItem.get(i).getName();
@@ -164,7 +164,7 @@ public class Order {
 			count++;
 		}
 		price = price+ orderItem.get(i-1).getPrice();
-		System.out.printf("Order #%d: %d %s \t %.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
+		System.out.printf("Order #%d: %d %-15s    $%3.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
 	}
 	
 	/**
@@ -182,12 +182,14 @@ public class Order {
 	private void sort(ArrayList<MenuItem> menuItemList) {
 		int prev=0;
 		if(menuItemList.size()<=1) return;
-		String order = menuItemList.get(0).getName();
+		String order;
 		for (int i=0;i<menuItemList.size()-1;i=prev) {
+			order = menuItemList.get(i).getName();
 			prev = i+1;
 			for (int j=i+1; j<menuItemList.size();j++) {
 				if(order == menuItemList.get(j).getName()) {
 					Collections.swap(menuItemList, prev, j);
+					prev++;
 				}
 			  }
 		}
