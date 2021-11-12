@@ -187,7 +187,7 @@ public class Table {
 		if (this.customer != null) {
 			this.customer = null;
 			System.out.println("Table " + tableNo + " unassigned successfully");
-		} else System.out.println("Table is already unasigned");
+		} else System.out.println("Table " + tableNo + " has no customer, cannot unassign");
 	}
 	
 	/**
