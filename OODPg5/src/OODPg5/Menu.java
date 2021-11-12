@@ -161,7 +161,6 @@ public class Menu {
 			System.out.printf("========= SELECT UPDATE =========\n(1)Name  (2)Price  (3)Description\n");
 			if(sc.hasNextInt()) {
 				int choice = sc.nextInt();
-				sc.nextLine();
 				switch(choice) {
 					case 1:
 						System.out.println("Enter new name: ");

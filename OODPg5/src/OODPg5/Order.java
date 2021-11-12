@@ -41,6 +41,7 @@ public class Order {
 	 * Date of order placed
 	 */
 	private LocalDate date;
+	
 //An order should indicate the staff who created the order.
 //Order invoice can be printed to list the order details (eg, table number, timestamp)
 //	and a complete breakdown of order items details with taxes details.
@@ -91,6 +92,13 @@ public class Order {
 	 */
 	public Customer getCustomer() {
 		return customer;
+	}
+	/**
+	 * Get the table number of table assigned for the order
+	 * @return Table number of table assigned for the order
+	 */
+	public int getTableNum() {
+		return table_no;
 	}
 	/**
 	 * Get the check number of the order
@@ -165,14 +173,6 @@ public class Order {
 		}
 		price = price+ orderItem.get(i-1).getPrice();
 		System.out.printf("Order #%d: %d %-15s    $%3.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
-	}
-	
-	/**
-	 * Get the table number of table assigned for the order
-	 * @return Table number of table assigned for the order
-	 */
-	public int getTableNum() {
-		return table_no;
 	}
 	
 	/**

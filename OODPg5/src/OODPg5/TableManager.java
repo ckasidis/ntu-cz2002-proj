@@ -104,10 +104,10 @@ public class TableManager {
 		}
 		LocalTime startTime = LocalTime.of(tmp, 0);
 		
-		//can only book >x hour in advance for same day reservation
+		//can only book >2 hour in advance for same day reservation
 		if (LocalDate.now().equals(date)) {
-			if (Duration.between(LocalTime.now(), startTime).toHours() <= 0) { // 0 hours in advance
-				System.out.println("Cannot Reserve!, Please reserve a time slot more than 2 hours in advance!");
+			if (Duration.between(LocalTime.now(), startTime).toHours() < 2) { // 2 hours in advance
+				System.out.println("Cannot Reserve!, Please reserve your time slot atleast 2 hours in advance!");
 				System.out.println("Your Date: " + date + ", Your Time: " + startTime);
 				System.out.println("Current Date: " + LocalDate.now() + ", Current Time: " + LocalTime.now());
 				return;

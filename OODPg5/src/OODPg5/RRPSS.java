@@ -86,13 +86,14 @@ public class RRPSS {
 		 * Print sales revenue of the restaurant for a day, a month or a year
 		 * @param sales Sale revenue record of the restaurant
 		 */
-		public static void printSalesrevenue(SaleRevenue sales) {
+		public static void printSalesRevenue(SaleRevenue sales) {
 
 		int c;
 
-		LocalDate date = LocalDate.now(),ld;
+		LocalDate ld;
 		DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MMM/yyyy"); ;
-		String input;
+		String inputDate;
+		int inputMnth;
 		
 			while(true) {
 				System.out.printf("========= SELECT OPTION =========\n(1)Print today  (2)Print this month  (3)Print whole year  (4)Select a day  (5)Select a Month  (6)Quit\n");
@@ -100,19 +101,19 @@ public class RRPSS {
 				if(sc.hasNextInt()) {
 					c = sc.nextInt();
 					switch(c) {
-						case 1: sales.printSalesRevenueDay(date);
+						case 1: sales.printSalesRevenueDay(LocalDate.now());
 								return;
-						case 2:	sales.printSalesRevenueMonth(date);
+						case 2:	sales.printSalesRevenueMonth(LocalDate.now().getMonthValue());
 								return;
 						case 3:	sales.printSalesRevenueYear();
 								return;
 						case 4:	
 								sc.nextLine();
 								System.out.println("Enter Date :(eg 11/Jan/2001):");
-								input = sc.nextLine();
+								inputDate = sc.nextLine();
 								try 
 									{
-									    ld = LocalDate.parse( input , f ) ;
+									    ld = LocalDate.parse(inputDate,f) ;
 									    sales.printSalesRevenueDay(ld);
 									}
 								catch ( DateTimeParseException e )
@@ -121,13 +122,12 @@ public class RRPSS {
 								}
 								return;
 						case 5:
-								sc.nextLine();
-								System.out.println("Enter Date :(eg 11/Jan/2001):");
-								input = sc.nextLine();
+								System.out.println("Enter Month (1-12):");
+								inputMnth = sc.nextInt();
 								try 
 									{
-									    ld = LocalDate.parse( input , f ) ;
-									    sales.printSalesRevenueMonth(ld);
+									    ;
+									    sales.printSalesRevenueMonth(inputMnth);
 									}
 								catch ( DateTimeParseException e )
 								{
@@ -188,33 +188,37 @@ public class RRPSS {
 							Customer cus = new Customer();
 							int tb = tables.assignTable(cus);
 							if (tb == -1) break;
-							System.out.println("Staff on duty today:");
-							for(int i=0;i<staffs.size();i++) {
-								System.out.println("->" + staffs.get(i).getName() + ", ID = " + staffs.get(i).getEmployeeID());
-							}
 							System.out.printf("\n");
-							System.out.println("Enter Staff ID");
-							if(sc.hasNextInt()) {
-								int ID = sc.nextInt();
-								sc.nextLine();
-								if(tb!=-1 && ID < staffs.size() && ID>-1) {
-									table_orders.set(tb-1, new Order(cus,staffs.get(ID),tb));
-									System.out.printf("Table %d assigned successfully.\n",tb);
+							while (true) {
+								System.out.println("Staff on duty today:");
+								for(int i=0;i<staffs.size();i++) {
+									System.out.println("->" + staffs.get(i).getName() + ", ID = " + staffs.get(i).getEmployeeID() + ", " + staffs.get(i).getJobTitle());
+								}
+								System.out.println("Enter Staff ID");
+								if(sc.hasNextInt()) {
+									int ID = sc.nextInt();
+									sc.nextLine();
+									if(tb!=-1 && ID < staffs.size() && ID>-1) {
+										table_orders.set(tb-1, new Order(cus,staffs.get(ID),tb));
+										System.out.printf("Table %d assigned successfully.\n",tb);
+										break;
+									}
+									else {
+										System.out.println("Invalid input! Try again");
+										sc.next();
+									}
 								}
 								else {
-									System.out.println("Invalid input!Try again");
+									System.out.println("Enter an integer!!! Try again");
+									sc.next();
 								}
-							}
-							else {
-								System.out.println("Enter an integer!!!Try again");
-								sc.next();
 							}
 							break;
 						case 5:
 							System.out.println("Occupied Tables:");
 							for(Order o: table_orders) {
 								if(o.getCheckNo()!=0) {
-									System.out.printf("table no:%d ,customer name: %s \n",o.getTableNum(),o.getCustomer().getName());
+									System.out.printf("Table number: %d, Customer name: %s \n",o.getTableNum(),o.getCustomer().getName());
 								}
 							}
 							int tb1 = tables.unAssignTable();
@@ -228,7 +232,7 @@ public class RRPSS {
 							System.out.println("Occupied Tables:");
 							for(Order o: table_orders) {
 								if(o.getCheckNo()!=0) {
-									System.out.printf("table no:%d ,customer name: %s \n",o.getTableNum(),o.getCustomer().getName());
+									System.out.printf("Table number: %d, Customer name: %s \n",o.getTableNum(),o.getCustomer().getName());
 								}
 							}
 							System.out.println("Enter table number (1-10)");
@@ -244,7 +248,7 @@ public class RRPSS {
 									System.out.println("Enter an integer!!!");
 									sc.next();
 								}
-							}while(tn2<1 || tn2>10);
+							} while (tn2<1 || tn2>10);
 							
 							if (tables.getTableList().get(tn2-1).getCustomer() == null) {
 								System.out.println("No customer on this table!");
@@ -258,7 +262,7 @@ public class RRPSS {
 							updateOrder(menu, table_orders.get(tn2-1));
 							break;
 						case 7:		
-							printSalesrevenue(sales);
+							printSalesRevenue(sales);
 							break;
 						case 8: System.out.println("Shutting down..");return;
 							default:System.out.println("Invalid entry!");

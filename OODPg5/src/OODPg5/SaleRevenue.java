@@ -40,15 +40,15 @@ public class SaleRevenue {
 	public void printSalesRevenueDay(LocalDate date) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
-		int mnth = date.getMonthValue()-1;
+		int mnthIndex = date.getMonthValue()-1;
 		double totalRevenue =0;
-		for(Order o: year.get(mnth)) {
-			if(o.getDate().compareTo(date)==0)
+		for(Order o: year.get(mnthIndex)) {
+			if(o.getDate().compareTo(date)==0) {
 				System.out.println("");
 				System.out.println("Date:" + o.getDate().format(dtf));
-				
 				o.viewOrder();
 				totalRevenue += o.getfinalPrice();
+			}
 		}
 		System.out.println("");
 		System.out.printf("Total Revenue for the day: %.2f\n",totalRevenue);
@@ -58,18 +58,14 @@ public class SaleRevenue {
 	 * Print all the sales revenue for the stated date's month
 	 * @param date Date of the month of recorded sales revenue needed
 	 */
-	public void printSalesRevenueMonth(LocalDate date) {
+	public void printSalesRevenueMonth(int mnth) {
 		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd/MM");
 		
-		LocalDate tempDate = date.withDayOfMonth(1);
-		int mnth = date.getMonthValue()-1;
+		int mnthIndex = mnth - 1;
 		double totalRevenue =0;
 		for(Order o: year.get(mnth)) {
-			if(o.getDate().compareTo(tempDate)!=0) {
-				System.out.println("");
-				System.out.println("Date:" + date.format(dtf1));
-				tempDate = o.getDate();
-			}
+			System.out.println("");
+			System.out.println("Date:" + o.getDate().format(dtf1));
 			o.viewOrder();
 			totalRevenue += o.getfinalPrice();
 		}
