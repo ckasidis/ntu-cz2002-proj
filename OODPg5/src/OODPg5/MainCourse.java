@@ -10,18 +10,23 @@ public class MainCourse implements MenuItem {
 	 * Name of the main course
 	 */
 	private String name;
+	
 	/**
 	 * Price of the main course
 	 */
 	private double price;
+	
 	/**
 	 * Description of the main course
 	 */
 	private String description;
+	
 	/**
 	 * Type of the item (Main Course)
 	 */
 	private TypeOfItem item;
+	
+	//constructors
 	
 	/**
 	 * Creates a main course item to be sold
@@ -35,21 +40,9 @@ public class MainCourse implements MenuItem {
 			this.description = description;
 			item = TypeOfItem.MAINCOURSE;
 	}
-	/**
-	 * Creates a main course item to be sold
-	 */
-	public MenuItem toOrder() {
-		MainCourse mi= new MainCourse(name,price,description);
-		return mi;
-	}
-	/**
-	 * Print the description of the main course
-	 */
-	public void printDescription() {
-		System.out.println(this.description);
-	}
 	
 	//getters
+	
 	/**
 	 * Get the name of the main course
 	 */
@@ -71,6 +64,7 @@ public class MainCourse implements MenuItem {
 	}
 	
 	//setters
+	
 	/**
 	 * Set the name of the main course
 	 */
@@ -90,5 +84,22 @@ public class MainCourse implements MenuItem {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	//methods
+	
+	/**
+	 * Print the description of the main course
+	 */
+	public void printDescription() {
+		System.out.println(this.description);
+	}
+	
+	/**
+	 * Creates a main course item to be sold
+	 */
+	public MenuItem toOrder() {
+		MainCourse mi= new MainCourse(name,price,description);
+		return mi;
 	}
 }

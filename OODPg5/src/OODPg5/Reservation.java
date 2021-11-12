@@ -28,7 +28,7 @@ public class Reservation {
 	 */
 	private int numOfPax;
 	
-	//constructor
+	//constructors
 	
 	/**
 	 * Creates a reservation

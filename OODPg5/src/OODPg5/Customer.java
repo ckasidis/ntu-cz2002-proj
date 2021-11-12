@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class Customer {
 	Scanner sc = new Scanner(System.in);
+	
 	/**
 	 * Name of the customer
 	 */
@@ -18,10 +19,13 @@ public class Customer {
 	 * 8-digit contact number of customer
 	 */
 	private long contact;
+	
 	/**
 	 * Array list of entitled discounts
 	 */
 	private ArrayList<Discount> discount = new ArrayList<Discount>();
+	
+	//constructor
 	
 	/**
 	 * Creates a customer with user input of name, contact number and discount
@@ -69,19 +73,29 @@ public class Customer {
 	 * @param n Name of the customer
 	 * @param c 8-digit contact number of customer
 	 */
-	Customer(String n,long c){
+	Customer(String n,long c) {
 		name = n;
 		contact = c;
 	}
+
+	//getters
 	
 	/**
-	 * Set the discount entitled to customer
-	 * @param d Discount entitled to customer
+	 * Get the name of the customer
+	 * @return Name of the customer
 	 */
-	public void setDiscount(Discount d) {
-		discount.add(d);
+	public String getName() {
+		return name;
 	}
-	
+
+	/**
+	 * Get the 8-digit contact number of customer
+	 * @return 8-digit contact number of customer
+	 */
+	public long getContactNo() {
+		return contact;
+	}
+			
 	/**
 	 * Get the discount entitled to customer
 	 * @param price Original price
@@ -100,27 +114,14 @@ public class Customer {
 		return highest_discount*price;
 	}
 	
-	/**
-	 * Get the name of the customer
-	 * @return Name of the customer
-	 */
-	public String getName() {
-		return name;
-	}
+	//setters
+	
 	/**
 	 * Set the name of the customer
 	 * @param n Name of the customer
 	 */
 	public void setName(String n) {
 		name = n;
-	}
-	
-	/**
-	 * Get the 8-digit contact number of customer
-	 * @return 8-digit contact number of customer
-	 */
-	public long getContactNo() {
-		return contact;
 	}
 	
 	/**
@@ -132,5 +133,13 @@ public class Customer {
 			contact = c;
 		else
 			System.out.println("invalid contacts!");
+	}
+
+	/**
+	 * Set the discount entitled to customer
+	 * @param d Discount entitled to customer
+	 */
+	public void setDiscount(Discount d) {
+		discount.add(d);
 	}
 }

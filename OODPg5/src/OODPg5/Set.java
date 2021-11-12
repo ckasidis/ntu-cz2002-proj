@@ -98,18 +98,6 @@ public class Set implements MenuItem {
 	//methods
 	
 	/**
-	 * Creates a set of menu items to be sold
-	 */
-	public MenuItem toOrder() {
-		 ArrayList<MenuItem> setcopy = new ArrayList<MenuItem>();
-		for(MenuItem item: menuItem) {
-			setcopy.add(item.toOrder());
-		}
-		Set mi= new Set(name,price,description,setcopy);
-		return mi;
-	}
-	
-	/**
 	 * Add an item to the set
 	 * @param mi Array list of items in the set
 	 */
@@ -171,4 +159,15 @@ public class Set implements MenuItem {
 		System.out.println("");
 	}
 	
+	/**
+	 * Creates a set of menu items to be sold
+	 */
+	public MenuItem toOrder() {
+		 ArrayList<MenuItem> setcopy = new ArrayList<MenuItem>();
+		for(MenuItem item: menuItem) {
+			setcopy.add(item.toOrder());
+		}
+		Set mi= new Set(name,price,description,setcopy);
+		return mi;
+	}
 }

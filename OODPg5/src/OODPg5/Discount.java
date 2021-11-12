@@ -4,12 +4,13 @@ package OODPg5;
  * @author Group 5
  *
  */
-public class Discount{
-	
+public class Discount{	
 	/**
 	 * Discount given 
 	 */
 	private Double discount;
+	
+	//constructors
 	
 	/**
 	 * Creates a discount of 0.01
@@ -17,6 +18,7 @@ public class Discount{
 	public Discount() {
 		discount = 0.01;
 	}
+	
 	/**
 	 * Creates a discount
 	 * @param discount Discount to be given 
@@ -25,6 +27,8 @@ public class Discount{
 		this.discount = discount;
 	}
 	
+	//getters
+	
 	/**
 	 * Get the discount 
 	 * @return Discount 
@@ -32,6 +36,9 @@ public class Discount{
 	public double getDiscount() {
 		return discount;
 	}
+	
+	//setters
+	
 	/**
 	 * Set the discount
 	 * @param discount Discount to be given

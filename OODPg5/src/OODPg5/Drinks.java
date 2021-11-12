@@ -7,21 +7,26 @@ package OODPg5;
  */
 public class Drinks implements MenuItem{
 	/**
-	 * Type of the item (Drinks)
-	 */
-	private TypeOfItem item;
-	/**
 	 * Name of the drink
 	 */
 	private String name;
+	
 	/**
 	 * Price of the drink
 	 */
 	private double price;
+	
 	/**
 	 * Description of the drink
 	 */
 	private String description;
+	
+	/**
+	 * Type of the item (Drinks)
+	 */
+	private TypeOfItem item;
+	
+	//constructors
 	
 	/**
 	 * Creates a drink to be sold
@@ -35,21 +40,9 @@ public class Drinks implements MenuItem{
 			this.description = description;
 			item = TypeOfItem.DRINK;
 	}
-	/**
-	 * Creates a dessert to be sold
-	 */
-	public MenuItem toOrder() {
-		Drinks mi= new Drinks(name,price,description);
-		return mi;
-	}
-	/**
-	 * Print description of the drink
-	 */
-	public void printDescription() {
-		System.out.println(this.description);
-	}
 	
 	//getters
+
 	/**
 	 * Get the name of the drink
 	 */
@@ -72,6 +65,7 @@ public class Drinks implements MenuItem{
 	}
 	
 	//setters
+	
 	/**
 	 * Set the name of the drink
 	 */
@@ -92,4 +86,20 @@ public class Drinks implements MenuItem{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	//methods
+	
+	/**
+	 * Creates a dessert to be sold
+	 */
+	public MenuItem toOrder() {
+		Drinks mi= new Drinks(name,price,description);
+		return mi;
+	}
+	/**
+	 * Print description of the drink
+	 */
+	public void printDescription() {
+		System.out.println(this.description);
+	}	
 }
