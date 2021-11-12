@@ -85,9 +85,9 @@ public class SaleRevenue {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("MM/yyyy");
 		LocalDate tempDate = LocalDate.now();
-		 LocalDate tempDate1= tempDate.minusYears(1);
-		 double totalRevenue = 0;
-		 System.out.println("Printing Sales Record from :"+ tempDate1.format(dtf)+ "to " + tempDate.format(dtf));
+		LocalDate tempDate1= tempDate.minusYears(1);
+		double totalRevenue = 0;
+		System.out.println("Printing Sales Record from :"+ tempDate1.format(dtf)+ "to " + tempDate.format(dtf));
 		for(ArrayList<Order> mnth : year) {
 			if(mnth.size()!=0) {
 				System.out.println("");

@@ -25,10 +25,13 @@ public class Menu {
 	 * Options to edit the menu:
 	 * Remove or update menu item
 	 */
-		public void editMenu() {
-		
+	public void editMenu() {
 		System.out.println("Enter item number:");
 		int num = sc.nextInt();
+		if (num < 1 || num > menuItem.size()) {
+			System.out.println("Item not found");
+			return;
+		}
 		System.out.println("======= SELECT CHOICE =======\n(1)Remove item  (2)Update details");
 		if(sc.hasNextInt()) {
 			int choice = sc.nextInt();
@@ -40,13 +43,13 @@ public class Menu {
 				if(menuItem.get(num-1).getItemType() != TypeOfItem.SET)
 					updateMenuItem(num);
 				else
-				updatePromotionSet(num);
+					updatePromotionSet(num);
 				return;
 			case 3:
-				break;
+				return;
 			default:
 				System.out.println("Invalid entry!");
-				break;		
+				return;		
 			}
 		}
 		else {
@@ -151,7 +154,7 @@ public class Menu {
 	private void updateMenuItem (int itemIndex) {
 		--itemIndex;
 		if(itemIndex < 0 || itemIndex > menuItem.size() - 1) {
-			System.out.println("Promotional set not in menu.");
+			System.out.println("Item not in menu.");
 			return;
 		}
 		else {
@@ -211,21 +214,22 @@ public class Menu {
 		showMenuItems(false);
 		while(adding) {
 			System.out.println("Enter item to add to set (Enter -1 to quit): ");
-			while(!in.hasNextInt()){
+			if (sc.hasNextInt()) {
+				if((itemIndex = sc.nextInt())== -1) break;
+				itemIndex--;
+				if(itemIndex < 0 || itemIndex > menuItem.size() - 1 ) {
+					System.out.println("Not added!Please choose from within menu.");
+					continue;
+				}
+				if(menuItem.get(itemIndex).getItemType()== TypeOfItem.SET){
+					System.out.println("Not added! Sets cannot be added to sets.");
+					continue;
+				}
+				SetItem.add(menuItem.get(itemIndex));
+			} else {
 				System.out.println("Enter an integer!!!");
-				in.next();
+				sc.next();
 			}
-			if((itemIndex = in.nextInt())== -1) break;
-			itemIndex--;
-			if(itemIndex < 0 || itemIndex > menuItem.size() - 1 ) {
-				System.out.println("Not added!Please choose from within menu.");
-				continue;
-			}
-			 if(menuItem.get(itemIndex).getItemType()== TypeOfItem.SET){
-				 System.out.println("Not added! Sets cannot be added to sets.");
-				 continue;
-			 }
-			SetItem.add(menuItem.get(itemIndex));
 		}
 		sort(SetItem);
 		sc.nextLine();

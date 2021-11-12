@@ -87,7 +87,7 @@ public class RRPSS {
 		 * @param sales Sale revenue record of the restaurant
 		 */
 		public static void printSalesrevenue(SaleRevenue sales) {
-		int c, mon,day;
+		int c, mon, day;
 		LocalDate date = LocalDate.now(),ld;
 		DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MMM/yyyy"); ;
 		String input;
@@ -95,54 +95,53 @@ public class RRPSS {
 			while(true) {
 				System.out.printf("========= SELECT OPTION =========\n(1)Print today  (2)Print this month  (3)Print whole year  (4)Select a day  (5)Select a Month  (6)Quit\n");
 				System.out.println("Records up to 1 year");
-				if(s.hasNextInt()) {
-				c = s.nextInt();
-				switch(c) {
-					case 1: sales.printSalesRevenueDay(date);
-							return;
-					case 2:	sales.printSalesRevenueMonth(date);
-							return;
-					case 3:	sales.printSalesRevenueYear();
-							return;
-					case 4:	
-							s.nextLine();
-							System.out.println("Enter Date :(eg 11/Jan/2001):");
-							input = s.nextLine();
-							try 
+				if(sc.hasNextInt()) {
+					c = sc.nextInt();
+					switch(c) {
+						case 1: sales.printSalesRevenueDay(date);
+								return;
+						case 2:	sales.printSalesRevenueMonth(date);
+								return;
+						case 3:	sales.printSalesRevenueYear();
+								return;
+						case 4:	
+								sc.nextLine();
+								System.out.println("Enter Date :(eg 11/Jan/2001):");
+								input = sc.nextLine();
+								try 
+									{
+									    ld = LocalDate.parse( input , f ) ;
+									    sales.printSalesRevenueDay(ld);
+									}
+								catch ( DateTimeParseException e )
 								{
-								    ld = LocalDate.parse( input , f ) ;
-								    sales.printSalesRevenueDay(ld);
+								   System.out.println("Enter a valid date(eg 11/Jan/2001)!!");
 								}
-							catch ( DateTimeParseException e )
-							{
-							   System.out.println("Enter a valid date(eg 11/Jan/2001)!!");
-							}
-							return;
-					case 5:
-							s.nextLine();
-							System.out.println("Enter Date :(eg 11/Jan/2001):");
-							input = s.nextLine();
-							try 
+								return;
+						case 5:
+								sc.nextLine();
+								System.out.println("Enter Date :(eg 11/Jan/2001):");
+								input = sc.nextLine();
+								try 
+									{
+									    ld = LocalDate.parse( input , f ) ;
+									    sales.printSalesRevenueMonth(ld);
+									}
+								catch ( DateTimeParseException e )
 								{
-								    ld = LocalDate.parse( input , f ) ;
-								    sales.printSalesRevenueMonth(ld);
+								   System.out.println("Enter Date :(eg 11/Jan/2001):");
 								}
-							catch ( DateTimeParseException e )
-							{
-							   System.out.println("Enter Date :(eg 11/Jan/2001):");
-							}
-							return;
-					case 6: return;
-					default: System.out.println("Invalid Input!");
-						
+								return;
+						case 6: return;
+						default: System.out.println("Invalid Input!");
+					}
+				}
+				else {
+					System.out.println("Enter an integer!!!");
+					sc.next();
 				}
 			}
-			else {
-					System.out.println("Enter an integer!!!");
-					s.next();
-			}
 		}
-	}
 	
 	/**
 	 * Allows user to operate the RRPSS of the restaurant
@@ -221,7 +220,6 @@ public class RRPSS {
 								table_orders.get(tb1-1).printOrderInvoice();
 								sales.addOrder(table_orders.get(tb1-1));
 								table_orders.set(tb1-1, new Order(tb1-1));
-								System.out.printf("Table %d Unassigned\n",tb1);
 							}
 							break;
 						case 6:
