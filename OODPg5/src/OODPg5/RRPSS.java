@@ -272,8 +272,7 @@ public class RRPSS {
 		}
 		catch(Exception e) {
 			System.out.println("Invalid input! Try again.");
-		}
-		finally {
+			System.out.println("Rebooting..");
 			start(menu, tables, sales, staffs);
 		}
 	}
