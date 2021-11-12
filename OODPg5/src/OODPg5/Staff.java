@@ -53,10 +53,9 @@ public class Staff {
 	 * @param employeeID Employee ID of the staff
 	 * @param jobTitle Job Title of the staff
 	 */
-	public Staff(String name, char gender, int employeeID, String jobTitle) {
+	public Staff(String name, char gender, String jobTitle) {
 		this.name  = name;
 		this.gender = gender;
-		this.employeeID = employeeID;
 		this.jobTitle = jobTitle;
 		employeeID = ID++;
 	}
