@@ -182,12 +182,14 @@ public class Order {
 	private void sort(ArrayList<MenuItem> menuItemList) {
 		int prev=0;
 		if(menuItemList.size()<=1) return;
-		String order = menuItemList.get(0).getName();
+		String order;
 		for (int i=0;i<menuItemList.size()-1;i=prev) {
+			order = menuItemList.get(i).getName();
 			prev = i+1;
 			for (int j=i+1; j<menuItemList.size();j++) {
 				if(order == menuItemList.get(j).getName()) {
 					Collections.swap(menuItemList, prev, j);
+					prev++;
 				}
 			  }
 		}
