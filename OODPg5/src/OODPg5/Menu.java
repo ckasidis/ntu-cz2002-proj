@@ -211,11 +211,11 @@ public class Menu {
 		showMenuItems(false);
 		while(adding) {
 			System.out.println("Enter item to add to set (Enter -1 to quit): ");
-			while(!in.hasNextInt()){
+			while(!sc.hasNextInt()){
 				System.out.println("Enter an integer!!!");
-				in.next();
+				sc.next();
 			}
-			if((itemIndex = in.nextInt())== -1) break;
+			if((itemIndex = sc.nextInt())== -1) break;
 			itemIndex--;
 			if(itemIndex < 0 || itemIndex > menuItem.size() - 1 ) {
 				System.out.println("Not added!Please choose from within menu.");
