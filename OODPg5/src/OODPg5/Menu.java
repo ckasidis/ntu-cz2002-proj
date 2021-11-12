@@ -207,7 +207,7 @@ public class Menu {
 			sc.next();
 		}
 		double price = sc.nextDouble();
-		ArrayList<MenuItem> SetItem = new ArrayList<MenuItem>();
+		ArrayList<MenuItem> setItem = new ArrayList<MenuItem>();
 		showMenuItems(false);
 		while(adding) {
 			System.out.println("Enter item to add to set (Enter -1 to quit): ");
@@ -225,13 +225,17 @@ public class Menu {
 				 System.out.println("Not added! Sets cannot be added to sets.");
 				 continue;
 			 }
-			SetItem.add(menuItem.get(itemIndex));
+			setItem.add(menuItem.get(itemIndex));
 		}
-		sort(SetItem);
+		sort(setItem);
 		sc.nextLine();
+		if(setItem.size()<=1) {
+			System.out.println("Set not created! Sets need more than 1 item.");
+			return;
+		}
 		System.out.println("Description of Promotional set: ");
 		description = sc.nextLine();
-		menuItem.add(new Set(name, price, description,SetItem));
+		menuItem.add(new Set(name, price, description,setItem));
 		System.out.println("Promotional Set succesfully created!");
 	}
 	
