@@ -26,37 +26,37 @@ public class Customer {
 	 * Creates a customer with user input of name, contact number and discount
 	 */
 	Customer(){//constructor
-		Scanner s = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Enter name of customer:");//get name and contacts for customer
-		name = s.nextLine();
+		name = sc.nextLine();
 		System.out.println("Enter contact number:");
-		while(!s.hasNextLong()){
+		while(!sc.hasNextLong()){
 			System.out.println("Enter a number!!!");
-			s.next();
+			sc.next();
 		}
-		while((contact = s.nextLong())<9999999 || contact >99999999) {
+		while((contact = sc.nextLong())<9999999 || contact >99999999) {
 			System.out.println("Enter an 8 digit number!");
-			while(!s.hasNextLong()){
+			while(!sc.hasNextLong()){
 				System.out.println("Enter a number!!!");
-				s.next();
+				sc.next();
 			}
 		}
 		System.out.println("Enter 'Y' if customer has discount.(Enter any other input if no discount)");
-		s.nextLine();
+		sc.nextLine();
 		char c;
-		if((c = s.nextLine().charAt(0)) == 'y' || c == 'Y'){;
+		if((c = sc.nextLine().charAt(0)) == 'y' || c == 'Y') {
 			System.out.println("Enter discount amount");
 			double d;
-			while(!s.hasNextDouble()){
+			while(!sc.hasNextDouble()){
 				System.out.println("Enter a decimal between (0-1)!");
-				s.next();
+				sc.next();
 			}
-			while(( d= s.nextDouble())<0 || d >1) {
+			while(( d= sc.nextDouble())<0 || d >1) {
 				System.out.println("Enter a decimal between (0-1)!");
-				while(!s.hasNextDouble()){
+				while(!sc.hasNextDouble()){
 					System.out.println("Enter a decimal between (0-1)!");
-					s.next();
+					sc.next();
 				}
 			}
 			discount.add(new Discount(d));
