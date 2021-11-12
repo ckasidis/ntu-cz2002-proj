@@ -200,6 +200,7 @@ public class Menu {
 		boolean adding =true;
 		System.out.println("====== CREATE PROMOTIONAL SET ======");
 		System.out.println("Set name: ");
+		sc.nextLine();
 		String name = sc.nextLine();
 		System.out.print("Price of Set: \n$");
 		while(!sc.hasNextDouble()){
