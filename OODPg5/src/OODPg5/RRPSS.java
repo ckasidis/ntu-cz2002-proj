@@ -87,7 +87,7 @@ public class RRPSS {
 		 * @param sales Sale revenue record of the restaurant
 		 */
 		public static void printSalesrevenue(SaleRevenue sales) {
-		int c, mon,day;
+		int c;
 		LocalDate date = LocalDate.now(),ld;
 		DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MMM/yyyy"); ;
 		String input;
