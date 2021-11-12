@@ -11,22 +11,29 @@ public class Set implements MenuItem {
 	 * Name of the set
 	 */
 	private String name;
+	
 	/**
 	 * Price of the set
 	 */
 	private double price;
+	
 	/**
 	 * Description of the set
 	 */
 	private String description;
+	
 	/**
 	 * Type of the item (Set)
 	 */
 	private TypeOfItem item;
+	
 	/**
 	 * Array list of items in the set
 	 */
 	private ArrayList<MenuItem> menuItem;
+	
+	//constructors
+	
 	/**
 	 * Create a set of menu items to be sold 
 	 * @param name Name of the set
@@ -34,13 +41,62 @@ public class Set implements MenuItem {
 	 * @param description Description of the set
 	 * @param mi Array list of items in the set
 	 */
-	public Set (String name, double price, String description,ArrayList<MenuItem> mi) {
+	public Set(String name, double price, String description,ArrayList<MenuItem> mi) {
 			this.name = name;
 			this.price = price;
 			this.description = description;
 			menuItem = mi;
 			item = TypeOfItem.SET;
 	}
+
+	//getters
+	
+	/**
+	 * Get the name of the set 
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * Get the price of the set
+	 */
+	public double getPrice() {
+		return price;
+	}
+	
+	/**
+	 * Get the type of item (Set)
+	 */
+	public TypeOfItem getItemType() {
+		return item;
+	}
+
+	//setters
+	
+	/**
+	 * Set the name of the set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * Set the price of the set
+	 */
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	/**
+	 * Set the description of the set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	//methods
+	
 	/**
 	 * Creates a set of menu items to be sold
 	 */
@@ -51,26 +107,6 @@ public class Set implements MenuItem {
 		}
 		Set mi= new Set(name,price,description,setcopy);
 		return mi;
-	}
-	/**
-	 * Get the name of the set 
-	 */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * Set the name of the set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	/**
-	 * Get the price of the set
-	 */
-	public double getPrice() {
-		return price;
 	}
 	
 	/**
@@ -121,14 +157,7 @@ public class Set implements MenuItem {
 			System.out.println();
 		}
 	}
-	
-	/**
-	 * Set the price of the set
-	 */
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	
+
 	/**
 	 * Print the description of the set
 	 */
@@ -142,17 +171,4 @@ public class Set implements MenuItem {
 		System.out.println("");
 	}
 	
-	/**
-	 * Get the type of item (Set)
-	 */
-	public TypeOfItem getItemType() {
-		return item;
-	}
-	/**
-	 * Set the description of the set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 }

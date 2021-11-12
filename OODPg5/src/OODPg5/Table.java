@@ -23,20 +23,24 @@ public class Table {
 	 * Unique ID for each table
 	 */
 	private int tableNo;
+	
 	/**
 	 * Total number of seats available in Table
 	 */
 	private int numOfSeats;
+	
 	/**
 	 * The customer assigned to the table
 	 */
 	private Customer customer;
+	
 	/**
 	 * The list of time slots
 	 */
 	private ArrayList<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
 	
-	//constructor
+	//constructors
+	
 	/**
 	 * Creates a table in the restaurant.
 	 * 1 hour time slots available for the table from 1100 to 2200
@@ -61,58 +65,72 @@ public class Table {
 	}
 	
 	//getters
+	
 	/**
 	 * Get the table number of the table
 	 * @return Table number of the table
 	 */
-	public int getTableNo() {return tableNo;}
+	public int getTableNo() {
+		return tableNo;
+	}
+	
 	/**
 	 * Get the number of seats available in the table
 	 * @return Number of seats available in the table
 	 */
-	public int getNumOfSeats() {return numOfSeats;}
+	public int getNumOfSeats() {
+		return numOfSeats;
+	}
+	
 	/**
 	 * Get the customer assigned to table
 	 * @return Customer assigned to table, null if table is free
 	 */
-	public Customer getCustomer() {return customer;}
+	public Customer getCustomer() {
+		return customer;
+	}
+	
 	/**
 	 * Get the array list of time slots
 	 * @return Array list of time slots
 	 */
-	public ArrayList<TimeSlot> getTimeSlots() {return timeSlots;}
-	
-	//remove expired reservations
-	/**
-	 * Remove expired time slots
-	 */
-	private void removeExpired() {
-		for (TimeSlot ts : timeSlots) {
-			if (!ts.getReservationList().isEmpty()) {
-				for (Reservation res : ts.getReservationList()) {
-					//if current date > book date, remove reservation
-					if (LocalDate.now().compareTo(res.getDate()) > 0) {
-						System.out.println("Reservation Expired for Customer: " + res.getCustomer().getName());
-						System.out.println("Book Date: " + res.getDate() + ", Book Time: " + res.getStartTime());
-						System.out.println("Current Date: " + LocalDate.now() + ", Current Time: " + LocalTime.now());
-						ts.removeReservation(res.getDate());
-						return;
-					} else if (LocalDate.now().equals(res.getDate())) {
-						//if late 10 minutes after book time, remove reservation
-						if (Duration.between(res.getStartTime(), LocalTime.now()).toMinutes() >= 10) {
-							System.out.println("Reservation Expired for Customer: " + res.getCustomer().getName());
-							System.out.println("Book Date: " + res.getDate() + ", Book Time: " + res.getStartTime());
-							System.out.println("Current Date: " + LocalDate.now() + ", Current Time: " + LocalTime.now());
-							ts.removeReservation(res.getDate());
-							return;
-						}
-					}
-				}
-			}
-		}
+	public ArrayList<TimeSlot> getTimeSlots() {
+		return timeSlots;
 	}
 	
-	//assign and unAssign
+	//methods
+	
+	/**
+	 * Print the booking status for the table
+	 * @param date Date of the booking status to be printed
+	 */
+	public void printTableStatus(LocalDate date) {
+		//remove all expired reservations
+		removeExpired();
+		
+		System.out.println("Table " + tableNo + " (" + numOfSeats + " Max Seats)");
+		System.out.println("Current Time: " + LocalTime.now());
+		System.out.println("Availability: " + (customer != null ? "Occupied by " + customer.getName() : "Unoccupied"));
+		System.out.println("--------------------");
+		System.out.println("Bookings for Table " + tableNo + " on " + date);
+		for (TimeSlot ts : timeSlots) {
+			boolean booked = false;
+			if (!ts.getReservationList().isEmpty()) {
+				for (Reservation res : ts.getReservationList()) {
+					if (res.getDate().equals(date)) {
+						System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is BOOKED" + 
+								", Name: " + res.getCustomer().getName() + 
+								", Contact Number: " + res.getCustomer().getContactNo());
+						booked = true;
+						break;
+					}
+				} 
+			}
+			if (!booked) System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is FREE");
+		}
+		System.out.println("--------------------");
+	}
+	
 	/**
 	 * Assign a customer to the table
 	 * @param customer Customer to be assigned the table
@@ -191,38 +209,6 @@ public class Table {
 	}
 	
 	/**
-	 * Print the booking status for the table
-	 * @param date Date of the booking status to be printed
-	 */
-	public void printTableStatus(LocalDate date) {
-		//remove all expired reservations
-		removeExpired();
-		
-		System.out.println("Table " + tableNo + " (" + numOfSeats + " Max Seats)");
-		System.out.println("Current Time: " + LocalTime.now());
-		System.out.println("Availability: " + (customer != null ? "Occupied by " + customer.getName() : "Unoccupied"));
-		System.out.println("--------------------");
-		System.out.println("Bookings for Table " + tableNo + " on " + date);
-		for (TimeSlot ts : timeSlots) {
-			boolean booked = false;
-			if (!ts.getReservationList().isEmpty()) {
-				for (Reservation res : ts.getReservationList()) {
-					if (res.getDate().equals(date)) {
-						System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is BOOKED" + 
-								", Name: " + res.getCustomer().getName() + 
-								", Contact Number: " + res.getCustomer().getContactNo());
-						booked = true;
-						break;
-					}
-				} 
-			}
-			if (!booked) System.out.println(ts.getStartTime() + " to " + ts.getEndTime() + " is FREE");
-		}
-		System.out.println("--------------------");
-	}
-	
-	//book slot & free slot
-	/**
 	 * Book a time slot for the table
 	 * @param reservation Reservation booked for the table
 	 * @return TRUE if time slot booked for the table
@@ -284,5 +270,34 @@ public class Table {
 		}
 		System.out.println("Time Slot not found, please choose another start time");
 		return;
+	}
+	
+	/**
+	 * Remove expired time slots
+	 */
+	private void removeExpired() {
+		for (TimeSlot ts : timeSlots) {
+			if (!ts.getReservationList().isEmpty()) {
+				for (Reservation res : ts.getReservationList()) {
+					//if current date > book date, remove reservation
+					if (LocalDate.now().compareTo(res.getDate()) > 0) {
+						System.out.println("Reservation Expired for Customer: " + res.getCustomer().getName());
+						System.out.println("Book Date: " + res.getDate() + ", Book Time: " + res.getStartTime());
+						System.out.println("Current Date: " + LocalDate.now() + ", Current Time: " + LocalTime.now());
+						ts.removeReservation(res.getDate());
+						return;
+					} else if (LocalDate.now().equals(res.getDate())) {
+						//if late 10 minutes after book time, remove reservation
+						if (Duration.between(res.getStartTime(), LocalTime.now()).toMinutes() >= 10) {
+							System.out.println("Reservation Expired for Customer: " + res.getCustomer().getName());
+							System.out.println("Book Date: " + res.getDate() + ", Book Time: " + res.getStartTime());
+							System.out.println("Current Date: " + LocalDate.now() + ", Current Time: " + LocalTime.now());
+							ts.removeReservation(res.getDate());
+							return;
+						}
+					}
+				}
+			}
+		}
 	}
 }

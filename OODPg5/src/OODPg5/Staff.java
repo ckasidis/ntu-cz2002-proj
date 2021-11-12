@@ -8,26 +8,32 @@ import java.util.Scanner;
  *
  */
 public class Staff {
+	Scanner sc = new Scanner(System.in);
+	
 	static int ID = 0;
+	
 	/**
 	 * Name of the staff
 	 */
 	private String name;
+	
 	/**
 	 * Gender of the staff
 	 */
 	private char gender;
+	
 	/**
 	 * Employee ID of the staff
 	 */
 	private int employeeID;
+	
 	/**
 	 * Job Title of the staff
 	 */
 	private String jobTitle;
 	
-	Scanner sc = new Scanner(System.in);
-	//Constructors
+	//constructors
+	
 	/**
 	 * Creates a staff of the restaurant with user inputs of name, gender and job title
 	 */
@@ -60,7 +66,8 @@ public class Staff {
 		employeeID = ID++;
 	}
 
-	//Getters and Setters
+	//getters
+	
 	/**
 	 * Get the name of the staff
 	 * @return Name of the staff

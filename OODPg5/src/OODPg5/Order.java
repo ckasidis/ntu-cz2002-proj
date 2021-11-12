@@ -12,39 +12,47 @@ import java.util.Scanner;
  *
  */
 public class Order {
+	Scanner sc = new Scanner(System.in);
+	
 	static int checkNo =1;
+	
 	/**
 	 * Array list of items ordered
 	 */
 	private ArrayList<MenuItem> orderItem = new ArrayList<MenuItem>();
+	
 	/**
 	 * Customer that placed the order
 	 */
 	private Customer customer;
+	
 	/**
 	 * Staff facilitating the order
 	 */
 	private Staff staff;
+	
 	/**
 	 * Table number of table assigned for the order
 	 */
 	private int table_no;
+	
 	/**
 	 * Check number of the order
 	 */
 	private int cNumber;
+	
 	/**
 	 * Total to be paid by customer
 	 */
 	private double finalPrice;
+	
 	/**
 	 * Date of order placed
 	 */
 	private LocalDate date;
 	
-//An order should indicate the staff who created the order.
-//Order invoice can be printed to list the order details (eg, table number, timestamp)
-//	and a complete breakdown of order items details with taxes details.
+	//constructors
+	
 	/**
 	 * Create an empty order
 	 * @param tableNo Table number of table assigned for the order
@@ -56,6 +64,7 @@ public class Order {
 		finalPrice =0;
 		date = LocalDate.now();
 	}
+	
 	/**
 	 * Create an order
 	 * @param customer Customer that placed the order
@@ -70,22 +79,9 @@ public class Order {
 		finalPrice =0;
 		date = LocalDate.now();
 	}
-	/**
-	 * Add item to the list of order items
-	 * @param mi Item to be added into the order
-	 */
-	public void addOrder(MenuItem mi) {
-		orderItem.add(mi);
-		sort(orderItem);		
-	}
-	
-	/**
-	 * Get the date of order placed
-	 * @return Date of order placed
-	 */
-	public LocalDate getDate() {
-		return date;
-	}
+
+	//getters
+
 	/**
 	 * Get the customer from order
 	 * @return Customer from order
@@ -93,6 +89,7 @@ public class Order {
 	public Customer getCustomer() {
 		return customer;
 	}
+	
 	/**
 	 * Get the table number of table assigned for the order
 	 * @return Table number of table assigned for the order
@@ -100,6 +97,7 @@ public class Order {
 	public int getTableNum() {
 		return table_no;
 	}
+	
 	/**
 	 * Get the check number of the order
 	 * @return Check number of the order
@@ -115,6 +113,26 @@ public class Order {
 	public double getfinalPrice() {
 		return finalPrice;
 	}
+	
+	/**
+	 * Get the date of order placed
+	 * @return Date of order placed
+	 */
+	public LocalDate getDate() {
+		return date;
+	}
+	
+	//methods
+	
+	/**
+	 * Add item to the list of order items
+	 * @param mi Item to be added into the order
+	 */
+	public void addOrder(MenuItem mi) {
+		orderItem.add(mi);
+		sort(orderItem);		
+	}
+	
 	/**
 	 * Add menu item to the order list
 	 * @param mi Menu item to be added
@@ -129,14 +147,13 @@ public class Order {
 	 * @param mi Item to be removed from the order
 	 */
 	public void removeOrderItem() {
-		Scanner s = new Scanner(System.in);
 		int temp =1;
 		for(MenuItem oi: orderItem) {
 			System.out.printf("Order #%d:  %s \t %.2f\n",temp++,oi.getName(),oi.getPrice());
 		}
 		System.out.println("Enter order number of item to remove");
-		if(s.hasNextInt()) {
-			int itemIndex = s.nextInt();
+		if(sc.hasNextInt()) {
+			int itemIndex = sc.nextInt();
 			if(itemIndex < 1 || itemIndex > orderItem.size()) {
 				System.out.println("Item not in menu.");
 				return;
@@ -145,7 +162,7 @@ public class Order {
 		}
 		else {
 			System.out.println("Enter an integer!!!");
-			s.next();
+			sc.next();
 			return;
 		}
 	}
@@ -173,26 +190,6 @@ public class Order {
 		}
 		price = price+ orderItem.get(i-1).getPrice();
 		System.out.printf("Order #%d: %d %-15s    $%3.2f\n",temp++,count,orderItem.get(i-1).getName(),price);
-	}
-	
-	/**
-	 * Sort the items in the list 
-	 * @param menuItemList List of items
-	 */
-	private void sort(ArrayList<MenuItem> menuItemList) {
-		int prev=0;
-		if(menuItemList.size()<=1) return;
-		String order;
-		for (int i=0;i<menuItemList.size()-1;i=prev) {
-			order = menuItemList.get(i).getName();
-			prev = i+1;
-			for (int j=i+1; j<menuItemList.size();j++) {
-				if(order == menuItemList.get(j).getName()) {
-					Collections.swap(menuItemList, prev, j);
-					prev++;
-				}
-			  }
-		}
 	}
 	
 	/**
@@ -237,4 +234,24 @@ public class Order {
 		System.out.println("*****************************************");
 	}
 
+	/**
+	 * Sort the items in the list 
+	 * @param menuItemList List of items
+	 */
+	private void sort(ArrayList<MenuItem> menuItemList) {
+		int prev=0;
+		if(menuItemList.size()<=1) return;
+		String order;
+		for (int i=0;i<menuItemList.size()-1;i=prev) {
+			order = menuItemList.get(i).getName();
+			prev = i+1;
+			for (int j=i+1; j<menuItemList.size();j++) {
+				if(order == menuItemList.get(j).getName()) {
+					Collections.swap(menuItemList, prev, j);
+					prev++;
+				}
+			  }
+		}
+	}
+	
 }

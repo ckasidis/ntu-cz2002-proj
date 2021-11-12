@@ -9,11 +9,15 @@ import java.util.Collections;
  *
  */
 public class Menu {
+	Scanner sc = new Scanner(System.in);
+	
 	/**
 	 * Array list of the items in the menu
 	 */
 	ArrayList<MenuItem> menuItem;
-	Scanner sc = new Scanner(System.in);
+	
+	//constructors
+	
 	/**
 	 * Creates a menu
 	 */
@@ -21,42 +25,8 @@ public class Menu {
 		menuItem = new ArrayList<MenuItem>();
 	}
 	
-	/**
-	 * Options to edit the menu:
-	 * Remove or update menu item
-	 */
-	public void editMenu() {
-		System.out.println("Enter item number:");
-		int num = sc.nextInt();
-		if (num < 1 || num > menuItem.size()) {
-			System.out.println("Item not found");
-			return;
-		}
-		System.out.println("======= SELECT CHOICE =======\n(1)Remove item  (2)Update details");
-		if(sc.hasNextInt()) {
-			int choice = sc.nextInt();
-			switch(choice) {
-			case 1:
-				removeMenuItem(num);
-				return;
-			case 2:
-				if(menuItem.get(num-1).getItemType() != TypeOfItem.SET)
-					updateMenuItem(num);
-				else
-					updatePromotionSet(num);
-				return;
-			case 3:
-				return;
-			default:
-				System.out.println("Invalid entry!");
-				return;		
-			}
-		}
-		else {
-			System.out.println("Enter an integer!!!");
-			sc.next();
-		}
-	}
+	//methods
+	
 	public MenuItem getMenuItem() {
 		System.out.println("Enter item number:");
 		while(!sc.hasNextInt()){
@@ -73,7 +43,8 @@ public class Menu {
 		}
 		return menuItem.get(item-1).toOrder();
 		
-	}
+	}	
+	
 	/**
 	 * Create a menu item using user input of type, name, price and description
 	 */
@@ -123,6 +94,125 @@ public class Menu {
 			if(choice>0 && choice<4) {
 				sort(menuItem);
 				System.out.println("Item successfully created!");
+			}
+		}
+		else {
+			System.out.println("Enter an integer!!!");
+			sc.next();
+		}
+	}
+	
+	/**
+	 * Create a promotional set of existing menu items
+	 */
+	public void createPromotionSet() {
+		if (menuItem.size() < 1) {
+			System.out.println("Menu Empty! Cannot create a set item");
+			return;
+		}
+		int itemIndex;
+		String description;
+		boolean adding =true;
+		System.out.println("====== CREATE PROMOTIONAL SET ======");
+		System.out.println("Set name: ");
+		String name = sc.nextLine();
+		System.out.print("Price of Set: \n$");
+		while(!sc.hasNextDouble()){
+			System.out.println("Enter a double!!!");
+			sc.next();
+		}
+		double price = sc.nextDouble();
+		ArrayList<MenuItem> setItem = new ArrayList<MenuItem>();
+		showMenuItems(false);
+		while(adding) {
+			System.out.println("Enter item to add to set (Enter -1 to quit): ");
+			while(!sc.hasNextInt()){
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
+			if((itemIndex = sc.nextInt())== -1) break;
+			itemIndex--;
+			if(itemIndex < 0 || itemIndex > menuItem.size() - 1 ) {
+				System.out.println("Not added!Please choose from within menu.");
+				continue;
+			}
+			 if(menuItem.get(itemIndex).getItemType()== TypeOfItem.SET){
+				 System.out.println("Not added! Sets cannot be added to sets.");
+				 continue;
+			 }
+			setItem.add(menuItem.get(itemIndex));
+		}
+		sort(setItem);
+		sc.nextLine();
+		if(setItem.size()<=1) {
+			System.out.println("Set not created! Sets need more than 1 item.");
+			return;
+		}
+		System.out.println("Description of Promotional set: ");
+		description = sc.nextLine();
+		menuItem.add(new Set(name, price, description,setItem));
+		System.out.println("Promotional Set succesfully created!");
+	}
+
+	/**
+	 * Show items in the menu
+	 * @param showSets If TRUE, sets in the menu are shown
+	 */
+	public void showMenuItems(boolean showSets) {
+		int i,j=0;
+		System.out.println("\n\t======= RESTAURANT MENU =======\n");
+		System.out.print("DRINKS: \n");
+		TypeOfItem item = TypeOfItem.values()[j];
+		for(i=0;i<menuItem.size();i++) {
+			if(!showSets && menuItem.get(i).getItemType() == TypeOfItem.SET) continue;
+			while(menuItem.get(i).getItemType() != item) {
+				item = TypeOfItem.values()[++j];
+				System.out.printf("\n%sS: \n",item);
+			}
+			
+			System.out.printf("Item %d: %s, $%.2f: ",i+1,menuItem.get(i).getName(),menuItem.get(i).getPrice());
+			menuItem.get(i).printDescription();
+			System.out.println();
+		}
+		for (TypeOfItem item1 : TypeOfItem.values()) {
+			item= item1;
+		}
+		while(item != TypeOfItem.values()[j]) {
+			if(!showSets && menuItem.get(i-1).getItemType() == TypeOfItem.SET) {++j;continue;}
+			System.out.printf("\n%sS: \n",TypeOfItem.values()[++j]);
+		}
+		System.out.println("\n\t================================\n");
+	}
+
+	/**
+	 * Options to edit the menu:
+	 * Remove or update menu item
+	 */
+	public void editMenu() {
+		System.out.println("Enter item number:");
+		int num = sc.nextInt();
+		if (num < 1 || num > menuItem.size()) {
+			System.out.println("Item not found");
+			return;
+		}
+		System.out.println("======= SELECT CHOICE =======\n(1)Remove item  (2)Update details");
+		if(sc.hasNextInt()) {
+			int choice = sc.nextInt();
+			switch(choice) {
+			case 1:
+				removeMenuItem(num);
+				return;
+			case 2:
+				if(menuItem.get(num-1).getItemType() != TypeOfItem.SET)
+					updateMenuItem(num);
+				else
+					updatePromotionSet(num);
+				return;
+			case 3:
+				return;
+			default:
+				System.out.println("Invalid entry!");
+				return;		
 			}
 		}
 		else {
@@ -188,65 +278,12 @@ public class Menu {
 			}
 		}
 	}
-
-	/**
-	 * Create a promotional set of existing menu items
-	 */
-	public void createPromotionSet() {
-		if (menuItem.size() < 1) {
-			System.out.println("Menu Empty! Cannot create a set item");
-			return;
-		}
-		int itemIndex;
-		String description;
-		boolean adding =true;
-		System.out.println("====== CREATE PROMOTIONAL SET ======");
-		System.out.println("Set name: ");
-		String name = sc.nextLine();
-		System.out.print("Price of Set: \n$");
-		while(!sc.hasNextDouble()){
-			System.out.println("Enter a double!!!");
-			sc.next();
-		}
-		double price = sc.nextDouble();
-		ArrayList<MenuItem> setItem = new ArrayList<MenuItem>();
-		showMenuItems(false);
-		while(adding) {
-			System.out.println("Enter item to add to set (Enter -1 to quit): ");
-			while(!sc.hasNextInt()){
-				System.out.println("Enter an integer!!!");
-				sc.next();
-			}
-			if((itemIndex = sc.nextInt())== -1) break;
-			itemIndex--;
-			if(itemIndex < 0 || itemIndex > menuItem.size() - 1 ) {
-				System.out.println("Not added!Please choose from within menu.");
-				continue;
-			}
-			 if(menuItem.get(itemIndex).getItemType()== TypeOfItem.SET){
-				 System.out.println("Not added! Sets cannot be added to sets.");
-				 continue;
-			 }
-			setItem.add(menuItem.get(itemIndex));
-		}
-		sort(setItem);
-		sc.nextLine();
-		if(setItem.size()<=1) {
-			System.out.println("Set not created! Sets need more than 1 item.");
-			return;
-		}
-		System.out.println("Description of Promotional set: ");
-		description = sc.nextLine();
-		menuItem.add(new Set(name, price, description,setItem));
-		System.out.println("Promotional Set succesfully created!");
-	}
 	
 	/**
 	 * Update name, price, description and items in the promotional set
 	 * @param itemIndex
 	 */
 	private void updatePromotionSet(int itemIndex) {
-		
 		--itemIndex;
 		if(itemIndex < 0 || itemIndex > menuItem.size() - 1) {
 			System.out.println("Promotional set not in menu.");
@@ -323,36 +360,6 @@ public class Menu {
 			}
 		}	
 }
-	/**
-	 * Show items in the menu
-	 * @param showSets If TRUE, sets in the menu are shown
-	 */
-	public void showMenuItems(boolean showSets) {
-		
-		int i,j=0;
-		System.out.println("\n\t======= RESTAURANT MENU =======\n");
-		System.out.print("DRINKS: \n");
-		TypeOfItem item = TypeOfItem.values()[j];
-		for(i=0;i<menuItem.size();i++) {
-			if(!showSets && menuItem.get(i).getItemType() == TypeOfItem.SET) continue;
-			while(menuItem.get(i).getItemType() != item) {
-				item = TypeOfItem.values()[++j];
-				System.out.printf("\n%sS: \n",item);
-			}
-			
-			System.out.printf("Item %d: %s, $%.2f: ",i+1,menuItem.get(i).getName(),menuItem.get(i).getPrice());
-			menuItem.get(i).printDescription();
-			System.out.println();
-		}
-		for (TypeOfItem item1 : TypeOfItem.values()) {
-			item= item1;
-		}
-		while(item != TypeOfItem.values()[j]) {
-			if(!showSets && menuItem.get(i-1).getItemType() == TypeOfItem.SET) {++j;continue;}
-			System.out.printf("\n%sS: \n",TypeOfItem.values()[++j]);
-		}
-		System.out.println("\n\t================================\n");
-	}
 	
 	/**
 	 * Sorts the items in menu according to item type

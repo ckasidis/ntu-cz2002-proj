@@ -12,20 +12,24 @@ public class Reservation {
 	 * Customer of the restaurant
 	 */
 	private Customer customer;
+	
 	/**
 	 * Starting time of the reservation
 	 */
 	private LocalTime startTime;
+	
 	/**
 	 * Date of the reservation
 	 */
 	private LocalDate date;
+	
 	/**
 	 * Number of persons reservation is booked for
 	 */
 	private int numOfPax;
 	
 	//constructor
+	
 	/**
 	 * Creates a reservation
 	 * @param customer Customer booking the reservation
@@ -41,6 +45,7 @@ public class Reservation {
 	}
 
 	//getters
+	
 	/**
 	 * Get the customer booking the reservation
 	 * @return Customer booking the reservation
@@ -56,13 +61,7 @@ public class Reservation {
 	public LocalTime getStartTime() {
 		return startTime;
 	}
-	/**
-	 * Get the number of persons reservation is booked for
-	 * @return Number of persons reservation is booked for
-	 */
-	public int getNumOfPax() {
-		return numOfPax;
-	}
+	
 	/**
 	 * Get the date of the reservation
 	 * @return Date of the reservation
@@ -70,4 +69,13 @@ public class Reservation {
 	public LocalDate getDate() {
 		return date;
 	}
+	
+	/**
+	 * Get the number of persons reservation is booked for
+	 * @return Number of persons reservation is booked for
+	 */
+	public int getNumOfPax() {
+		return numOfPax;
+	}
+
 }

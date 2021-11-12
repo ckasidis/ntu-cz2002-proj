@@ -8,6 +8,7 @@ import java.util.Scanner;
  *
  */
 public class Customer {
+	Scanner sc = new Scanner(System.in);
 	/**
 	 * Name of the customer
 	 */
@@ -25,8 +26,7 @@ public class Customer {
 	/**
 	 * Creates a customer with user input of name, contact number and discount
 	 */
-	Customer(){//constructor
-		Scanner sc = new Scanner(System.in);
+	Customer() {//constructor
 		
 		System.out.println("Enter name of customer:");//get name and contacts for customer
 		name = sc.nextLine();

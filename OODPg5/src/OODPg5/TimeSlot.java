@@ -26,7 +26,8 @@ public class TimeSlot {
 	 */
 	private ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
 	
-	//constructor
+	//constructors
+	
 	/**
 	 * Creates a time slot
 	 * 
@@ -39,6 +40,7 @@ public class TimeSlot {
 	}
 	
 	//getters
+	
 	/**
 	 * Get the starting time of the time slot
 	 * @return Starting time of the time slot
@@ -61,9 +63,10 @@ public class TimeSlot {
 	 */
 	public ArrayList<Reservation> getReservationList() {
 		return reservationList;
-	} //
+	}
 	
-	//add reservation
+	//methods
+	
 	/**
 	 * Add new reservation to the list of reservations
 	 * @param reservation New reservation to be added
@@ -72,7 +75,6 @@ public class TimeSlot {
 		reservationList.add(reservation);
 	}
 	
-	//remove reservation
 	/**
 	 * Remove the reservation on specified date from the list of reservations
 	 * @param date Date of reservation to be removed

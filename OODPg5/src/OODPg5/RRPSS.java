@@ -9,13 +9,12 @@ import java.util.ArrayList;
  *
  */
 public class RRPSS {
+	static Scanner sc = new Scanner(System.in);
 	/**
 	 * User interface for RRPSS
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		
+	public static void main(String[] args) {	
 		Menu menu = new  Menu();
 		ArrayList<Table> tableList = new ArrayList<Table>();
 		TableManager tables = new TableManager(tableList);

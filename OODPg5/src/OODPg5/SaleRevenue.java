@@ -14,6 +14,8 @@ public class SaleRevenue {
 	 */
 	private ArrayList<ArrayList<Order>> year = new ArrayList<ArrayList<Order>>();
 	
+	//constructors
+	
 	/**
 	 * Creates a nested array list to record sales revenue of restaurant for up to a year
 	 */
@@ -23,6 +25,8 @@ public class SaleRevenue {
 			year.add(new ArrayList<Order>());
 		}
 	}
+
+	//methods
 	
 	/**
 	 * Record an order placed as part of the year's sales revenue

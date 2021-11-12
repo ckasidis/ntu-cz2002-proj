@@ -12,147 +12,10 @@ import java.time.format.DateTimeParseException;
  */
 public class RestaurantManager {
 	static Scanner sc = new Scanner(System.in);
+	
 	private static final boolean showSet = true;
-	/**
-	 * Create, display and edit the menu of the restaurant
-	 * @param menu Menu of the restaurant
-	 */
-	private static void showMenu(Menu menu) {
-		int c;
-		
-			while(true) {
-				menu.showMenuItems(showSet);
-				System.out.println("1: Create menu item");
-				System.out.println("2: Create promotion set");
-				System.out.println("3: Edit menu item");
-				System.out.println("4: return");
-				if(sc.hasNextInt()) {
-					c = sc.nextInt();
-					switch(c){
-						case 1:	
-							menu.createMenuItem(); 
-							break;
-						case 2: 
-							menu.createPromotionSet();
-							break;
-						case 3:
-							menu.editMenu();
-							break;
-						case 4:return;
-						default: System.out.println("invalid entry");break;
-					}
-				}
-				else {
-					System.out.println("Enter an integer!!!");
-					sc.next();
-				}
-		}
-
-	}
-	/**
-	 * Update the order placed by the customer in the restaurant
-	 * @param menu Menu of the restaurant
-	 * @param order Order placed by the customer
-	 */
-	public static void  updateOrder(Menu menu,Order order) {
-			while(true) {
-				order.viewOrder();
-				System.out.println("======= SELECT CHOICE =======\n(1)add item to order (2)Remove item from order (3)Return");
-				if(sc.hasNextInt()) {
-					int c = sc.nextInt();
-					switch(c) {
-						case 1:
-								menu.showMenuItems(showSet);
-								System.out.println("Choose item to add to order");
-								order.addOrderItem(menu.getMenuItem());
-								break;
-						case 2:
-								menu.showMenuItems(showSet);
-								System.out.println("Choose item to remove from order");
-								order.removeOrderItem();
-								break;
-						case 3:return;
-						default:System.out.println("Invalid option!");
-					}
-			}
-			else {
-				System.out.println("Enter an integer!!!");
-				sc.next();
-			}
-		}
-	}
-		/**
-		 * Print sales revenue of the restaurant for a day, a month or a year
-		 * @param sales Sale revenue record of the restaurant
-		 */
-		public static void printSalesRevenue(SaleRevenue sales) {
-
-		int c;
-
-		LocalDate ld;
-		DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MMM/yyyy"); ;
-		String inputDate;
-		int inputMnth;
-		
-			while(true) {
-				System.out.printf("========= SELECT OPTION =========\n(1)Print today  (2)Print this month  (3)Print whole year  (4)Select a day  (5)Select a Month  (6)Quit\n");
-				System.out.println("Records up to 1 year");
-				if(sc.hasNextInt()) {
-					c = sc.nextInt();
-					switch(c) {
-						case 1: sales.printSalesRevenueDay(LocalDate.now());
-								return;
-						case 2:	sales.printSalesRevenueMonth(LocalDate.now().getMonthValue());
-								return;
-						case 3:	sales.printSalesRevenueYear();
-								return;
-						case 4:	
-								sc.nextLine();
-								System.out.println("Enter Date (eg 11/Jan/2001):");
-								inputDate = sc.nextLine();
-								try 
-									{
-									    ld = LocalDate.parse(inputDate,f) ;
-									    sales.printSalesRevenueDay(ld);
-									}
-								catch ( DateTimeParseException e )
-								{
-								   System.out.println("Enter a valid date(eg 11/Jan/2001)!!");
-								}
-								return;
-						case 5:
-								System.out.println("Enter Month (1-12):");
-								while(!sc.hasNextInt()){
-									System.out.println("Enter an integer!!!");
-									sc.next();
-								}
-								while ((inputMnth = sc.nextInt()) < 1 || inputMnth > 12) {
-									System.out.println("Please enter an integer between 1-12");
-									while(!sc.hasNextInt()){
-										System.out.println("Enter an integer!!!");
-										sc.next();
-									}
-								}
-								try 
-									{
-									    ;
-									    sales.printSalesRevenueMonth(inputMnth);
-									}
-								catch ( DateTimeParseException e )
-								{
-								   System.out.println("Enter Date (eg 11/Jan/2001):");
-								}
-								return;
-						case 6: return;
-						default: System.out.println("Invalid Input!");
-					}
-				}
-				else {
-					System.out.println("Enter an integer!!!");
-					sc.next();
-				}
-			}
-		}
+	
+	//methods
 	
 	/**
 	 * Allows user to operate the RRPSS of the restaurant
@@ -285,4 +148,148 @@ public class RestaurantManager {
 			start(menu, tables, sales, staffs);
 		}
 	}
+
+	/**
+	 * Update the order placed by the customer in the restaurant
+	 * @param menu Menu of the restaurant
+	 * @param order Order placed by the customer
+	 */
+	public static void  updateOrder(Menu menu,Order order) {
+			while(true) {
+				order.viewOrder();
+				System.out.println("======= SELECT CHOICE =======\n(1)add item to order (2)Remove item from order (3)Return");
+				if(sc.hasNextInt()) {
+					int c = sc.nextInt();
+					switch(c) {
+						case 1:
+								menu.showMenuItems(showSet);
+								System.out.println("Choose item to add to order");
+								order.addOrderItem(menu.getMenuItem());
+								break;
+						case 2:
+								menu.showMenuItems(showSet);
+								System.out.println("Choose item to remove from order");
+								order.removeOrderItem();
+								break;
+						case 3:return;
+						default:System.out.println("Invalid option!");
+					}
+			}
+			else {
+				System.out.println("Enter an integer!!!");
+				sc.next();
+			}
+		}
+	}
+	
+	/**
+	 * Create, display and edit the menu of the restaurant
+	 * @param menu Menu of the restaurant
+	 */
+	private static void showMenu(Menu menu) {
+		int c;
+		
+			while(true) {
+				menu.showMenuItems(showSet);
+				System.out.println("1: Create menu item");
+				System.out.println("2: Create promotion set");
+				System.out.println("3: Edit menu item");
+				System.out.println("4: return");
+				if(sc.hasNextInt()) {
+					c = sc.nextInt();
+					switch(c){
+						case 1:	
+							menu.createMenuItem(); 
+							break;
+						case 2: 
+							menu.createPromotionSet();
+							break;
+						case 3:
+							menu.editMenu();
+							break;
+						case 4:return;
+						default: System.out.println("invalid entry");break;
+					}
+				}
+				else {
+					System.out.println("Enter an integer!!!");
+					sc.next();
+				}
+		}
+
+	}
+	
+	/**
+	 * Print sales revenue of the restaurant for a day, a month or a year
+	 * @param sales Sale revenue record of the restaurant
+	 */
+	private static void printSalesRevenue(SaleRevenue sales) {
+
+		int c;
+
+		LocalDate ld;
+		DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MMM/yyyy"); ;
+		String inputDate;
+		int inputMnth;
+		
+			while(true) {
+				System.out.printf("========= SELECT OPTION =========\n(1)Print today  (2)Print this month  (3)Print whole year  (4)Select a day  (5)Select a Month  (6)Quit\n");
+				System.out.println("Records up to 1 year");
+				if(sc.hasNextInt()) {
+					c = sc.nextInt();
+					switch(c) {
+						case 1: sales.printSalesRevenueDay(LocalDate.now());
+								return;
+						case 2:	sales.printSalesRevenueMonth(LocalDate.now().getMonthValue());
+								return;
+						case 3:	sales.printSalesRevenueYear();
+								return;
+						case 4:	
+								sc.nextLine();
+								System.out.println("Enter Date (eg 11/Jan/2001):");
+								inputDate = sc.nextLine();
+								try 
+									{
+									    ld = LocalDate.parse(inputDate,f) ;
+									    sales.printSalesRevenueDay(ld);
+									}
+								catch ( DateTimeParseException e )
+								{
+								   System.out.println("Enter a valid date(eg 11/Jan/2001)!!");
+								}
+								return;
+						case 5:
+								System.out.println("Enter Month (1-12):");
+								while(!sc.hasNextInt()){
+									System.out.println("Enter an integer!!!");
+									sc.next();
+								}
+								while ((inputMnth = sc.nextInt()) < 1 || inputMnth > 12) {
+									System.out.println("Please enter an integer between 1-12");
+									while(!sc.hasNextInt()){
+										System.out.println("Enter an integer!!!");
+										sc.next();
+									}
+								}
+								try 
+									{
+									    ;
+									    sales.printSalesRevenueMonth(inputMnth);
+									}
+								catch ( DateTimeParseException e )
+								{
+								   System.out.println("Enter Date (eg 11/Jan/2001):");
+								}
+								return;
+						case 6: return;
+						default: System.out.println("Invalid Input!");
+					}
+				}
+				else {
+					System.out.println("Enter an integer!!!");
+					sc.next();
+				}
+			}
+		}
+	
 }
