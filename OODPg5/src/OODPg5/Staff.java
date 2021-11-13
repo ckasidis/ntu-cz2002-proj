@@ -63,9 +63,9 @@ public class Staff {
 	 * Creates a staff of the restaurant
 	 * @param name Name of the staff
 	 * @param gender Gender of the staff
-	 * @param employeeID Employee ID of the staff
 	 * @param jobTitle Job title of the staff
 	 */
+	
 	public Staff(String name, char gender, String jobTitle) {
 		this.name  = name;
 		this.gender = gender;
