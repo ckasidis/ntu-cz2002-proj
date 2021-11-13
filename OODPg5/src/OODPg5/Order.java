@@ -12,8 +12,13 @@ import java.util.Scanner;
  *
  */
 public class Order {
+	/**
+	 * Scanner to scan user input
+	 */
 	Scanner sc = new Scanner(System.in);
-	
+	/**
+	 * Initialized check number of the order
+	 */
 	static int checkNo =1;
 	
 	/**

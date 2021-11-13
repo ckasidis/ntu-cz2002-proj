@@ -30,7 +30,7 @@ public class RestaurantManager {
 	 * Allows user to operate the RRPSS of the restaurant
 	 * @param menu Menu of the restaurant
 	 * @param tables Tables in the restaurant
-	 * @param SalesRecord Array list of orders placed in the restaurant
+	 * @param sales Array list of orders placed in the restaurant
 	 * @param staffs Array list of staffs working at the restaurant
 	 */
 	public static void start(Menu menu, TableManager tables, SaleRevenue sales, ArrayList<Staff> staffs) {

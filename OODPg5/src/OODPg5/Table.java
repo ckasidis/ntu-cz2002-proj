@@ -45,11 +45,11 @@ public class Table {
 	 * Creates a table in the restaurant.
 	 * 1 hour time slots available for the table from 1100 to 2200
 	 * 
-	 * @param TableNo Table number of the table
+	 * @param tableNo Table number of the table
 	 * @param numOfSeats Number of seats available in the table
 	 */
-	public Table(int TableNo, int numOfSeats) {
-		this.tableNo = TableNo;
+	public Table(int tableNo, int numOfSeats) {
+		this.tableNo = tableNo;
 		this.numOfSeats = numOfSeats;
 		this.customer = null;
 		
