@@ -101,7 +101,7 @@ public class Table {
 	//methods
 	
 	/**
-	 * Print the booking status for the table
+	 * Print the availability and booking status of the table
 	 * @param date Date of the booking status to be printed
 	 */
 	public void printTableStatus(LocalDate date) {
@@ -132,7 +132,10 @@ public class Table {
 	}
 	
 	/**
-	 * Assign a customer to the table
+	 * Assign a customer to the table.<p>
+	 * Table only assigned for the customer with reservation if customer arrives within 10min of the start time.
+	 * Table only assigned for customer without reservation if customer arrives 20min before start time of current slot, 
+	 * the next slot is not booked and it is not the last slot.
 	 * @param customer Customer to be assigned the table
 	 * @return <code> true</code> if customer is assigned the table, <code>false</code> otherwise
 	 */
@@ -273,7 +276,7 @@ public class Table {
 	}
 	
 	/**
-	 * Remove expired time slots
+	 * Remove expired reservations for past date and if customer arrives 10 min after booked time
 	 */
 	private void removeExpired() {
 		for (TimeSlot ts : timeSlots) {

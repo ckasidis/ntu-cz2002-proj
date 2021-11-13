@@ -114,7 +114,7 @@ public class TableManager {
 	}
 	
 	/**
-	 * Assigns a free table with sufficient capacity to incoming customer with input number of persons.
+	 * Assigns a free table with just enough seats to incoming customer with user input of number of persons.
 	 * Customer is not assigned a table 40 minutes before closing time
 	 * @param cus Customer that table is to be assigned to
 	 * @return Table number of table assigned, -1 if no tables assigned
@@ -158,7 +158,7 @@ public class TableManager {
 	
 	
 	/**
-	 * Unassigns a Table with input table number 
+	 * Unassigns a Table with user input of table number 
 	 * and sets table free 
 	 * @return Table number of table unassigned, -1 if unassigning failed
 	 */

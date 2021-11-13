@@ -140,7 +140,7 @@ public class Order {
 	}
 
 	/**
-	 * Remove menu item from the list of order items
+	 * Remove menu item from the order list 
 	 * @param mi Menu item to be removed from the order
 	 */
 	public void removeOrderItem() {

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 /**
- * Represents the sales revenue of the restaurant
+ * Represents the sales revenue of the restaurant for up to a year
  * @author Group 5
  *
  */

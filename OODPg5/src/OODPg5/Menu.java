@@ -173,7 +173,7 @@ public class Menu {
 	}
 
 	/**
-	 * Show items in the menu
+	 * Show item number, name and price of items in the menu
 	 * @param showSets <code> true</code> if sets in the menu are to be shown, <code>false</code> if otherwise
 	 */
 	public void showMenuItems(boolean showSets) {
@@ -204,7 +204,7 @@ public class Menu {
 
 	/**
 	 * Allows user to edit the menu:
-	 * Remove or update items in the menu
+	 * Remove or update items in the menu with user input of item number
 	 */
 	public void editMenu() {
 		System.out.println("Enter item number:");

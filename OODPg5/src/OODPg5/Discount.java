@@ -1,6 +1,6 @@
 package OODPg5;
 /**
- * Represents a discount given to customer
+ * Represents a discount rate given to customer
  * @author Group 5
  *
  */
@@ -13,15 +13,15 @@ public class Discount{
 	//constructors
 	
 	/**
-	 * Creates a discount of 0.01
+	 * Creates a discount rate of 0.01
 	 */
 	public Discount() {
 		discount = 0.01;
 	}
 	
 	/**
-	 * Creates a discount to be given to customer
-	 * @param discount Discount to be given to customer
+	 * Creates a discount rate to be given to customer
+	 * @param discount Discount rate to be given to customer
 	 */
 	public Discount(double discount) {
 		this.discount = discount;
@@ -30,8 +30,8 @@ public class Discount{
 	//getters
 	
 	/**
-	 * Get the discount to be given to customer
-	 * @return Discount to be given to customer
+	 * Get the discount rate to be given to customer
+	 * @return Discount rate to be given to customer
 	 */
 	public double getDiscount() {
 		return discount;
@@ -40,8 +40,8 @@ public class Discount{
 	//setters
 	
 	/**
-	 * Set the discount to be given to customer
-	 * @param discount Discount to be given to customer
+	 * Set the discount rate to be given to customer
+	 * @param discount Discount rate to be given to customer
 	 */
 	public void setDiscount(double discount) {
 		this.discount = discount;

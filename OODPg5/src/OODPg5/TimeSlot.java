@@ -76,7 +76,7 @@ public class TimeSlot {
 	}
 	
 	/**
-	 * Remove the reservation on specified date from the list of reservations
+	 * Remove the reservations on specified date from the list of reservations
 	 * @param date Date of reservation to be removed
 	 */
 	public void removeReservation(LocalDate date) {

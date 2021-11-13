@@ -100,9 +100,9 @@ public class Customer {
 	}
 			
 	/**
-	 * Get the discount entitled to customer
+	 * Get the highest discount entitled to customer
 	 * @param price Original price
-	 * @return Discount entitled to customer
+	 * @return Highest discount entitled to customer
 	 */
 	public double getDiscount(double price) {
 		if(discount.size()==0) {
@@ -139,7 +139,7 @@ public class Customer {
 	}
 
 	/**
-	 * Set the discount entitled to customer
+	 * Add a discount rate to list of discounts entitled to customer
 	 * @param d Discount entitled to customer
 	 */
 	public void setDiscount(Discount d) {

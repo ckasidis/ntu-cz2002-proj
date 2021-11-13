@@ -126,7 +126,7 @@ public class Set implements MenuItem {
 	}
 	
 	/**
-	 * Show the name and price of items of the set
+	 * Show the item number, name and price of items in the set
 	 */
 	public void showSet() {
 		int i,j=0;

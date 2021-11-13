@@ -80,7 +80,7 @@ public class Dessert implements MenuItem {
 	}
 	
 	/**
-	 * Set the description for the dessert
+	 * Set the description of the dessert
 	 */
 	public void setDescription(String description) {
 		this.description = description;
