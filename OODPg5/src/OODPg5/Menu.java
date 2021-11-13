@@ -61,6 +61,10 @@ public class Menu {
 				System.out.println("Drink name: ");
 				name = sc.nextLine();
 				System.out.print("Price of drink: \n$");
+				while(!sc.hasNextDouble()){
+					System.out.println("Enter a double!!!");
+					sc.next();
+				}
 				price = sc.nextDouble();
 				sc.nextLine();
 				System.out.println("Description of drink: ");
@@ -71,6 +75,10 @@ public class Menu {
 				System.out.println("MainCourse name: ");
 				name = sc.nextLine();
 				System.out.print("Price of Maincourse: \n$");
+				while(!sc.hasNextDouble()){
+					System.out.println("Enter a double!!!");
+					sc.next();
+				}
 				price = sc.nextDouble();
 				sc.nextLine();
 				System.out.println("Description of Maincourse: ");
@@ -81,6 +89,10 @@ public class Menu {
 				System.out.println("Dessert name: ");
 				name = sc.nextLine();
 				System.out.print("Price of Dessert: \n$");
+				while(!sc.hasNextDouble()){
+					System.out.println("Enter a double!!!");
+					sc.next();
+				}
 				price = sc.nextDouble();
 				sc.nextLine();
 				System.out.println("Description of dessert: ");
@@ -254,16 +266,22 @@ public class Menu {
 				switch(choice) {
 					case 1:
 						System.out.println("Enter new name: ");
+						sc.nextLine();
 						menuItem.get(itemIndex).setName(sc.nextLine());
 						System.out.println("Update successful!");
 						break;
 					case 2:
 						System.out.print("Enter new price: \n$");
+						while(!sc.hasNextDouble()){
+							System.out.println("Enter a double!!!");
+							sc.next();
+						}
 						menuItem.get(itemIndex).setPrice(sc.nextDouble());
 						System.out.println("Update successful!");
 						break;
 					case 3:
 						System.out.println("Enter new description: ");
+						sc.nextLine();
 						menuItem.get(itemIndex).setDescription(sc.nextLine());
 						System.out.println("Update successful!");
 						break;

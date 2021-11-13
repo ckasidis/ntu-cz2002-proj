@@ -69,7 +69,6 @@ public class RestaurantManager {
 								System.out.println("Enter Staff ID");
 								if(sc.hasNextInt()) {
 									int ID = sc.nextInt();
-									sc.nextLine();
 									if(tb!=-1 && ID < staffs.size() && ID>-1) {
 										table_orders.set(tb-1, new Order(cus,staffs.get(ID),tb));
 										System.out.printf("Table %d assigned successfully.\n",tb);

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Staff {
 	Scanner sc = new Scanner(System.in);
 	
-	static int ID = 0;
+	private static int ID = 0;
 	
 	/**
 	 * Name of the staff
