@@ -271,15 +271,7 @@ public class RestaurantManager {
 										sc.next();
 									}
 								}
-								try 
-									{
-									    ;
-									    sales.printSalesRevenueMonth(inputMnth);
-									}
-								catch ( DateTimeParseException e )
-								{
-								   System.out.println("Enter Date (eg 11/Jan/2001):");
-								}
+								sales.printSalesRevenueMonth(inputMnth);
 								return;
 						case 6: return;
 						default: System.out.println("Invalid Input!");
