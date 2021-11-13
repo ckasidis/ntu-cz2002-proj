@@ -134,7 +134,7 @@ public class Table {
 	/**
 	 * Assign a customer to the table
 	 * @param customer Customer to be assigned the table
-	 * @return true if customer is assigned the table, false otherwise
+	 * @return <code> true</code> if customer is assigned the table, <code>false</code> otherwise
 	 */
 	public boolean assign(Customer customer) {
 		//remove all expired reservations
@@ -211,7 +211,7 @@ public class Table {
 	/**
 	 * Book a time slot for the table
 	 * @param reservation Reservation booked for the table
-	 * @return true if time slot booked for the table, false otherwise
+	 * @return <code> true</code> if time slot booked for the table, <code>false</code> otherwise
 	 */
 	public boolean bookSlot(Reservation reservation) {
 		//remove all expired reservations

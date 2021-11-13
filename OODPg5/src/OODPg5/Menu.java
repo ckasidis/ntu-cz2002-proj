@@ -174,7 +174,7 @@ public class Menu {
 
 	/**
 	 * Show items in the menu
-	 * @param showSets true if sets in the menu are to be shown, false if otherwise
+	 * @param showSets <code> true</code> if sets in the menu are to be shown, <code>false</code> if otherwise
 	 */
 	public void showMenuItems(boolean showSets) {
 		int i,j=0;

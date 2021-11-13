@@ -108,7 +108,7 @@ public class Set implements MenuItem {
 	/**
 	 * Remove a menu item from the set
 	 * @param itemIndex Index of the item to be removed
-	 * @return true if item removed from the set, false otherwise
+	 * @return <code> true</code> if item removed from the set, <code>false</code> otherwise
 	 */
 	public boolean removeItem(int itemIndex) {
 		if(menuItem.size() - 1 < 3) {

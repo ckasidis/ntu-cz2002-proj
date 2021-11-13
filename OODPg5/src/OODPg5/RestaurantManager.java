@@ -20,7 +20,7 @@ public class RestaurantManager {
 	 */
 	static Scanner sc = new Scanner(System.in);
 	/**
-	 * true if sets are to be displayed, false otherwise
+	 * <code> true </code> if sets are to be displayed, <code>false</code> otherwise
 	 */
 	private static final boolean showSet = true;
 	
