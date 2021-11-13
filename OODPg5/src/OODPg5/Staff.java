@@ -8,9 +8,16 @@ import java.util.Scanner;
  *
  */
 public class Staff {
+	/**
+	 *  Scanner to scan user input
+	 */
 	Scanner sc = new Scanner(System.in);
-	
+
+	/**
+	 * Initialized employee ID of the staff
+	 */
 	private static int ID = 0;
+
 	
 	/**
 	 * Name of the staff
@@ -28,7 +35,7 @@ public class Staff {
 	private int employeeID;
 	
 	/**
-	 * Job Title of the staff
+	 * Job title of the staff
 	 */
 	private String jobTitle;
 	
@@ -53,11 +60,11 @@ public class Staff {
 		System.out.printf("Employee %s (%c), %s, will be on duty today!\n",name,gender,jobTitle);
 	}
 	/**
-	 * Creates of the restaurant
+	 * Creates a staff of the restaurant
 	 * @param name Name of the staff
 	 * @param gender Gender of the staff
 	 * @param employeeID Employee ID of the staff
-	 * @param jobTitle Job Title of the staff
+	 * @param jobTitle Job title of the staff
 	 */
 	public Staff(String name, char gender, String jobTitle) {
 		this.name  = name;
@@ -92,8 +99,8 @@ public class Staff {
 		return employeeID;
 	}
 	/**
-	 * Get the job Title of the staff
-	 * @return Job Title of the staff
+	 * Get the job title of the staff
+	 * @return Job title of the staff
 	 */
 
 	public String getJobTitle() {

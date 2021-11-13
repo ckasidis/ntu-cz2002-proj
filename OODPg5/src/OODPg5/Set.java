@@ -98,17 +98,17 @@ public class Set implements MenuItem {
 	//methods
 	
 	/**
-	 * Add an item to the set
-	 * @param mi Array list of items in the set
+	 * Add a menu item to the set
+	 * @param mi Menu item to be added in the set
 	 */
 	public void addItem(MenuItem mi) {
 		menuItem.add(mi);
 	}
 	
 	/**
-	 * Remove an item from the set
+	 * Remove a menu item from the set
 	 * @param itemIndex Index of the item to be removed
-	 * @return TRUE if item removed from the set
+	 * @return true if item removed from the set, false otherwise
 	 */
 	public boolean removeItem(int itemIndex) {
 		if(menuItem.size() - 1 < 3) {
@@ -126,7 +126,7 @@ public class Set implements MenuItem {
 	}
 	
 	/**
-	 * Show the items of the set
+	 * Show the name and price of items of the set
 	 */
 	public void showSet() {
 		int i,j=0;

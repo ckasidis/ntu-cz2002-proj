@@ -4,15 +4,22 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * Represents the Restaurant Reservation and Point of Sale System of the restaurant
+ * User interface for the Restaurant Reservation and Point of Sale System of the restaurant
  * @author Group 5
  *
  */
 public class RRPSS {
+	/**
+	 * Creates an user interface for the Restaurant Reservation and Point of Sale System
+	 */
+	public RRPSS(){}
+	/**
+	 *  Scanner to scan user input
+	 */
 	static Scanner sc = new Scanner(System.in);
 	/**
 	 * User interface for RRPSS
-	 * @param args
+	 * @param args An array of command-line arguments
 	 */
 	public static void main(String[] args) {	
 		Menu menu = new  Menu();

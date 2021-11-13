@@ -97,7 +97,7 @@ public class Drinks implements MenuItem{
 		return mi;
 	}
 	/**
-	 * Print description of the drink
+	 * Print the description of the drink
 	 */
 	public void printDescription() {
 		System.out.println(this.description);

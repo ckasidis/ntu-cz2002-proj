@@ -9,6 +9,9 @@ import java.util.Collections;
  *
  */
 public class Menu {
+	/**
+	 * Scanner to scan user input
+	 */
 	Scanner sc = new Scanner(System.in);
 	
 	/**
@@ -26,7 +29,10 @@ public class Menu {
 	}
 	
 	//methods
-	
+	/**
+	 * Get an item in the menu using user input of item number
+	 * @return Menu item with the inputted item number
+	 */
 	public MenuItem getMenuItem() {
 		System.out.println("Enter item number:");
 		while(!sc.hasNextInt()){
@@ -168,7 +174,7 @@ public class Menu {
 
 	/**
 	 * Show items in the menu
-	 * @param showSets If TRUE, sets in the menu are shown
+	 * @param showSets true if sets in the menu are to be shown, false if otherwise
 	 */
 	public void showMenuItems(boolean showSets) {
 		int i,j=0;
@@ -197,8 +203,8 @@ public class Menu {
 	}
 
 	/**
-	 * Options to edit the menu:
-	 * Remove or update menu item
+	 * Allows user to edit the menu:
+	 * Remove or update items in the menu
 	 */
 	public void editMenu() {
 		System.out.println("Enter item number:");
@@ -234,7 +240,7 @@ public class Menu {
 	}
 	
 	/**
-	 * Remove menu item 
+	 * Remove an item from the menu
 	 * @param itemIndex Index of the item in the menu to be removed
 	 */
 	private void removeMenuItem(int itemIndex) {
@@ -250,7 +256,7 @@ public class Menu {
 	}
 	
 	/**
-	 * Update name, price or description of the menu item
+	 * Update name, price or description of an item in the menu
 	 * @param itemIndex Index of the item in the menu to be updated
 	 */
 	private void updateMenuItem (int itemIndex) {
@@ -298,8 +304,8 @@ public class Menu {
 	}
 	
 	/**
-	 * Update name, price, description and items in the promotional set
-	 * @param itemIndex
+	 * Update name, price, description and items of the promotional set
+	 * @param itemIndex Index of the promotional set in the menu to be updated
 	 */
 	private void updatePromotionSet(int itemIndex) {
 		--itemIndex;

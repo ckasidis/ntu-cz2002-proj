@@ -11,8 +11,17 @@ import java.time.format.DateTimeParseException;
  *
  */
 public class RestaurantManager {
+	/**
+	 * Creates an Restaurant Reservation and Point of Sale System
+	 */
+	public RestaurantManager(){}
+	/**
+	 *  Scanner to scan user input
+	 */
 	static Scanner sc = new Scanner(System.in);
-	
+	/**
+	 * true if sets are to be displayed, false otherwise
+	 */
 	private static final boolean showSet = true;
 	
 	//methods

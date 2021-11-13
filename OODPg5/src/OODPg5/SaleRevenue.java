@@ -59,8 +59,8 @@ public class SaleRevenue {
 	}
 	
 	/**
-	 * Print all the sales revenue for the stated date's month
-	 * @param date Date of the month of recorded sales revenue needed
+	 * Print all the sales revenue for the stated month
+	 * @param mnth Month of the recorded sales revenue needed
 	 */
 	public void printSalesRevenueMonth(int mnth) {
 		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd/MM");
@@ -78,7 +78,7 @@ public class SaleRevenue {
 	}
 	
 	/**
-	 * Print the all the recorded sales revenue up to a year
+	 * Print all the recorded sales revenue up to a year
 	 */
 	public void printSalesRevenueYear() {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");

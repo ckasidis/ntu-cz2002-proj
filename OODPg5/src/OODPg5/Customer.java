@@ -8,6 +8,9 @@ import java.util.Scanner;
  *
  */
 public class Customer {
+	/**
+	 * Scanner to scan user input
+	 */
 	Scanner sc = new Scanner(System.in);
 	
 	/**

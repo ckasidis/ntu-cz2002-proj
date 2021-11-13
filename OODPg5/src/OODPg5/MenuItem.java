@@ -1,6 +1,6 @@
 package OODPg5;
 /**
- * Interface for different type of Menu Items
+ * Interface for the different types of menu items
  * @author Group 5
  *
  */

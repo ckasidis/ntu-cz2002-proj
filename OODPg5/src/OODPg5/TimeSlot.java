@@ -22,7 +22,7 @@ public class TimeSlot {
 	private LocalTime endTime;
 	
 	/**
-	 * List of reservations
+	 * Array list of reservations
 	 */
 	private ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
 	

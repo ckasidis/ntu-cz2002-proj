@@ -83,8 +83,8 @@ public class Order {
 	//getters
 
 	/**
-	 * Get the customer from order
-	 * @return Customer from order
+	 * Get the customer that placed the order
+	 * @return Customer that placed the order
 	 */
 	public Customer getCustomer() {
 		return customer;
@@ -127,7 +127,7 @@ public class Order {
 	
 	/**
 	 * Add menu item to the order list
-	 * @param mi Menu item to be added
+	 * @param mi Menu item to be added to the order
 	 */
 	public void addOrderItem(MenuItem mi) {
 		orderItem.add(mi);
@@ -135,8 +135,8 @@ public class Order {
 	}
 
 	/**
-	 * Remove item from the list of order items
-	 * @param mi Item to be removed from the order
+	 * Remove menu item from the list of order items
+	 * @param mi Menu item to be removed from the order
 	 */
 	public void removeOrderItem() {
 		int temp =1;
@@ -227,8 +227,8 @@ public class Order {
 	}
 
 	/**
-	 * Sort the items in the list 
-	 * @param menuItemList List of items
+	 * Sort the list of menu items
+	 * @param menuItemList List of menu items
 	 */
 	private void sort(ArrayList<MenuItem> menuItemList) {
 		int prev=0;

@@ -7,15 +7,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * System to manage assignment of table
+ * A system to manage assignment of table
  * @author Group 5
  *
  */
 public class TableManager {
+	/**
+	 * Scanner to scan user input
+	 */
 	Scanner sc = new Scanner(System.in);
 	
 	/**
-	 * A list of all the tables in the restaurant
+	 * An array list of all the tables in the restaurant
 	 */
 	private ArrayList<Table> tableList;
 	
@@ -23,7 +26,7 @@ public class TableManager {
 	 * Creates a system to manage the assignment of tables in the restaurant.
 	 * There are 2 tables each with 2,4,6,8 and 10 seats respectively.
 	 * 
-	 * @param tm This is the list of Tables
+	 * @param tm Array list of all the tables in the restaurant
 	 */
 	public TableManager(ArrayList<Table> tableList) {
 		this.tableList = tableList;
@@ -41,13 +44,19 @@ public class TableManager {
 	}
 	
 	//getters
-	
+	/**
+	 * Get the list of tables in the restaurant
+	 * @return Array list of tables in the restaurant
+	 */
 	public ArrayList<Table> getTableList() {
 		return tableList;
 	}
 	
 	//methods
-	
+	/**
+	 * Checks bookings and availability of a table or all the tables in the restaurant for a particular date 
+	 * using user input of date and table number
+	 */
 	public void checkTableStatus() {
 		int c;
 		
@@ -105,8 +114,10 @@ public class TableManager {
 	}
 	
 	/**
-	 * Assigns free Table with sufficient capacity to incoming customer with input number of persons
-	 * Customer not assigned a table 40 minutes before closing time
+	 * Assigns a free table with sufficient capacity to incoming customer with input number of persons.
+	 * Customer is not assigned a table 40 minutes before closing time
+	 * @param cus Customer that table is to be assigned to
+	 * @return Table number of table assigned, -1 if no tables assigned
 	 */
 	public int assignTable(Customer cus) {
 		
@@ -145,9 +156,11 @@ public class TableManager {
 		return -1;
 	}
 	
+	
 	/**
 	 * Unassigns a Table with input table number 
 	 * and sets table free 
+	 * @return Table number of table unassigned, -1 if unassigning failed
 	 */
 	public int unAssignTable() {
 		System.out.println("Enter table number (1-10)");
@@ -172,7 +185,10 @@ public class TableManager {
 		}
 		return -1;
 	}
-
+	/**
+	 * Checks bookings and availability of all the tables in the restaurant for a particular date
+	 * using user input of date 
+	 */
 	private void checkAllTable() {
 		System.out.println("Select month (1-12)"); //edited
 		int month;
@@ -205,6 +221,10 @@ public class TableManager {
 			table.printTableStatus(date);
 	}
 	
+	/**
+	 * Checks bookings and availability of a table in the restaurant for a particular date 
+	 * using user input of date and table number
+	 */
 	private void checkTable() {
 		 System.out.println("Enter table number (1-10)");
 			int tableNo;
@@ -256,7 +276,7 @@ public class TableManager {
 	 }
 	
 	/**
-	 * Books a reservation according to input date, time and number of persons.
+	 * Books a reservation according to user input of date, time and number of persons.
 	 * Booking must be made 2 hours in advance.
 	 * 
 	 * A free table with sufficient seats will be assigned.
@@ -355,7 +375,7 @@ public class TableManager {
 	}
 	
 	/**
-	 * Removes a reservation according to input table number, date and time
+	 * Removes a reservation according to user input of table number, date and time.
 	 * Table booked for the reservation will be freed
 	 *  
 	 */

@@ -9,9 +9,9 @@ import java.time.LocalDate;
 
 /**
  *Represents a table in the restaurant.
- *
- *Table can be used during the opening hours from 11:00-22:00
- *Table can be booked for 1 hour time slots
+ *<p>
+ *Table can be used during the opening hours from 11:00-22:00.
+ *It can be booked for 1 hour time slots.
  *
  * @author Group 5
  *
@@ -134,7 +134,7 @@ public class Table {
 	/**
 	 * Assign a customer to the table
 	 * @param customer Customer to be assigned the table
-	 * @return TRUE if customer is assigned the table
+	 * @return true if customer is assigned the table, false otherwise
 	 */
 	public boolean assign(Customer customer) {
 		//remove all expired reservations
@@ -196,7 +196,7 @@ public class Table {
 	}
 	
 	/**
-	 * Unassign the table, table is now free
+	 * Unassign the table. Table is now free
 	 */
 	public void unAssign() {
 		//remove all expired reservations
@@ -211,7 +211,7 @@ public class Table {
 	/**
 	 * Book a time slot for the table
 	 * @param reservation Reservation booked for the table
-	 * @return TRUE if time slot booked for the table
+	 * @return true if time slot booked for the table, false otherwise
 	 */
 	public boolean bookSlot(Reservation reservation) {
 		//remove all expired reservations
