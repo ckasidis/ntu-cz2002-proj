@@ -124,14 +124,6 @@ public class Order {
 	
 	//methods
 	
-	/**
-	 * Add item to the list of order items
-	 * @param mi Item to be added into the order
-	 */
-	public void addOrder(MenuItem mi) {
-		orderItem.add(mi);
-		sort(orderItem);		
-	}
 	
 	/**
 	 * Add menu item to the order list
