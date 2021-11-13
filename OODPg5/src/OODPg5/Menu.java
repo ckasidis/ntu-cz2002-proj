@@ -14,7 +14,7 @@ public class Menu {
 	/**
 	 * Array list of the items in the menu
 	 */
-	ArrayList<MenuItem> menuItem;
+	private ArrayList<MenuItem> menuItem;
 	
 	//constructors
 	
