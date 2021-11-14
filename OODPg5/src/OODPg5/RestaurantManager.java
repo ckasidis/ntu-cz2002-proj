@@ -159,6 +159,7 @@ public class RestaurantManager {
 
 	/**
 	 * Update the order placed by the customer in the restaurant
+	 * Choose to add item or remove item from order
 	 * @param menu Menu of the restaurant
 	 * @param order Order placed by the customer
 	 */
@@ -191,7 +192,7 @@ public class RestaurantManager {
 	}
 	
 	/**
-	 * Create, display and edit the menu of the restaurant
+	 * Create, display and edit the menu items or promotion sets in menu
 	 * @param menu Menu of the restaurant
 	 */
 	private static void showMenu(Menu menu) {
