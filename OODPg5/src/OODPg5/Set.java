@@ -103,6 +103,7 @@ public class Set implements MenuItem {
 	 */
 	public void addItem(MenuItem mi) {
 		menuItem.add(mi);
+		sort(menuItem);
 	}
 	
 	/**
@@ -111,11 +112,11 @@ public class Set implements MenuItem {
 	 * @return <code> true</code> if item removed from the set, <code>false</code> otherwise
 	 */
 	public boolean removeItem(int itemIndex) {
-		if(menuItem.size() - 1 < 3) {
+		if(menuItem.size() < 3) {
 			System.out.println("Sets cannot have less than 2 items!");
 			return false;
 		}
-		if(itemIndex < 0 || itemIndex > menuItem.size()) {
+		if(itemIndex < 0 || itemIndex > menuItem.size()-1) {
 			System.out.println("Not from set");
 			return false;
 		}
@@ -135,7 +136,7 @@ public class Set implements MenuItem {
 		TypeOfItem item = TypeOfItem.values()[j];
 		for(i=0;i<menuItem.size();i++) {
 			
-			while(menuItem.get(i).getItemType() != item) {
+			while(menuItem.get(i).getItemType() != item && j<3) {
 				item = TypeOfItem.values()[++j];
 				System.out.printf("\n%sS: \n",item);
 			}
@@ -169,5 +170,21 @@ public class Set implements MenuItem {
 		}
 		Set mi= new Set(name,price,description,setcopy);
 		return mi;
+	}
+	/**
+	 * Sorts the items in menu according to item enum type TypeOfItem
+	 * @param menuItemList List of items in the menu
+	 */
+	private void sort(ArrayList<MenuItem> menuItemList) {
+		int i, prev=0;
+		if(menuItemList.size()<=1) return;
+		for (TypeOfItem item : TypeOfItem.values()) {
+			  for(i=0;i<menuItemList.size();i++) {
+				  if(menuItemList.get(i).getItemType() == item) {
+					  Collections.swap(menuItemList, i, prev);
+					  prev++;
+				  }
+			  }
+		}
 	}
 }
