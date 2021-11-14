@@ -172,8 +172,8 @@ public class Set implements MenuItem {
 		return mi;
 	}
 	/**
-	 * Sorts the items in menu according to item enum type TypeOfItem
-	 * @param menuItemList List of items in the menu
+	 * Sorts the items in the set according to item enum type TypeOfItem
+	 * @param menuItemList List of items in the set
 	 */
 	private void sort(ArrayList<MenuItem> menuItemList) {
 		int i, prev=0;
