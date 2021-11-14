@@ -140,7 +140,7 @@ public class Customer {
 
 	/**
 	 * Add a discount rate to list of discounts entitled to customer
-	 * @param d Discount entitled to customer
+	 * @param d Discount rate entitled to customer
 	 */
 	public void setDiscount(Discount d) {
 		discount.add(d);

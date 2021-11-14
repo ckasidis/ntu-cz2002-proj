@@ -18,7 +18,6 @@ public class Order {
 	Scanner sc = new Scanner(System.in);
 	/**
 	 * Initialized check number of the order
-	 * unique check number for each order
 	 */
 	static int checkNo =1;
 	
@@ -60,8 +59,8 @@ public class Order {
 	//constructors
 	
 	/**
-	 * Create an empty order
-	 * cNumber 0 identify order as a dummy order
+	 * Create an empty order.
+	 *  <code>cNumber</code> = 0 identifies the order as a dummy order
 	 * @param tableNo Table number of table assigned for the order
 	 */
 	public Order(int tableNo) {
@@ -167,7 +166,7 @@ public class Order {
 	}
 	
 	/**
-	 * View all the items ordered
+	 * View all the items ordered.
 	 * Prints number of item ordered, item name and price of each item
 	 */
 	public void viewOrder() {
@@ -235,7 +234,7 @@ public class Order {
 	}
 
 	/**
-	 * Sort the list of menu items and group identical menuItems together
+	 * Sort the list of menu items and group identical menu items together
 	 * @param menuItemList List of menu items
 	 */
 	private void sort(ArrayList<MenuItem> menuItemList) {

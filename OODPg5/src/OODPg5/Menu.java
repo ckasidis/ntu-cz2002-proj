@@ -174,7 +174,7 @@ public class Menu {
 
 	/**
 	 * Show item number, name and price of items in the menu
-	 * @param showSets <code> true</code> if sets in the menu are to be shown, <code>false</code> if otherwise
+	 * @param showSets <code> true</code> if sets in the menu are to be shown, <code>false</code> otherwise
 	 */
 	public void showMenuItems(boolean showSets) {
 		int i,j=0;
@@ -386,7 +386,7 @@ public class Menu {
 }
 	
 	/**
-	 * Sorts the items in menu according to item enum type TypeOfItem
+	 * Sorts the items in menu according to item enum type <code>TypeOfItem</code>
 	 * @param menuItemList List of items in the menu
 	 */
 	private void sort(ArrayList<MenuItem> menuItemList) {

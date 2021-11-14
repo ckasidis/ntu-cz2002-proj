@@ -135,7 +135,7 @@ public class Table {
 	 * Assign a customer to the table.<p>
 	 * Table only assigned for the customer with reservation if customer arrives within 10min of the start time.
 	 * Table only assigned for customer without reservation if customer arrives 20min before start time of current slot, 
-	 * the next slot is not booked and it is not the last slot.
+	 * the current and next slot is not booked and current slot is not the last slot.
 	 * @param customer Customer to be assigned the table
 	 * @return <code> true</code> if customer is assigned the table, <code>false</code> otherwise
 	 */

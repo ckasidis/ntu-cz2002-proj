@@ -158,7 +158,7 @@ public class RestaurantManager {
 	}
 
 	/**
-	 * Update the order placed by the customer in the restaurant
+	 * Update the order placed by the customer in the restaurant.
 	 * Choose to add item or remove item from order
 	 * @param menu Menu of the restaurant
 	 * @param order Order placed by the customer

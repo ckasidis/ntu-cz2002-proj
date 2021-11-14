@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class SaleRevenue {
 	/**
-	 * Nested array list of orders placed in a year, 
+	 * Nested array list of orders placed in a year. 
 	 * Contains array list of orders placed in each month of the year
 	 */
 	private ArrayList<ArrayList<Order>> year = new ArrayList<ArrayList<Order>>();
@@ -17,8 +17,8 @@ public class SaleRevenue {
 	//constructors
 	
 	/**
-	 * Creates a nested array list to record sales revenue of restaurant for up to a year
-	 * Initialises 12 array list of order for the 12 months in a year
+	 * Creates a nested array list to record sales revenue of restaurant for up to a year.
+	 * Initializes 12 array list of order for the 12 months in a year
 	 */
 	public SaleRevenue() {
 		System.out.println("Record up to 1 year of Sales");

@@ -6,7 +6,7 @@ package OODPg5;
  */
 public class Discount{	
 	/**
-	 * Discount given to customer
+	 * Discount rate given to customer
 	 */
 	private Double discount;
 	
