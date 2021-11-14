@@ -148,7 +148,13 @@ public class Menu {
 				System.out.println("Enter an integer!!!");
 				sc.next();
 			}
-			if((itemIndex = sc.nextInt())== -1) break;
+			if((itemIndex = sc.nextInt())== -1) {
+				if(setItem.size() <2) {
+					System.out.println("need at least 2 items!");
+					continue;
+				}
+				break;
+			}
 			itemIndex--;
 			if(itemIndex < 0 || itemIndex > menuItem.size() - 1 ) {
 				System.out.println("Not added!Please choose from within menu.");
@@ -174,7 +180,7 @@ public class Menu {
 
 	/**
 	 * Show item number, name and price of items in the menu
-	 * @param showSets <code> true</code> if sets in the menu are to be shown, <code>false</code> otherwise
+	 * @param showSets <code> true</code> if sets in the menu are to be shown, <code>false</code> if otherwise
 	 */
 	public void showMenuItems(boolean showSets) {
 		int i,j=0;
@@ -216,6 +222,7 @@ public class Menu {
 		System.out.println("======= SELECT CHOICE =======\n(1)Remove item  (2)Update details");
 		if(sc.hasNextInt()) {
 			int choice = sc.nextInt();
+			sc.nextLine();
 			switch(choice) {
 			case 1:
 				removeMenuItem(num);
@@ -317,9 +324,9 @@ public class Menu {
 			System.out.printf("========= SELECT UPDATE =========\n(1)Name  (2)Price  (3)Description  (4)Add Item  (5)Remove Item\n");
 			if(sc.hasNextInt()) {
 				int choice = sc.nextInt();
+				sc.nextLine();
 				switch(choice) {
 					case 1:
-						sc.nextLine();
 						System.out.println("Enter new name: ");
 						menuItem.get(itemIndex).setName(sc.nextLine());
 						System.out.println("Update successful!");
@@ -334,7 +341,6 @@ public class Menu {
 						System.out.println("Update successful!");
 						break;
 					case 3:
-						sc.nextLine();
 						String description = sc.nextLine();
 						menuItem.get(itemIndex).setDescription(description);
 						System.out.println("Update successful!");
@@ -367,7 +373,7 @@ public class Menu {
 								System.out.println("Enter an integer!!!");
 								sc.next();
 							}
-							if(sets.removeItem(sc.nextInt() - 1)) 
+							if(sets.removeItem(sc.nextInt())) 
 								System.out.print("Update successful.");
 							else 
 								System.out.println("Update unsuccessful.");
@@ -386,7 +392,7 @@ public class Menu {
 }
 	
 	/**
-	 * Sorts the items in menu according to item enum type <code>TypeOfItem</code>
+	 * Sorts the items in menu according to item enum type TypeOfItem
 	 * @param menuItemList List of items in the menu
 	 */
 	private void sort(ArrayList<MenuItem> menuItemList) {
