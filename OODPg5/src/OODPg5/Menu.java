@@ -30,7 +30,7 @@ public class Menu {
 	
 	//methods
 	/**
-	 * Get an item in the menu using user input of item number
+	 * Get a copy of item in the menu using user input of item number
 	 * @return Menu item with the inputted item number
 	 */
 	public MenuItem getMenuItem() {
@@ -386,7 +386,7 @@ public class Menu {
 }
 	
 	/**
-	 * Sorts the items in menu according to item type
+	 * Sorts the items in menu according to item enum type TypeOfItem
 	 * @param menuItemList List of items in the menu
 	 */
 	private void sort(ArrayList<MenuItem> menuItemList) {
