@@ -90,7 +90,7 @@ public class Drinks implements MenuItem{
 	//methods
 	
 	/**
-	 * Creates a dessert to be sold
+	 * Creates a drink to be sold
 	 */
 	public MenuItem toOrder() {
 		Drinks mi= new Drinks(name,price,description);
